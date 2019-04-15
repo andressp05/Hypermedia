@@ -5,7 +5,7 @@
 | --------- | ------------- | ---------- | --------- | --------- | --------------- |
 | 1 | administrator | Andres | Salas Peña | 915713 | asalaspena@gmail.com |
 | 2 | member | Marcelo | Iturriaga Dewulf | 918113 | muiturriaga@uc.cl |
-| 3 | member | Luca | Colombo | 808637 | ucacolo94@gmail.com
+| 3 | member | Luca | Colombo | 808637 | luca48.colombo@mail.polimi.it
 ## Links to other deliverables
 - Deliverable D0: the web application is accessible at
 [this address](https://example.com).
