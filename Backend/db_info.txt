@@ -1,0 +1,13 @@
+Host: ec2-54-228-252-67.eu-west-1.compute.amazonaws.com
+
+Database: d9cbl2ahoq35f1
+
+User: itdrqfolhcqnuu
+
+Port: 5432
+
+Password: 4ecc64ca1bbdd8a7703f8a799aaade99b9cf1be3dd7a4d8972293cc1e8104fcc
+
+URI: postgres://itdrqfolhcqnuu:4ecc64ca1bbdd8a7703f8a799aaade99b9cf1be3dd7a4d8972293cc1e8104fcc@ec2-54-228-252-67.eu-west-1.compute.amazonaws.com:5432/d9cbl2ahoq35f1
+
+Heroku CLI: heroku pg:psql postgresql-opaque-92951 --app hypermedia-bookshop
