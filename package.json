@@ -1,0 +1,22 @@
+{
+  "name": "book-house",
+  "version": "0.0.1",
+  "description": "Hypermedia Applications project year 2018-2019. A bookstore with book lists and user functions.",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "knex": "^0.16.5",
+    "pg": "^7.10.0",
+    "swagger-tools": "0.10.1"
+  }
+}
