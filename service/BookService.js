@@ -38,8 +38,12 @@ exports.booksGET = function(offset, limit) {
  * returns Book
  **/
 exports.getBookById = function(bookId) {
-  let book = sqlDb('Books').where('ISBN', "718157834");
-  return mapBook(book);
+  return new Promise(function(resolve, reject) {
+    let book = sqlDb('Books').where('ISBN', bookId);
+    resolve(mapBook(book));
+  });
+
+
 //   return new Promise(function(resolve, reject) {
 //     var examples = {};
 //     examples['application/json'] = {
