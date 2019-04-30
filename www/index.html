@@ -10,15 +10,25 @@
     </ul>
 
     <script type="text/javascript">
-      fetch('test/books').then(  function(response) {return response.json()} )
-        .then(json => {
-          for(let i = 0; i < json.length; i++){
-            let listItem = document.createElement('li');
-            let { ISBN, Name, Price } = json[i];
-            listItem.innerHTML = `${ISBN} - ${Name} - ${Price.Value}`;
-            document.querySelector('ul').append(listItem);
-          }
-        });
+      fetch('test/books/718157834').then(  function(response) {
+        console.log(response.status);
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error(response.status);
+        }
+      })
+      .then(json => {
+        for(let i = 0; i < json.length; i++){
+          let listItem = document.createElement('li');
+          let { ISBN, Name, Price } = json[i];
+          listItem.innerHTML = `${ISBN} - ${Name} - ${Price.Value}${Price.Currency}`;
+          document.querySelector('ul').append(listItem);
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
     </script>
 
   </body>
