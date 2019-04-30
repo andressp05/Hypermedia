@@ -1,6 +1,7 @@
 'use strict';
 
-
+let Codes = require('../utils/Codes');
+var utils = require('../utils/writer.js');
 
 let sqlDb;
 
@@ -40,7 +41,23 @@ exports.booksGET = function(offset, limit) {
 exports.getBookById = function(bookId) {
   return new Promise(function(resolve, reject) {
     let book = sqlDb('Books').where('ISBN', bookId);
-    resolve(mapBook(book));
+    book.then(data => {
+      console.log(Object.keys(data).length);
+      if (Object.keys(data).length > 0) {
+        resolve(data.map(e => {
+          e.Price = {Value: e.Price, Currency: "EUR"};
+          return e;
+        }));
+      } else {
+        reject(utils.respondWithCode(Codes.NOT_FOUND, '{message: Book not found}'));
+      }
+    });
+    // if (Object.keys(book).length > 0) {
+    //   resolve(mapBook(book));
+    // } else {
+    //   throw new Error("Book not found");
+    // }
+
   });
 
 
