@@ -49,7 +49,7 @@ paths:
             items:
               $ref: "#/definitions/Book"
         404:
-          description: "Unexpected error"
+          description: "Books not found"
       x-swagger-router-controller: "Book"
   /books/{bookId}:
     get:
@@ -231,33 +231,33 @@ definitions:
   Book:
     type: "object"
     required:
-    - "author"
-    - "price"
-    - "title"
+    - "ISBN"
+    - "Price"
+    - "Name"
     properties:
       ISBN:
         type: "integer"
         format: "int64"
-      title:
+      Name:
         type: "string"
-      author:
+      Author:
         type: "string"
-      genre:
+      Genre:
         type: "string"
-      abstract:
+      Abstract:
         type: "string"
-      edition:
+      Edition:
         type: "integer"
         format: "int32"
-      year:
+      Year:
         type: "integer"
         format: "int32"
-      publisher:
+      Publisher:
         type: "string"
-      pages:
+      Pages:
         type: "integer"
         format: "int32"
-      price:
+      Price:
         $ref: "#/definitions/Amount"
       status:
         type: "string"
