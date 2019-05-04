@@ -4,15 +4,14 @@ var fs = require('fs'),
     path = require('path'),
     http = require('http');
 
-var express = require('express')
-var app = express();
-var router = express.Router();
+var app = require('express')();
 var serveStatic = require('serve-static');
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = process.env.PORT || 8080;
-
+// import other file from the server
 var { setupDataLayer } = require('./service/Data');
+var router = require('./service/Router');
 
 // swaggerRouter configuration
 var options = {
