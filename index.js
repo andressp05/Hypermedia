@@ -4,7 +4,9 @@ var fs = require('fs'),
     path = require('path'),
     http = require('http');
 
-var app = require('connect')();
+var express = require('express')
+var app = express();
+var router = express.Router();
 var serveStatic = require('serve-static');
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
@@ -23,6 +25,8 @@ var options = {
 var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
+
+app.use('/', router);
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
@@ -38,7 +42,8 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
 
-  app.use(serveStatic(__dirname + "/www"));
+
+  // app.use(serveStatic(__dirname + "/www"));
 
   setupDataLayer().then(() => {
     // Start the server
