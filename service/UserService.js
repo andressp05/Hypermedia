@@ -1,5 +1,20 @@
 'use strict';
 
+var jwt = require('jasonwebtoken');
+
+let sqlDb;
+
+exports.usersDbSetup = function(database) {
+  sqlDb = database;
+  console.log("Checking if Clients table exists");
+  return database.schema.hasTable("Clients").then(exists => {
+    if (!exists) {
+      console.log("Clients doesn't exists");
+    } else {
+      console.log("Clients table exists");
+    }
+  });
+};
 
 /**
  * Create user
@@ -31,9 +46,9 @@ exports.deleteUser = function(username) {
 
 /**
  * Get user by user name
- * 
  *
- * username String The name that needs to be fetched. Use user1 for testing. 
+ *
+ * username String The name that needs to be fetched. Use user1 for testing.
  * returns User
  **/
 exports.getUserByName = function(username) {
@@ -59,7 +74,7 @@ exports.getUserByName = function(username) {
 
 /**
  * Logs user into the system
- * 
+ *
  *
  * username String The user name for login
  * password String The password for login
@@ -80,7 +95,7 @@ exports.loginUser = function(username,password) {
 
 /**
  * Logs out current logged in user session
- * 
+ *
  *
  * no response value expected for this operation
  **/
@@ -104,4 +119,3 @@ exports.updateUser = function(username,body) {
     resolve();
   });
 }
-
