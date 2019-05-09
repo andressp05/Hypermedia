@@ -1,56 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Paper House</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Paper House</title>
+
+	<!-- Bootsrap -->
+	<link href="../assets/css/bootstrap.css" rel="stylesheet">
 <!--===============================================================================================-->
+
 </head>
-<body>
 
+<body style="background-color: #C1876B">
+<!-- Page Content -->
+<div class="container">
 
-	<div class="container-contact100">
-		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
-				<span class="contact100-form-title">
-					Contact Us
-				</span>
-
-				<label class="label-input100" for="name">Name *</label>
-				<div class="wrap-input100 validate-input">
-					<input id="name" class="input100" type="text" name="name" placeholder="Eg. Vittorio Zaccaria">
-					<span class="focus-input100"></span>
-				</div>
-
-				<label class="label-input100" for="email">Email *</label>
-				<div class="wrap-input100 validate-input">
-					<input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
-					<span class="focus-input100"></span>
-				</div>
-
-				<label class="label-input100" for="phone">Phone Number</label>
-				<div class="wrap-input100">
-					<input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +39 33 4567 7897">
-					<span class="focus-input100"></span>
-				</div>
-
-				<label class="label-input100" for="message">Message *</label>
-				<div class="wrap-input100 validate-input">
-					<textarea id="message" class="input100" name="message" placeholder="Enter your message..."></textarea>
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn">
-						<span>
-							Submit
-							<i class="zmdi zmdi-arrow-right m-l-8"></i>
-						</span>
-					</button>
-				</div>
-			</form>
+	<!-- Page Heading -->
+	<div class="row">
+        <div class="col-lg-12">
+			<h1 class="page-header">Contact Us </h1>
 		</div>
 	</div>
+
+	<!-- Contact Form -->
+	<div class="row">
+        <div class="col-md-8">
+            <h3>Write Us</h3>
+            <form action = "#" method = "post" name="sentMessage" id="contactForm">
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" id="name" required data-validation-required-message="Enter your name">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Phone Number:</label>
+                        <input type="phone" class="form-control" id="phone">
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Email:</label>
+                        <input type="email" class="form-control" id="email" required data-validation-required-message="Enter your email">
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Message:</label>
+                        <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Enter your message" maxlength="999" style="resize:none"></textarea>
+                    </div>
+                </div>
+                <div id="success"></div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>
