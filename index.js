@@ -8,7 +8,7 @@ var app = require('express')();
 var serveStatic = require('serve-static');
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
-var serverPort = process.env.PORT || 8080;
+var serverPort = process.env.PORT || 3000;
 // import other file from the server
 var { setupDataLayer } = require('./public/assets/js/Data.js');
 var router = require('./public/assets/js/Router.js');
@@ -27,7 +27,7 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 
 app.use('/', router);
 // Initialize the Swagger middleware
-swaggerTools.initializeMiddlewarse(swaggerDoc, function (middleware) {
+swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
   // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
   app.use(middleware.swaggerMetadata());
