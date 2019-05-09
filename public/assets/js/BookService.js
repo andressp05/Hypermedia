@@ -1,7 +1,7 @@
 'use strict';
 
-let Codes = require('../utils/Codes');
-var utils = require('../utils/writer.js');
+let Codes = require('../Codes.js');
+var utils = require('../writer.js');
 
 let sqlDb;
 

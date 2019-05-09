@@ -1,5 +1,3 @@
-
-
 exports.ensureToken = function(req) {
   var header = req.header.["authorization"];
   if (typeof header !== 'undefined'){

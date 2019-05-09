@@ -1,7 +1,7 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
-var User = require('../service/UserService');
+var utils = require('../writer.js');
+var User = require('../UserService.js');
 
 module.exports.createUser = function createUser (req, res, next) {
   var body = req.swagger.params['body'].value;

@@ -1,7 +1,7 @@
 const sqlDbFactory = require("knex");
 
-let { booksDbSetup } = require("./BookService");
-let { usersDbSetup } = require("./UserService");
+let { booksDbSetup } = require("./BookService.js");
+let { usersDbSetup } = require("./UserService.js");
 
 // let sqlDb = sqlDbFactory({
 //   client: "pg",
