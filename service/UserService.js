@@ -1,6 +1,6 @@
 'use strict';
 
-var jwt = require('jasonwebtoken');
+var jwt = require('jsonwebtoken');
 
 let sqlDb;
 

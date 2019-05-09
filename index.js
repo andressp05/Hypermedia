@@ -44,13 +44,16 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
   // app.use(serveStatic(__dirname + "/www"));
 
-  setupDataLayer().then(() => {
+  setupDataLayer()
+  .then((val) => {
+    console.log(val);
     // Start the server
     http.createServer(app).listen(serverPort, function () {
       console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
       console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
     });
-  });
+  })
+  .catch(val => console.log(val));
 
 
 });

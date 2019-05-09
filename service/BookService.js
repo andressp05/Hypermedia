@@ -26,8 +26,10 @@ exports.booksDbSetup = function(database) {
  * returns List
  **/
 exports.booksGET = function(offset, limit) {
-  let books = sqlDb.select().table('Books').limit(limit).offset(offset);
-  return mapBook(books);
+  return new Promise((resolve, reject) => {
+    let books = sqlDb.select().table('Books').limit(limit).offset(offset);
+    resolve(mapBook(books));
+  });  
 }
 
 
