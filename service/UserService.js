@@ -7,7 +7,7 @@ let sqlDb;
 exports.usersDbSetup = function(database) {
   sqlDb = database;
   console.log("Checking if Clients table exists");
-  return database.schema.hasTable("Clients").then(exists => {
+  return database.schema.hasTable("clients").then(exists => {
     if (!exists) {
       console.log("Clients doesn't exists");
     } else {
