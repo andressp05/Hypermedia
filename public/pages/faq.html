@@ -6,17 +6,17 @@
 	<title>Paper House</title>
 
 	<!-- Bootsrap -->
-	<!-- <link href="../assets/css/bootstrap.min.css" rel="stylesheet"> -->
-	<!-- <script src="../assets/js/bootstrap.min.js"></script> -->
-	<!-- <script src="../assets/js/jquery-1.11.1.min.js"></script> -->
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/jquery-1.11.1.min.js"></script>
 
 	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 	<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
 	<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 </head>
 
-<body>
-	<div class="container ">
+<body style="background-color: #C1876B">
+	<!--<div class="container ">
 	    <div class="panel-group" id="faqAccordion">
 	        <div class="panel panel-default ">
 	            <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
@@ -140,8 +140,128 @@
 				</div>
 			</div>
 	    </div>
-	    <!--/panel-group-->
-	</div>
+	</div>-->
+
+	<div class="container py-3">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="accordion" id="faqExample">
+                <div class="card">
+                    <div class="card-header p-2" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              1: What is Paper House?
+                            </button>
+                          </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqExample">
+                        <div class="card-body">
+                            <b>Answer:</b> Paper House is a educational simulation of a bookshop created for the subject Hypermedia Applications of Politecnico di Milano university.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header p-2" id="headingTwo">
+                        <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          2: How can I filter the books?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqExample">
+                        <div class="card-body">
+                            <b>Answer:</b> You can filter them by literary genre and by topic. Also you can group them by literary genre and by topic. And in addition, we have a list of favourites and of bestsellers that you can see as well.
+                        </div>
+                    </div>
+				<div class="card">
+					<div class="card-header p-2" id="headingThree">
+						<h5 class="mb-0">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+							3: How can I filter the authors?
+						</button>
+					</h5>
+				</div>
+				<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
+					<div class="card-body">
+						<b>Answer:</b> To see.
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header p-2" id="headingFour">
+						<h5 class="mb-0">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+							4: What are exactly the events?
+						</button>
+					</h5>
+				</div>
+				<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqExample">
+					<div class="card-body">
+						<b>Answer:</b> To see.
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header p-2" id="headingFive">
+						<h5 class="mb-0">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+							5: Which is the criteria used to select some books as favourites?
+						</button>
+					</h5>
+				</div>
+				<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqExample">
+					<div class="card-body">
+						<b>Answer:</b> It is a personal criteria of the website administration personal.
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header p-2" id="headingSix">
+						<h5 class="mb-0">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+							6: Can I buy a book?
+						</button>
+					</h5>
+				</div>
+				<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#faqExample">
+					<div class="card-body">
+						<b>Answer:</b> No, our website simulates an e-commerce library in which you can simulate that you are buying a book by making a reservation of it.
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header p-2" id="headingSeven">
+						<h5 class="mb-0">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+							7: Should I be registered for make a reservation of a book?
+						</button>
+					</h5>
+				</div>
+				<div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#faqExample">
+					<div class="card-body">
+						<b>Answer:</b> Yes. You can create your account totally free.
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header p-2" id="headingEigth">
+						<h5 class="mb-0">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+							8: Do you have a physical shop?
+						</button>
+					</h5>
+				</div>
+				<div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#faqExample">
+					<div class="card-body">
+						<b>Answer:</b> No, we are an online e-commerce bookshop but we have done the website in Milano, Italy. Also, the website has been done by a chilean called Marcelo, a Spanish guy called Andres and an Italian one called Luca.
+					</div>
+				</div>
+		</div>
+		</div>
+		</div>
+        </div>
+	    </div>
 
 </body>
 
