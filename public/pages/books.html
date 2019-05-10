@@ -13,13 +13,13 @@
 
     <title>PaperHouse</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
     <script src="../public/assets/js/jquery.js"></script>
-    <script
+    <!-- <script
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous">
-    </script>
+    </script> -->
     <script>
     $(function(){
       $("#header").load("header.html");
@@ -41,28 +41,7 @@
     <!-- HEADER -->
 <!-- -->
 
-<ul></ul>
-<script type="text/javascript">
-  fetch('../test/books/').then(  function(response) {
-    console.log(response.status);
-    if (response.status === 200) {
-      return response.json();
-    } else {
-      throw new Error(response.status);
-    }
-  })
-  .then(json => {
-    for(let i = 0; i < json.length; i++){
-      let listItem = document.createElement('li');
-      let { ISBN, name, price } = json[i];
-      listItem.innerHTML = `${ISBN} - ${name} - ${price.value}${price.currency}`;
-      document.querySelector('ul').append(listItem);
-    }
-  })
-  .catch(e => {
-    console.error(e);
-  });
-</script>
+
 
 
 
@@ -92,23 +71,49 @@
         <div class="col-lg-9 center">
 
 
-          <div class="row">
+          <div class="row" id="cards">
 
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Item One</a>
-                  </h4>
-                  <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-              </div>
-            </div>
+
+                <script type="text/javascript">
+                  fetch('../test/books/').then(  function(response) {
+                    console.log(response.status);
+                    if (response.status === 200) {
+                      return response.json();
+                    } else {
+                      throw new Error(response.status);
+                    }
+                  })
+                  .then(json => {
+                    for(let i = 0; i < json.length; i++){
+                      let listItem = document.createElement('div');
+                      listItem.classList.add('col-lg-4');
+                      listItem.classList.add('col-md-6');
+                      listItem.classList.add('mb-4');
+                      let { ISBN, name, price } = json[i];
+                      listItem.innerHTML = `
+                        <div class="card h-100">
+                          <a href="#"><img class="card-img-top" src="https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY" alt=""></a>
+                          <div class="card-body">
+                            <h4 class="card-title">
+                              <a href="#">${name}</a>
+                            </h4>
+                            <h5>${price.value}${price.currency}</h5>
+                            <p class="card-text">${ISBN}</p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                          </div>
+                      </div>
+                      `;
+                      document.getElementById('cards').append(listItem);
+                    }
+                  })
+                  .catch(e => {
+                    console.error(e);
+                  });
+                </script>
+
+
 
 
           </div>
