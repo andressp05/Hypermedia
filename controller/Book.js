@@ -1,7 +1,7 @@
 'use strict';
 
-var utils = require('./writer.js');
-var Book = require('./BookService.js');
+var utils = require('../utils/writer.js');
+var Book = require('../service/BookService.js');
 
 module.exports.booksGET = function booksGET (req, res, next) {
   var offset = req.swagger.params['offset'].value;
