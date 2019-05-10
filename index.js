@@ -28,6 +28,7 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 app.use('/', router);
 app.use('/public',serveStatic(path.join(__dirname, "public")));
 app.use('/pages',serveStatic(path.join(__dirname, "public", "pages")));
+app.use('/assets',serveStatic(path.join(__dirname, "public", "assets")));
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
