@@ -1,6 +1,6 @@
 'use strict';
 
-let Codes = require('../utils/Codes');
+let Codes = require('../utils/Codes.js');
 var utils = require('../utils/writer.js');
 
 let sqlDb;
@@ -8,7 +8,7 @@ let sqlDb;
 exports.booksDbSetup = function(database) {
   sqlDb = database;
   console.log("Checking if books table exists");
-  return database.schema.hasTable("Books").then(exists => {
+  return database.schema.hasTable("books").then(exists => {
     if (!exists) {
       console.log("It doesn't so we create it");
     } else {
@@ -27,7 +27,7 @@ exports.booksDbSetup = function(database) {
  **/
 exports.booksGET = function(offset, limit) {
   return new Promise((resolve, reject) => {
-    let books = sqlDb.select().table('Books').limit(limit).offset(offset);
+    let books = sqlDb.select().table('books').limit(limit).offset(offset);
     resolve(mapBook(books));
   });  
 }
@@ -42,12 +42,12 @@ exports.booksGET = function(offset, limit) {
  **/
 exports.getBookById = function(bookId) {
   return new Promise(function(resolve, reject) {
-    let book = sqlDb('Books').where('ISBN', bookId);
+    let book = sqlDb('books').where('ISBN', bookId);
     book.then(data => {
       console.log(Object.keys(data).length);
       if (Object.keys(data).length > 0) {
         resolve(data.map(e => {
-          e.Price = {Value: e.Price, Currency: "EUR"};
+          e.price = {value: e.price, currency: "EUR"};
           return e;
         }));
       } else {
@@ -91,7 +91,7 @@ exports.getBookById = function(bookId) {
 let mapBook = function(book) {
   return book.then(data => {
     return data.map(e => {
-      e.Price = {Value: e.Price, Currency: "EUR"};
+      e.price = {value: e.price, currency: "EUR"};
       return e;
     });
   });

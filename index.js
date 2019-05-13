@@ -8,15 +8,15 @@ var app = require('express')();
 var serveStatic = require('serve-static');
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
-var serverPort = process.env.PORT || 8080;
+var serverPort = process.env.PORT || 3000;
 // import other file from the server
-var { setupDataLayer } = require('./service/Data');
-var router = require('./service/Router');
+var { setupDataLayer } = require('./utils/Data.js');
+var router = require('./utils/Router.js');
 
 // swaggerRouter configuration
 var options = {
-  swaggerUi: path.join(__dirname, '/swagger.json'),
-  controllers: path.join(__dirname, './controllers'),
+  swaggerUi: path.join(__dirname, 'swagger.json'),
+  controllers: path.join(__dirname, 'controller'),
   useStubs: process.env.NODE_ENV === 'development' // Conditionally turn on stubs (mock mode)
 };
 
@@ -26,6 +26,9 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 
 
 app.use('/', router);
+app.use('/public',serveStatic(path.join(__dirname, "public")));
+app.use('/pages',serveStatic(path.join(__dirname, "public", "pages")));
+app.use('/assets',serveStatic(path.join(__dirname, "public", "assets")));
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
@@ -42,7 +45,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   app.use(middleware.swaggerUi());
 
 
-  // app.use(serveStatic(__dirname + "/www"));
+
 
   setupDataLayer()
   .then((val) => {
