@@ -247,26 +247,26 @@ definitions:
       ISBN:
         type: "integer"
         format: "int64"
-      Name:
+      name:
         type: "string"
-      Author:
+      author:
         type: "string"
-      Genre:
+      genre:
         type: "string"
-      Abstract:
+      abstract:
         type: "string"
-      Edition:
+      edition:
         type: "integer"
         format: "int32"
-      Year:
+      year:
         type: "integer"
         format: "int32"
-      Publisher:
+      publisher:
         type: "string"
-      Pages:
+      pages:
         type: "integer"
         format: "int32"
-      Price:
+      price:
         $ref: "#/definitions/Amount"
       status:
         type: "string"
@@ -280,7 +280,7 @@ definitions:
       ISBN: "718157834"
       title: "Me before you"
       author: "Jojo Moyes"
-      Literary_gen: "Romance Fiction"
+      literary_gen: "Romance Fiction"
       edition: "1"
       year: "2012"
       publisher: "Penguin Books"
