@@ -4,7 +4,8 @@ var fs = require('fs'),
     path = require('path'),
     http = require('http');
 
-var app = require('express')();
+var express = require('express');
+var app = express();
 var serveStatic = require('serve-static');
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
@@ -26,9 +27,10 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 
 
 app.use('/', router);
-app.use('/public',serveStatic(path.join(__dirname, "public")));
-app.use('/pages',serveStatic(path.join(__dirname, "public", "pages")));
-app.use('/assets',serveStatic(path.join(__dirname, "public", "assets")));
+app.use(express.static(path.join(__dirname,'public')));
+// app.use('/public',serveStatic(path.join(__dirname, "public")));
+// app.use('/pages',serveStatic(path.join(__dirname, "public", "pages")));
+// app.use('/assets',serveStatic(path.join(__dirname, "public", "assets")));
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
