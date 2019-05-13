@@ -241,8 +241,8 @@ definitions:
     type: "object"
     required:
     - "ISBN"
-    - "Price"
-    - "Name"
+    - "price"
+    - "name"
     properties:
       ISBN:
         type: "integer"
