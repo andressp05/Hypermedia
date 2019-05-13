@@ -4,11 +4,11 @@ let { booksDbSetup } = require("../service/BookService.js");
 let { usersDbSetup } = require("../service/UserService.js");
 
 
-const TABLES = {
-  book: 'Books',
-  author: 'author',
+exports.Tables = {
+  book: 'books',
+  author: 'authors',
   written_by: 'written_by',
-  users: 'users'
+  user: 'clients'
 }
 
 let sqlDb = sqlDbFactory({
@@ -21,40 +21,41 @@ let sqlDb = sqlDbFactory({
 /**
  * Setup the database checking if every table
  */
-function setupDataLayer(){
-  return new Promise((res, rej) => {
-    var allExists = true;
-    for (const table in TABLES) {
-      if (TABLES.hasOwnProperty(table)) {
-        sqlDb.schema.hasTable(TABLES[table]).then(exists => {
-          console.log(`Checking if ${TABLES[table]} table exists`);
-          if (exists) {
-            console.log(`${TABLES[table]} table exists`);
-          } else {
-            console.log(`${TABLES[table]} doesn't exist`);
-            allExists = false;
-            // reject();
-          }
-        });
-      }
-    }
-    // Promise.all()
-    if (allExists) {
-      res(allExists);
-    } else {
-      rej(allExists);
-    }
-    // resolve();
-  });
-}
-
-// function setupDataLayer() {
-//   console.log("Setting up data layer");
-//   booksDbSetup(sqlDb);
-//   usersDbSetup(sqlDb);
-//   return new Promise(function(resolve, reject) {
+// function setupDataLayer(){
+//   return new Promise((resolve, reject) => {
+//     var allExists = true;
+//     for (const table in TABLES) {
+//       if (TABLES.hasOwnProperty(table)) {
+//         sqlDb.schema.hasTable(TABLES[table]).then(exists => {
+//           console.log(`Checking if ${TABLES[table]} table exists`);
+//           if (exists) {
+//             console.log(`${TABLES[table]} table exists`);
+//           } else {
+//             console.log(`${TABLES[table]} doesn't exist`);
+//             allExists = false;
+//             // reject();
+//           }
+//         });
+//       }
+//     }
 //     resolve();
+//     // Promise.all()
+//     // if (allExists) {
+//     //   res(allExists);
+//     // } else {
+//     //   rej(allExists);
+//     // }
+//     // resolve();
 //   });
 // }
 
-module.exports = { database: sqlDb, setupDataLayer };
+function setupDataLayer() {
+  return new Promise(function(resolve, reject) {
+    console.log("Setting up data layer");
+    booksDbSetup(sqlDb);
+    usersDbSetup(sqlDb);
+    resolve();
+  });
+}
+
+module.exports = { database: sqlDb, setupDataLayer};

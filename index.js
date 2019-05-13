@@ -48,8 +48,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
 
   setupDataLayer()
-  .then((val) => {
-    console.log(val);
+  .then(() => {
     // Start the server
     http.createServer(app).listen(serverPort, function () {
       console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
