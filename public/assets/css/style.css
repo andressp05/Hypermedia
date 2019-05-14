@@ -1,0 +1,11 @@
+
+/* Additional modifications to all the content of the pages */
+
+body {
+   padding-top:70px;
+   background-color: #C1876B;
+}
+
+#footer{
+  padding-top:70px;
+}
