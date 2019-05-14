@@ -82,6 +82,37 @@ paths:
         404:
           description: "Book not found"
       x-swagger-router-controller: "Book"
+  /authors:
+    get:
+      tags:
+      - "author"
+      summary: "Authors available in the database"
+      description: "List of authors available in the database"
+      operationId: "authorsGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of Authors"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+        404:
+          description: "Authors not found"
+      x-swagger-router-controller: "Author"
   /user/register:
     post:
       tags:
@@ -336,6 +367,31 @@ definitions:
       id: 0
       email: "email"
       username: "username"
+  Author:
+    type: "object"
+    required:
+    - "author_id"
+    - "name"
+    properties:
+      author_id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      short_bio:
+        type: "string"
+      img_path:
+        type: "string"
+    title: "Author"
+    description: "An author who writes wooks"
+    example:
+      author_id: "99"
+      name: "Pedro"
+      surname: "Infante"
+      short_bio: "A great writer"
+      img_path: "null"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"

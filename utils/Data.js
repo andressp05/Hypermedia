@@ -2,6 +2,7 @@ const sqlDbFactory = require("knex");
 
 let { booksDbSetup } = require("../service/BookService.js");
 let { usersDbSetup } = require("../service/UserService.js");
+let { authorsDbSetup } = require("../service/AuthorService.js");
 
 
 exports.Tables = {
@@ -54,6 +55,7 @@ function setupDataLayer() {
     console.log("Setting up data layer");
     booksDbSetup(sqlDb);
     usersDbSetup(sqlDb);
+    authorsDbSetup(sqlDb);
     resolve();
   });
 }

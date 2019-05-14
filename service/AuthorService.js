@@ -5,31 +5,30 @@ var utils = require('../utils/writer.js');
 
 let sqlDb;
 
-exports.booksDbSetup = function(database) {
+exports.authorsDbSetup = function(database) {
   sqlDb = database;
-  console.log("Checking if books table exists");
-  return database.schema.hasTable("books").then(exists => {
+  console.log("Checking if authors table exists");
+  return database.schema.hasTable("authors").then(exists => {
     if (!exists) {
       console.log("It doesn't so we create it");
     } else {
-      console.log("books table exists");
+      console.log("authors table exists");
     }
   });
 };
 
 /**
- * Books available in the inventory
- * List of books available in the inventory
+ * Authors available in the inventory
+ * List of authors available in the inventory
  *
  * offset Integer Pagination offset. Default is 0. (optional)
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.booksGET = function(offset=0, limit=500) {
-  let books = sqlDb.select().table('books').limit(limit).offset(offset);
-  return mapBook(books);
+exports.authorsGET = function(offset=0, limit=500) {
+  let authors = sqlDb.select().table('authors').limit(limit).offset(offset);
+  return mapAuthor(authors);
 }
-
 
 /**
  * Find book by ID
@@ -38,10 +37,10 @@ exports.booksGET = function(offset=0, limit=500) {
  * bookId Long ID of book to return
  * returns Book
  **/
-exports.getBookById = function(bookId) {
+exports.getAuthorById = function(authorId) {
   return new Promise(function(resolve, reject) {
-    let book = sqlDb('books').where('ISBN', bookId);
-    book.then(data => {
+    let author = sqlDb('authors').where('author_id', authorId);
+    author.then(data => {
       console.log(Object.keys(data).length);
       if (Object.keys(data).length > 0) {
         resolve(data.map(e => {
@@ -52,11 +51,6 @@ exports.getBookById = function(bookId) {
         reject(utils.respondWithCode(Codes.NOT_FOUND, '{message: Book not found}'));
       }
     });
-    // if (Object.keys(book).length > 0) {
-    //   resolve(mapBook(book));
-    // } else {
-    //   throw new Error("Book not found");
-    // }
 
   });
 
@@ -83,11 +77,11 @@ exports.getBookById = function(bookId) {
 
 /**
  * Map a book mapping the database call result into the Swagger defined product Book.
- * @param  {[type]} book the result of the call to the database
+ * @param  {[type]} author the result of the call to the database
  * @return {[type]}      the Swagger spec compliant Book product.
  */
-let mapBook = function(book) {
-  return book.then(data => {
+let mapAuthor = function(author) {
+  return author.then(data => {
     return data.map(e => {
       e.price = {value: e.price, currency: "EUR"};
       return e;
