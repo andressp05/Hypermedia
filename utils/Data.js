@@ -15,7 +15,7 @@ exports.Tables = {
 let sqlDb = sqlDbFactory({
   client: 'pg',
   debug: true,
-  connection: process.env.DATABASE_URL || 'postgres://itdrqfolhcqnuu:4ecc64ca1bbdd8a7703f8a799aaade99b9cf1be3dd7a4d8972293cc1e8104fcc@ec2-54-228-252-67.eu-west-1.compute.amazonaws.com:5432/d9cbl2ahoq35f1?ssl=true',
+  connection: process.env.DATABASE_URL || 'postgres://zcewloawnvphjh:a4974b184a6780cc4324d21998ba4b9421ae7f5b6c18c0cf73901edc7e97b12a@ec2-176-34-183-20.eu-west-1.compute.amazonaws.com:5432/dcd9njsp145phm?ssl=true',
   ssl: true
 });
 
