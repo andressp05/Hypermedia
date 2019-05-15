@@ -1,6 +1,10 @@
 'use strict';
 
 let bcrypt = require('bcrypt');
+let shortid = require('shortid');
+
+let Codes = require('../utils/Codes');
+let utils = require('../utils/writer');
 let Data = require('../utils/Data');
 
 let sqlDb = Data.database;
@@ -27,8 +31,24 @@ exports.usersDbSetup = function(database) {
  **/
 exports.createUser = function(name, surname, email, password, address) {
   return new Promise(function(resolve, reject) {
-
-    resolve();
+    bcrypt.hash(password, 10).then((hash) => {
+      var id = shortid.generate();
+      return database(Data.Tables.user)
+      .returning('client_id')
+      .insert({
+        client_id: 11,
+        name: name,
+        surname: surname,
+        email: email,
+        password: hash,
+        address: address
+      });
+    })
+    .then((client_id) => {
+      console.log(`New user registered with id: ${client_id}`);
+      resolve(client_id);
+    })
+    .catch((val) => reject(utils.respondWithCode(401, '{message: operation failed}')));
   });
 }
 

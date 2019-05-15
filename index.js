@@ -26,10 +26,10 @@ var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
 
-// app.use(cookieSession({
-//   name: 'session',
-//   keys: ['key1', 'key2']
-// }))
+app.use(cookieSession({
+  name: 'user_session',
+  keys: ['key1', 'key2']
+}));
 // app.use(function (req, res, next) {
 //   console.log(req.session.views);
 //   var n = req.session.views || 0

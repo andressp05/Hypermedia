@@ -8,13 +8,13 @@ router.get('/', function(req, res, next){
 });
 
 /* NOT USEFULL THIS ARE ALREADY INCLUDED IN THE STATIC FILE HANDLING */
-// router.get('/pages/books.html', function(req, res, next){
-//   res.sendFile(path.join(__dirname, '../public', 'pages', 'books.html'));
-// });
+router.get('/pages/books.html', function(req, res, next){
+  res.sendFile(path.join(__dirname, '../public', 'pages', 'books.html'));
+});
 
-// router.get('/pages/authors.html', function(req, res, next){
-//   res.sendFile(path.join(__dirname, '../public', 'pages', 'authors.html'));
-// });
+router.get('/pages/authors.html', function(req, res, next){
+  res.sendFile(path.join(__dirname, '../public', 'pages', 'authors.html'));
+});
 
 
 module.exports = router;
