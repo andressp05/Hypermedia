@@ -1,18 +1,19 @@
 'use strict';
 
 let Codes = require('../utils/Codes.js');
-var utils = require('../utils/writer.js');
+let utils = require('../utils/writer.js');
+let Data = require('../utils/Data');
 
-let sqlDb;
+let sqlDb = Data.database;
 
 exports.booksDbSetup = function(database) {
   sqlDb = database;
   console.log("Checking if books table exists");
-  return database.schema.hasTable("books").then(exists => {
+  return sqlDb.schema.hasTable(Data.Tables.book).then(exists => {
     if (!exists) {
       console.log("It doesn't so we create it");
     } else {
-      console.log("books table exists");
+      console.log("Books table exists");
     }
   });
 };
@@ -25,9 +26,12 @@ exports.booksDbSetup = function(database) {
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.booksGET = function(offset=0, limit=500) {
-  let books = sqlDb.select().table('books').limit(limit).offset(offset);
-  return mapBook(books);
+exports.booksGET = function(offset=0, limit=20) {
+  console.log(Data.Tables.book)
+  return new Promise((resolve, reject) => {
+    let books = sqlDb.select().table(Data.Tables.book).limit(limit).offset(offset);
+    resolve(mapBook(books));
+  });  
 }
 
 
@@ -40,7 +44,7 @@ exports.booksGET = function(offset=0, limit=500) {
  **/
 exports.getBookById = function(bookId) {
   return new Promise(function(resolve, reject) {
-    let book = sqlDb('books').where('ISBN', bookId);
+    let book = database(Data.Tables.book).where('ISBN', bookId);
     book.then(data => {
       console.log(Object.keys(data).length);
       if (Object.keys(data).length > 0) {
