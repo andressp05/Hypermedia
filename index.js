@@ -6,7 +6,7 @@ var fs = require('fs'),
 
 var express = require('express');
 var app = express();
-var serveStatic = require('serve-static');
+var cookieSession = require('cookie-session');
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = process.env.PORT || 3000;
@@ -25,6 +25,19 @@ var options = {
 var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
+
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ['key1', 'key2']
+// }))
+// app.use(function (req, res, next) {
+//   console.log(req.session.views);
+//   var n = req.session.views || 0
+//   req.session.views = n + 1;
+//   // console.log(req.session.views);
+//   // res.end(n + ' views')
+//   next();
+// });
 
 app.use('/', router);
 app.use(express.static(path.join(__dirname,'public')));

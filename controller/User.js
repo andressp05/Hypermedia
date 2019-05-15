@@ -4,8 +4,9 @@ var utils = require('../utils/writer.js');
 var User = require('../service/UserService.js');
 
 module.exports.createUser = function createUser (req, res, next) {
-  var body = req.swagger.params['body'].value;
-  User.createUser(body)
+  var username = req.swagger.params['username'].value;
+  var password = req.swagger.params['password'].value;
+  User.createUser(username,password)
     .then(function (response) {
       utils.writeJson(res, response);
     })

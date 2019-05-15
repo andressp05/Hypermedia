@@ -1,13 +1,14 @@
 'use strict';
 
-var jwt = require('jsonwebtoken');
+let bcrypt = require('bcrypt');
+let Data = require('../utils/Data');
 
-let sqlDb;
+let sqlDb = Data.database;
 
 exports.usersDbSetup = function(database) {
   sqlDb = database;
-  console.log("Checking if Clients table exists");
-  return database.schema.hasTable("clients").then(exists => {
+  console.log("Checking if clients table exists");
+  return database.schema.hasTable(Data.Tables.user).then(exists => {
     if (!exists) {
       console.log("Clients doesn't exists");
     } else {
@@ -18,13 +19,15 @@ exports.usersDbSetup = function(database) {
 
 /**
  * Create user
- * This can only be done by the logged in user.
+ * Register an user on the site
  *
- * body User Created user object
+ * username The username for login
+ * password The password for login
  * no response value expected for this operation
  **/
-exports.createUser = function(body) {
+exports.createUser = function(name, surname, email, password, address) {
   return new Promise(function(resolve, reject) {
+
     resolve();
   });
 }

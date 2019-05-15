@@ -118,18 +118,38 @@ paths:
       tags:
       - "user"
       summary: "Create user"
-      description: "This can only be done by the logged in user."
+      description: "Register an user on the site"
       operationId: "createUser"
+      consumes:
+      - "application/x-www-form-urlencoded"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
+      - name: "name"
+        in: "formData"
+        description: "The name of the user"
         required: true
-        schema:
-          $ref: "#/definitions/User"
+        type: "string"
+      - name: "surname"
+        in: "formData"
+        description: "The surname of the user"
+        required: true
+        type: "string"
+      - name: "email"
+        in: "formData"
+        description: "The email of the user"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "The password for login"
+        required: true
+        type: "string"
+      - name: "address"
+        in: "formData"
+        description: "The address of the user"
+        required: false
+        type: "string"
       responses:
         200:
           description: "successful operation"
