@@ -33,7 +33,7 @@ exports.createUser = function(name, surname, email, password, address) {
   return new Promise(function(resolve, reject) {
     bcrypt.hash(password, 10).then((hash) => {
       var id = shortid.generate();
-      return database(Data.Tables.user)
+      return sqlDb(Data.Tables.user)
       .returning('client_id')
       .insert({
         client_id: 11,
@@ -48,7 +48,51 @@ exports.createUser = function(name, surname, email, password, address) {
       console.log(`New user registered with id: ${client_id}`);
       resolve(client_id);
     })
-    .catch((val) => reject(utils.respondWithCode(401, '{message: operation failed}')));
+    .catch((val) => reject(utils.respondWithCode(400, '{message: operation failed}')));
+  });
+}
+
+
+/**
+ * Logs user into the system
+ *
+ *
+ * username String The user name for login
+ * password String The password for login
+ * returns String
+ **/
+exports.loginUser = function(email,password) {
+  return new Promise(function(resolve, reject) {
+    sqlDb.select().from(Data.Tables.user).where({email: email})
+      .then(user => {
+        console.log("found: " + Object.keys(user).length);
+        if(Object.keys(user).length > 0) {
+          bcrypt.compare(password, user[0].password, function(err, res){
+            console.log(res);
+            if(res == true){
+              // console.log(user[0]);
+              resolve();
+            } else {
+              // Wrong password
+              reject(utils.respondWithCode(401, '{message: Wrong username or password}'));
+            }
+          });
+        } else {
+          // Wrong email
+          reject(utils.respondWithCode(401, '{message: Wrong username or password}'));
+        }
+      });
+
+
+
+
+  //   var examples = {};
+  //   examples['application/json'] = "";
+  //   if (Object.keys(examples).length > 0) {
+  //     resolve(examples[Object.keys(examples)[0]]);
+  //   } else {
+  //     resolve();
+  //   }
   });
 }
 
@@ -86,27 +130,6 @@ exports.getUserByName = function(username) {
   "email" : "email",
   "username" : "username"
 };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
-
-/**
- * Logs user into the system
- *
- *
- * username String The user name for login
- * password String The password for login
- * returns String
- **/
-exports.loginUser = function(username,password) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "";
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
