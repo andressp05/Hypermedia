@@ -52,7 +52,7 @@ exports.getBookById = function(bookId) {
           return e;
         }));
       } else {
-        reject(utils.respondWithCode(Codes.NOT_FOUND, '{message: Book not found}'));
+        reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Book not found"}'));
       }
     });
     // if (Object.keys(book).length > 0) {

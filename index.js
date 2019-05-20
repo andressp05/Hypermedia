@@ -28,6 +28,7 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 
 app.use(cookieSession({
   name: 'user_session',
+  maxAge: 3600000,
   keys: ['key1', 'key2']
 }));
 // app.use(function (req, res, next) {

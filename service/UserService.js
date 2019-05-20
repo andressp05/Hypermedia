@@ -48,7 +48,7 @@ exports.createUser = function(name, surname, email, password, address) {
       console.log(`New user registered with id: ${client_id}`);
       resolve(client_id);
     })
-    .catch((val) => reject(utils.respondWithCode(400, '{message: operation failed}')));
+    .catch((val) => reject(utils.respondWithCode(400, '{"message": "operation failed"}')));
   });
 }
 
@@ -67,19 +67,18 @@ exports.loginUser = function(email,password) {
       .then(user => {
         console.log("found: " + Object.keys(user).length);
         if(Object.keys(user).length > 0) {
-          bcrypt.compare(password, user[0].password, function(err, res){
+          bcrypt.compare(password, user[0].password).then(res => {
             console.log(res);
             if(res == true){
-              // console.log(user[0]);
-              resolve();
+              resolve(user[0].client_id);
             } else {
               // Wrong password
-              reject(utils.respondWithCode(401, '{message: Wrong username or password}'));
+              reject(utils.respondWithCode(400, '{"message": "Wrong username or password"}'));
             }
           });
         } else {
           // Wrong email
-          reject(utils.respondWithCode(401, '{message: Wrong username or password}'));
+          reject(utils.respondWithCode(400, '{"message": "Wrong username or password"}'));
         }
       });
 

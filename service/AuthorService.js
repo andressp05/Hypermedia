@@ -48,7 +48,7 @@ exports.getAuthorById = function(authorId) {
           return e;
         }));
       } else {
-        reject(utils.respondWithCode(Codes.NOT_FOUND, '{message: Book not found}'));
+        reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Book not found"}'));
       }
     });
 

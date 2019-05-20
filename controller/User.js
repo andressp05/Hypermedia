@@ -9,8 +9,8 @@ module.exports.createUser = function createUser (req, res, next) {
   var email = req.swagger.params['email'].value;
   var password = req.swagger.params['password'].value;
   var address = req.swagger.params['address'].value;
-  if(req.session.loggedin && req.session.loggedin === true){
-    utils.respondWithCode(403, '{message: user already logged in}');
+  if(req.session.loggedin && req.session.loggedin == true){
+    utils.writeJson(res, utils.respondWithCode(403, '{"message": "user already logged in"}'));
   } else {
     User.createUser(name,surname,email,password,address)
       .then(function (response) {
@@ -27,16 +27,20 @@ module.exports.createUser = function createUser (req, res, next) {
 module.exports.loginUser = function loginUser (req, res, next) {
   var username = req.swagger.params['email'].value;
   var password = req.swagger.params['password'].value;
-  if(req.session.loggedin && req.session.loggedin === true) {
-    utils.respondWithCode(403, '{message: user already logged in}');
+  if(req.session.loggedin && req.session.loggedin == true && req.session.userid) {
+    console.log(`User ${req.session.userid} already logged in`);
+    utils.writeJson(res, utils.respondWithCode(403, '{"message": "user already logged in"}'));
   } else {
     User.loginUser(username,password)
       .then(function (response) {
         req.session.loggedin = true;
+        req.session.userid = response;
         utils.writeJson(res, response);
       })
       .catch(function (response) {
+        console.log('catch')
         req.session.loggedin = false;
+        req.session.userid = null;
         utils.writeJson(res, response);
       });
   }
