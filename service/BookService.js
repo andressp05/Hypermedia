@@ -44,9 +44,8 @@ exports.booksGET = function(offset=0, limit=20) {
  **/
 exports.getBookById = function(bookId) {
   return new Promise(function(resolve, reject) {
-    let book = database(Data.Tables.book).where('ISBN', bookId);
+    let book = sqlDb(Data.Tables.book).where('ISBN', bookId);
     book.then(data => {
-      console.log(Object.keys(data).length);
       if (Object.keys(data).length > 0) {
         resolve(data.map(e => {
           e.price = {value: e.price, currency: "EUR"};
