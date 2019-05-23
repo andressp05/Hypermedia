@@ -31,7 +31,7 @@ exports.booksGET = function(offset=0, limit=20) {
   return new Promise((resolve, reject) => {
     let books = sqlDb.select().table(Data.Tables.book).limit(limit).offset(offset);
     resolve(mapBook(books));
-  });  
+  });
 }
 
 

@@ -38,6 +38,8 @@
   <hr>
 
 
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <hr>
       <div class="row justify-content-md-center">
         <!-- /.col-lg-3 -->
         <div class="col-lg-3 center">
@@ -70,6 +72,7 @@
                       listItem.classList.add('col-lg-4');
                       listItem.classList.add('col-md-6');
                       listItem.classList.add('mb-4');
+                      listItem.id='card';
                       let { ISBN, name, price } = json[i];
                       listItem.innerHTML = `
                         <div class="card h-100">
@@ -109,6 +112,19 @@
 
     <!-- FOOTER -->
     <div id="footer"></div>
+
+    <script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#cards #card").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        // $("#cards #card").sort();
+      });
+    });
+    </script>
+
 
   </body>
 </html>
