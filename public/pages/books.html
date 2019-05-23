@@ -40,23 +40,36 @@
 
   <input class="form-control" id="myInput" type="text" placeholder="Search..">
   <hr>
-      <div class="row justify-content-md-center">
+      <div class="row justify-content-md-center gallery">
         <!-- /.col-lg-3 -->
         <div class="col-lg-3 center">
 
+          <div class="nav-side-menu">
+            <div class="list-group animate-grid" >
+              <a href="#" data-toggle="collapse" data-target="#themes" class="collapsed list-group-item themes">Themes <span class="glyphicon glyphicon-align-left" aria-hidden="false"></span></a>
+                  <ul class="sub-menu collapse themes" id="themes">
+                      <a href="#" class="list-group-item active">All</a>
+                  </ul>
+              <a href="#" data-toggle="collapse" data-target="#lit_gen" class="collapsed list-group-item">Literary Genres <span class="arrow"></span></a>
+                  <ul class="sub-menu collapse lit_gen" id="lit_gen">
+                      <a href="#" class="list-group-item active">All</a>
+                  </ul>
+            </div>
+
+            <hr>
           <div class="list-group">
             <a href="#" class="list-group-item">Best Sellers</a>
             <a href="#" class="list-group-item">Our Favorites</a>
-            <a href="#" class="list-group-item">Filters</a>
           </div>
 
         </div>
+      </div>
 
         <div class="col-lg-9 center">
 
 
           <!-- Cards per books -->
-          <div class="row" id="cards">
+          <div class="row gallary-thumbs container" id="cards">
                 <script type="text/javascript">
                   fetch('../test/books/').then(  function(response) {
                     console.log(response.status);
@@ -67,22 +80,35 @@
                     }
                   })
                   .then(json => {
+                    var array = [];
+                    var array2 = [];
                     for(let i = 0; i < json.length; i++){
                       let listItem = document.createElement('div');
                       listItem.classList.add('col-lg-4');
                       listItem.classList.add('col-md-6');
                       listItem.classList.add('mb-4');
                       listItem.id='card';
-                      let { ISBN, name, price } = json[i];
+                      let { ISBN, name, price, theme, literary_gen} = json[i];
+                      if (theme != null) {listItem.classList.add(theme.replace(/\s+/g, "").toLowerCase())
+                        var div = document.getElementById("themes");
+                        array.indexOf(literary_gen.trim()) === -1 ? array.push(literary_gen.trim()) : console.log("This item already exists");;
+                        }
+
+                      if (literary_gen != null) {listItem.classList.add(literary_gen.replace(/\s+/g, "").toLowerCase())
+                        var div2 = document.getElementById("lit_gen");
+                        array2.indexOf(literary_gen.trim()) === -1 ? array2.push(literary_gen.trim()) : console.log("This item already exists");
+                        }
                       listItem.innerHTML = `
                         <div class="card h-100">
                           <a href="#"><img class="card-img-top" src="https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY" alt=""></a>
                           <div class="card-body">
                             <h4 class="card-title">
-                              <a href="#">${name}</a>
+                              <a href="#">Name: ${name}</a>
                             </h4>
                             <h5>${price.value}${price.currency}</h5>
-                            <p class="card-text">${ISBN}</p>
+                            <p class="card-text">ISBN: ${ISBN}</p>
+                            <p class="theme">Theme: ${theme}</p>
+                            <p class="lit_gen">Literary Genre: ${literary_gen}</p>
                           </div>
                           <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -91,6 +117,20 @@
                       `;
                       document.getElementById('cards').append(listItem);
                     }
+                    for (var x in array) {
+                      var a = document.createElement("a");
+                      a.href="#";
+                      a.classList.add('list-group-item');
+                      a.appendChild(document.createTextNode(array[x]));
+                      div.appendChild(a);
+                      }
+                    for (var x in array2) {
+                      var a2 = document.createElement("a");
+                      a2.href="#";
+                      a2.classList.add('list-group-item');
+                      a2.appendChild(document.createTextNode(array2[x]));
+                      div2.appendChild(a2);
+                      }
                   })
                   .catch(e => {
                     console.error(e);
@@ -120,8 +160,27 @@
         $("#cards #card").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
-        // $("#cards #card").sort();
       });
+    });
+    $('.animate-grid .themes').on("click", "a", function() {
+        $('.animate-grid .themes .active').removeClass('active');
+        $(this).addClass('active');
+        var selector = $(this).text();
+        $("#cards #card").filter(function() {
+          if (selector !== 'All') {
+             $(this).toggle($(this).text().includes(selector))
+          } else $(this).toggle($(this).text().toLowerCase().includes(""));
+        });
+    });
+    $('.animate-grid .lit_gen').on("click", "a", function() {
+        $('.animate-grid .lit_gen .active').removeClass('active');
+        $(this).addClass('active');
+        var selector = $(this).text();
+        $("#cards #card").filter(function() {
+          if (selector !== 'All') {
+             $(this).toggle($(this).text().includes(selector))
+          } else $(this).toggle($(this).text().toLowerCase().includes(""));
+        });
     });
     </script>
 
