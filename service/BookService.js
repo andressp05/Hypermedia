@@ -27,11 +27,17 @@ exports.booksDbSetup = function(database) {
  * returns List
  **/
 exports.booksGET = function(offset=0, limit=20) {
-  console.log(Data.Tables.book)
-  return new Promise((resolve, reject) => {
-    let books = sqlDb.select().table(Data.Tables.book).limit(limit).offset(offset);
-    resolve(mapBook(books));
-  });
+  // return new Promise((resolve, reject) => {
+  //   let books = sqlDb.select().table(Data.Tables.book).limit(limit).offset(offset);
+  //   resolve(books.then(data => mapBook(data)));
+  // });
+
+  return sqlDb.select().table(Data.Tables.book).limit(limit).offset(offset)
+  .then(data => {
+    return new Promise((resolve, reject) => {
+      resolve(mapBook(data));
+    })
+  })
 }
 
 
@@ -89,11 +95,16 @@ exports.getBookById = function(bookId) {
  * @param  {[type]} book the result of the call to the database
  * @return {[type]}      the Swagger spec compliant Book product.
  */
-let mapBook = function(book) {
-  return book.then(data => {
+let mapBook = function(data) {
+  // return book.then(data => {
     return data.map(e => {
       e.price = {value: e.price, currency: "EUR"};
       return e;
     });
-  });
+  // });
+}
+
+
+let getBookAuthor = function(bookId) {
+  
 }
