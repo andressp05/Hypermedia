@@ -6,16 +6,29 @@ let Data = require('../utils/Data');
 
 let sqlDb = Data.database;
 
-exports.booksDbSetup = function(database) {
+let bookQuery;
+  
+
+exports.booksDbSetup = async function(database) {
   sqlDb = database;
   console.log("Checking if books table exists");
-  return sqlDb.schema.hasTable(Data.Tables.book).then(exists => {
-    if (!exists) {
-      console.log("It doesn't so we create it");
-    } else {
-      console.log("Books table exists");
-    }
-  });
+  const exists = await sqlDb.schema.hasTable(Data.Tables.book);
+  if (!exists) {
+    console.log("It doesn't so we create it");
+  }
+  else {
+    bookQuery = sqlDb
+    .select(
+      Data.Tables.book+'.*',
+      sqlDb.raw(`array_agg(${Data.Tables.author}.name ORDER BY ${Data.Tables.author}.author_id) AS a_name`),
+      sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`))
+    .from(Data.Tables.book)
+    .leftJoin(Data.Tables.written_by, Data.Tables.book + '.ISBN', Data.Tables.written_by + '.ISBN')
+    .leftJoin(Data.Tables.author, Data.Tables.written_by + '.author_id', Data.Tables.author + '.author_id')
+    .groupBy(`${Data.Tables.book}.ISBN`);
+
+    console.log("Books table exists");
+  }
 };
 
 /**
@@ -26,18 +39,16 @@ exports.booksDbSetup = function(database) {
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.booksGET = function(offset=0, limit=20) {
+exports.booksGET = async function(offset=0, limit=20) {
   // return new Promise((resolve, reject) => {
   //   let books = sqlDb.select().table(Data.Tables.book).limit(limit).offset(offset);
   //   resolve(books.then(data => mapBook(data)));
   // });
 
-  return sqlDb.select().table(Data.Tables.book).limit(limit).offset(offset)
-  .then(data => {
-    return new Promise((resolve, reject) => {
-      resolve(mapBook(data));
-    })
-  })
+  const data = await bookQuery;
+  return new Promise((resolve, reject) => {
+    resolve(mapBook(data));
+  });
 }
 
 
@@ -48,46 +59,16 @@ exports.booksGET = function(offset=0, limit=20) {
  * bookId Long ID of book to return
  * returns Book
  **/
-exports.getBookById = function(bookId) {
+exports.getBookById = async function(bookId) {
+  const data = await bookQuery.where(`${Data.Tables.book}.ISBN`, bookId);
   return new Promise(function(resolve, reject) {
-    let book = sqlDb(Data.Tables.book).where('ISBN', bookId);
-    book.then(data => {
       if (Object.keys(data).length > 0) {
-        resolve(data.map(e => {
-          e.price = {value: e.price, currency: "EUR"};
-          return e;
-        }));
+        console.log(data);
+        resolve(mapBook(data));
       } else {
         reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Book not found"}'));
       }
-    });
-    // if (Object.keys(book).length > 0) {
-    //   resolve(mapBook(book));
-    // } else {
-    //   throw new Error("Book not found");
-    // }
-
   });
-
-
-//   return new Promise(function(resolve, reject) {
-//     var examples = {};
-//     examples['application/json'] = {
-//   "id" : 0,
-//   "title" : "Il deserto dei tartari",
-//   "author" : "Dino Buzzati",
-//   "price" : {
-//     "value" : 10,
-//     "currency" : "EUR"
-//   },
-//   "status" : "available"
-// };
-//     if (Object.keys(examples).length > 0) {
-//       resolve(examples[Object.keys(examples)[0]]);
-//     } else {
-//       resolve();
-//     }
-//   });
 }
 
 /**
@@ -99,6 +80,12 @@ let mapBook = function(data) {
   // return book.then(data => {
     return data.map(e => {
       e.price = {value: e.price, currency: "EUR"};
+      e.author = [];
+      for(let i = 0; i < e.a_name.length; i++){
+        e.author.push(e.a_name[i] + ' ' + e.a_surname[i]);
+      }
+      delete e.a_name;
+      delete e.a_surname;
       return e;
     });
   // });

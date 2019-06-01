@@ -327,7 +327,9 @@ definitions:
       name:
         type: "string"
       author:
-        type: "string"
+        type: "array"
+        items:
+          type: "string"
       genre:
         type: "string"
       abstract:
@@ -418,6 +420,7 @@ definitions:
     required:
     - "author_id"
     - "name"
+    - "surname"
     properties:
       author_id:
         type: "integer"
