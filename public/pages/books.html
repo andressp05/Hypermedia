@@ -62,6 +62,8 @@
             <a href="#" class="list-group-item">Our Favorites</a>
           </div>
 
+        <hr>
+
         </div>
       </div>
 
@@ -80,27 +82,33 @@
                     }
                   })
                   .then(json => {
-                    var array = [];
-                    var array2 = [];
+                    var array_theme = [];
+                    var array_litGen = [];
                     for(let i = 0; i < json.length; i++){
                       let listItem = document.createElement('div');
                       listItem.classList.add('col-lg-4');
                       listItem.classList.add('col-md-6');
                       listItem.classList.add('mb-4');
                       listItem.id='card';
-                      let { ISBN, name, price, theme, literary_gen} = json[i];
-                      if (theme != null) {listItem.classList.add(theme.replace(/\s+/g, "").toLowerCase())
-                        var div = document.getElementById("themes");
-                        array.indexOf(literary_gen.trim()) === -1 ? array.push(literary_gen.trim()) : console.log("This item already exists");;
+                      let { ISBN, name, price, theme, literary_gen, img_path} = json[i];
+                      console.log(json[i]);
+                      if (theme != null) {
+                        listItem.classList.add(theme.replace(/\s+/g, "").toLowerCase())
+                        var div_theme = document.getElementById("themes");
+                        array_theme.indexOf(theme.trim()) === -1 ? array_theme.push(theme.trim()) : console.log("This item already exists");;
                         }
 
-                      if (literary_gen != null) {listItem.classList.add(literary_gen.replace(/\s+/g, "").toLowerCase())
-                        var div2 = document.getElementById("lit_gen");
-                        array2.indexOf(literary_gen.trim()) === -1 ? array2.push(literary_gen.trim()) : console.log("This item already exists");
+                      if (literary_gen != null) {
+                        listItem.classList.add(literary_gen.replace(/\s+/g, "").toLowerCase())
+                        var div_litGen = document.getElementById("lit_gen");
+                        array_litGen.indexOf(literary_gen.trim()) === -1 ? array_litGen.push(literary_gen.trim()) : console.log("This item already exists");
                         }
+                      if (img_path == null) {
+                        img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+                      }
                       listItem.innerHTML = `
                         <div class="card h-100">
-                          <a href="#"><img class="card-img-top" src="https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY" alt=""></a>
+                          <a href="#"><img class="card-img-top" src="${img_path}" alt=""></a>
                           <div class="card-body">
                             <h4 class="card-title">
                               <a href="#">Name: ${name}</a>
@@ -117,19 +125,19 @@
                       `;
                       document.getElementById('cards').append(listItem);
                     }
-                    for (var x in array) {
+                    for (var x in array_theme) {
                       var a = document.createElement("a");
                       a.href="#";
                       a.classList.add('list-group-item');
-                      a.appendChild(document.createTextNode(array[x]));
-                      div.appendChild(a);
+                      a.appendChild(document.createTextNode(array_theme[x]));
+                      div_theme.appendChild(a);
                       }
-                    for (var x in array2) {
+                    for (var y in array_litGen) {
                       var a2 = document.createElement("a");
                       a2.href="#";
                       a2.classList.add('list-group-item');
-                      a2.appendChild(document.createTextNode(array2[x]));
-                      div2.appendChild(a2);
+                      a2.appendChild(document.createTextNode(array_litGen[y]));
+                      div_litGen.appendChild(a2);
                       }
                   })
                   .catch(e => {
