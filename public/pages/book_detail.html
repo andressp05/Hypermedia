@@ -24,6 +24,8 @@
       $("#header").load("header.html");
       $("#footer").load("footer.html");
     }
+	const urlParams = new URLSearchParams(window.location.search);
+	const isbn = urlParams.get('isbn');
     </script>
 
   </head>
@@ -35,16 +37,16 @@
 
 	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+
 	 <div class="container">
 	     <div class="row">
-	         <!-- Image -->
+	         <!-- Book Image + Title-->
 	         <div class="col-12 col-lg-6">
 	             <div class="card bg-light mb-3">
-	                 <div class="card-body">
-	                     <a href="" data-toggle="modal" data-target="#productModal">
-	                         <img class="img-fluid" src="https://dummyimage.com/800x800/55595c/fff" />
-	                         <p class="text-center">Zoom</p>
-	                     </a>
+	                 <div class="card-body" >
+	                         <div class="" id="image"> </div>
+	                         <p class="text-center" id="title">
+							 </p>
 	                 </div>
 	             </div>
 	         </div>
@@ -53,19 +55,43 @@
 	         <div class="col-12 col-lg-6 add_to_cart_block">
 	             <div class="card bg-light mb-3">
 	                 <div class="card-body">
-	                     <p class="price">99.00 $</p>
-	                     <p class="price_discounted">149.90 $</p>
+
+	                     <p class="author" id="author"></p>
+
+						 <table class"table" id="general_info">
+							 <tr>
+								 <th align="left"> Theme </th>
+								 <td id="theme" align="right"> </td>
+							 </tr>
+							 <tr>
+								 <th align="left"> Literary Genre </th>
+								 <td id="literary_gen" align="right"> </td>
+							 </tr>
+							 <tr>
+								 <th align="left"> Edition </th>
+								 <td id="edition" align="right"> </td>
+							 </tr>
+							 <tr>
+								 <th align="left"> Publisher </th>
+								 <td id="publisher" align="right"> </td>
+							 </tr>
+							 <tr>
+ 								<th align="left"> ISBN </th>
+ 								<td id="isbn" align="right"> </td>
+ 							</tr>
+							<tr>
+								<th align="left"> Year </th>
+								<td id="year" align="right"> </td>
+							</tr>
+							<tr>
+								<th align="left"> Number of Pages </th>
+								<td id="pages" align="right"> </td>
+							</tr>
+						</table>
+
 	                     <form method="get" action="cart.html">
 	                         <div class="form-group">
-	                             <label for="colors">Color</label>
-	                             <select class="custom-select" id="colors">
-	                                 <option selected>Select</option>
-	                                 <option value="1">Blue</option>
-	                                 <option value="2">Red</option>
-	                                 <option value="3">Green</option>
-	                             </select>
-	                         </div>
-	                         <div class="form-group">
+								 <p> </p>
 	                             <label>Quantity :</label>
 	                             <div class="input-group mb-3">
 	                                 <div class="input-group-prepend">
@@ -85,13 +111,7 @@
 	                             <i class="fa fa-shopping-cart"></i> Add To Cart
 	                         </a>
 	                     </form>
-	                     <div class="product_rassurance">
-	                         <ul class="list-inline">
-	                             <li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br/>Fast delivery</li>
-	                             <li class="list-inline-item"><i class="fa fa-credit-card fa-2x"></i><br/>Secure payment</li>
-	                             <li class="list-inline-item"><i class="fa fa-phone fa-2x"></i><br/>+33 1 22 54 65 60</li>
-	                         </ul>
-	                     </div>
+
 	                     <div class="reviews_product p-3 mb-2 ">
 	                         3 reviews
 	                         <i class="fa fa-star"></i>
@@ -101,9 +121,6 @@
 	                         <i class="fa fa-star"></i>
 	                         (4/5)
 	                         <a class="pull-right" href="#reviews">View all reviews</a>
-	                     </div>
-	                     <div class="datasheet p-3 mb-2 bg-info text-white">
-	                         <a href="" class="text-white"><i class="fa fa-file-text"></i> Download DataSheet</a>
 	                     </div>
 	                 </div>
 	             </div>
@@ -115,13 +132,18 @@
 	         <div class="col-12">
 	             <div class="card border-light mb-3">
 	                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-align-justify"></i> Description</div>
-	                 <div class="card-body">
-	                     <p class="card-text">
-	                         Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-	                     </p>
-	                     <p class="card-text">
-	                         Contrairement à une opinion répandue, le Lorem Ipsum n'est pas simplement du texte aléatoire. Il trouve ses racines dans une oeuvre de la littérature latine classique datant de 45 av. J.-C., le rendant vieux de 2000 ans. Un professeur du Hampden-Sydney College, en Virginie, s'est intéressé à un des mots latins les plus obscurs, consectetur, extrait d'un passage du Lorem Ipsum, et en étudiant tous les usages de ce mot dans la littérature classique, découvrit la source incontestable du Lorem Ipsum. Il provient en fait des sections 1.10.32 et 1.10.33 du "De Finibus Bonorum et Malorum" (Des Suprêmes Biens et des Suprêmes Maux) de Cicéron. Cet ouvrage, très populaire pendant la Renaissance, est un traité sur la théorie de l'éthique. Les premières lignes du Lorem Ipsum, "Lorem ipsum dolor sit amet...", proviennent de la section 1.10.32.
-	                     </p>
+	                 <div class="card-body" id="description">
+	                         ${abstract}
+	                 </div>
+	             </div>
+	         </div>
+
+			 <!-- Interview -->
+	         <div class="col-12">
+	             <div class="card border-light mb-3">
+	                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-align-justify"></i> Interview</div>
+	                 <div class="card-body" id="interview">
+	                         ${interview}
 	                 </div>
 	             </div>
 	         </div>
@@ -191,5 +213,58 @@
 	 <!-- FOOTER -->
 	 <div id="footer"></div>
 
+	 <script type="text/javascript">
+	 console.log(isbn)
+	 fetch('../test/books/' + isbn).then(  function(response) {
+		 console.log(response.status);
+		 if (response.status === 200) {
+			 return response.json();
+		 } else {
+			 throw new Error(response.status);
+		 }
+	 }).then(json => {
+		 console.log(json);
+
+		 var array_theme = [];
+		 var array_litGen = [];
+		 for(let i = 0; i < json.length; i++){
+			 var { img_path, name, author, theme, literary_gen, edition, publisher, ISBN, year, page_num, abstract, interview} = json[i];
+			 console.log(json[i]);
+
+			 if (img_path == null) {
+				 img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+			 }
+
+		 }
+		 console.log(json[0].author + author);
+		 var image = json[0].img_path;
+		 var name = json[0].name;
+		 var author = json[0].author[0];
+		 var theme = json[0].theme;
+		 var literary_gen = json[0].literary_gen;
+		 var edition = json[0].edition;
+		 var publisher = json[0].publisher;
+		 var isbn = json[0].ISBN;
+		 var year = json[0].year;
+		 var page_num = json[0].page_num;
+		 var abstract = json[0].abstract;
+		 var interview = json[0].interview;
+		 console.log(json[0].theme + theme);
+		 console.log(author);
+		 document.getElementById("image").innerHTML='<img class="img-fluid" src="' + image + '" />';
+		 document.getElementById("title").innerHTML=name;
+		 document.getElementById("author").innerHTML=author;
+		 document.getElementById("theme").innerHTML=theme;
+		 document.getElementById("literary_gen").innerHTML=literary_gen;
+		 document.getElementById("edition").innerHTML=edition;
+		 document.getElementById("publisher").innerHTML=publisher;
+		 document.getElementById("isbn").innerHTML=isbn;
+		 document.getElementById("year").innerHTML=year;
+		 document.getElementById("pages").innerHTML=page_num;
+		 document.getElementById("description").innerHTML=abstract;
+		 document.getElementById("interview").innerHTML=interview;
+	 })
+
+	 </script>
 	</body>
 </html>
