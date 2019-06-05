@@ -39,47 +39,45 @@
           </div>
           <div class="card-body">
             <h5 class="card-title text-center">Register</h5>
-            <form class="form-signin">
+            <form class="form-signin" action="/test/user/register" method="POST">
               <div class="form-label-group">
-                <input type="text" id="inputName" class="form-control" placeholder="Name" required autofocus>
-                <label for="inputName">Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Name" required autofocus>
+                <label for="name">Name</label>
               </div>
 
               <div class="form-label-group">
-                <input type="text" id="inputSurname" class="form-control" placeholder="Surname" required autofocus>
-                <label for="inputSurname">Surname</label>
+                <input type="text" id="surname" class="form-control" placeholder="Surname" required autofocus>
+                <label for="surname">Surname</label>
               </div>
 
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-                <label for="inputEmail">Email address</label>
+                <input type="email" id="email" class="form-control" placeholder="Email address" required>
+                <label for="email">Email address</label>
               </div>
 
               <hr>
 
               <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Password" required>
+                <label for="password">Password</label>
               </div>
 
               <div class="form-label-group">
-                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
-                <label for="inputConfirmPassword">Confirm password</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Password" required>
+                <label for="confirmPassword">Confirm password</label>
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onclick="validate_passwords()">Register</button>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
               <a class="d-block text-center mt-2 small" href="/pages/login.html">Login</a>
 
               <script type="text/javascript">
-                var input_field_1 = document.getElementById("inputPassword");
-                var input_field_2 = document.getElementById("inputConfirmPassword");
+                var input_field_1 = document.getElementById("password");
+                var input_field_2 = document.getElementById("confirmPassword");
 
 
                 function validate_passwords() {
 
                   if (input_field_1.value === input_field_2.value) {
-
-                    // REGISTRATION FOR LUCA
 
                   } else {
                     alert("Passwords do not match !");
