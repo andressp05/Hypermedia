@@ -39,31 +39,31 @@
           </div>
           <div class="card-body">
             <h5 class="card-title text-center">Register</h5>
-            <form class="form-signin" action="/test/user/register" method="GET">
+            <form class="form-signin" action="/test/user/register" method="POST">
               <div class="form-label-group">
-                <input type="text" id="name" class="form-control" placeholder="Name" required autofocus>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Name" required autofocus>
                 <label for="name">Name</label>
               </div>
 
               <div class="form-label-group">
-                <input type="text" id="surname" class="form-control" placeholder="Surname" required autofocus>
+                <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" required autofocus>
                 <label for="surname">Surname</label>
               </div>
 
               <div class="form-label-group">
-                <input type="email" id="email" class="form-control" placeholder="Email address" required>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required>
                 <label for="email">Email address</label>
               </div>
 
               <hr>
 
               <div class="form-label-group">
-                <input type="password" id="password" class="form-control" placeholder="Password" required>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                 <label for="password">Password</label>
               </div>
 
               <div class="form-label-group">
-                <input type="password" id="confirmPassword" class="form-control" placeholder="Password" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Password" required>
                 <label for="confirmPassword">Confirm password</label>
               </div>
 

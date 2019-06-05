@@ -34,9 +34,9 @@ exports.createUser = function(name, surname, email, password, address) {
     bcrypt.hash(password, 10).then((hash) => {
       var id = shortid.generate();
       return sqlDb(Data.Tables.user)
-      .returning('client_id')
+      .returning('id')
       .insert({
-        client_id: 11,
+        id: id,
         name: name,
         surname: surname,
         email: email,
@@ -48,7 +48,11 @@ exports.createUser = function(name, surname, email, password, address) {
       console.log(`New user registered with id: ${client_id}`);
       resolve(client_id);
     })
-    .catch((val) => reject(utils.respondWithCode(400, '{"message": "operation failed"}')));
+    .catch((val) => {
+      console.log(val);
+      reject(utils.respondWithCode(400, '{"message": "operation failed"}'));
+    });
+
   });
 }
 
