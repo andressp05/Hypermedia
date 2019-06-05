@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>PaperHouse</title>
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/assets/css/style.css">
+
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../assets/js/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script>
+	function setHeaderFooter(){
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		const urlParams = new URLSearchParams(window.location.search);
+		const author_id = urlParams.get('author_id');
+		console.log(author_id);
+	}
+	</script>
+
+  </head>
+
+  <body onload="setHeaderFooter()">
+	  <!-- HEADER -->
+	  <div id='header'></div>
+	  <div class="container">
+  		<div class="row">
+    		<div class="col-md-6 img">
+      			<div class="" id="image" align="middle"> </div>
+    		</div>
+    		<div class="col-md-6 details">
+				<table class="table" id="general_info">
+					<tr>
+						<th align="left"> Name </th>
+						<td id="name" align="right"> </td>
+					</tr>
+					<tr>
+						<th align="left"> Surname </th>
+						<td id="surname" align="right"> </td>
+					</tr>
+				</table>
+      			<p id="short_bio">
+      			</p>
+    		</div>
+  		</div>
+	</div>
+
+	<!-- FOOTER -->
+	<div id="footer"></div>
+
+
+	<script type="text/javascript">
+	fetch('../test/authors/' + author_id).then(  function(response) {
+		console.log(response.status);
+		if (response.status === 200) {
+			return response.json();
+		} else {
+			throw new Error(response.status);
+		}
+	}).then(json => {
+		console.log(json);
+
+		var array_theme = [];
+		var array_litGen = [];
+		for(let i = 0; i < json.length; i++){
+			var { author_id, img_path, name, surname, short_bio} = json[i];
+			console.log(json[i]);
+		}
+		var author_id = json[0].author_id;
+		var image = json[0].img_path;
+		var name = json[0].name;
+		var surname = json[0].surname;
+		var short_bio = json[0].short_bio;
+		if (img_path == null) {
+			image = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+		}
+		document.getElementById("image").innerHTML='<img alt="" class="img-rounded" src="' + image + '" />';
+		document.getElementById("name").innerHTML=name;
+		document.getElementById("surname").innerHTML=surname;
+		document.getElementById("short_bio").innerHTML=short_bio;
+	})
+
+	</script>
+
+	</body>
+</html>
