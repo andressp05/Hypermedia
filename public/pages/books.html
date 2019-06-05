@@ -102,13 +102,13 @@
                   } = json[i];
                   console.log(json[i]);
                   if (theme != null) {
-                    listItem.classList.add(theme.replace(/\s+/g, "").toLowerCase())
+                    listItem.setAttribute("theme", theme);
                     var div_theme = document.getElementById("themes");
                     array_theme.indexOf(theme.trim()) === -1 ? array_theme.push(theme.trim()) : console.log("This item already exists");;
                   }
 
                   if (literary_gen != null) {
-                    listItem.classList.add(literary_gen.replace(/\s+/g, "").toLowerCase())
+                    listItem.setAttribute("litGen", literary_gen);
                     var div_litGen = document.getElementById("lit_gen");
                     array_litGen.indexOf(literary_gen.trim()) === -1 ? array_litGen.push(literary_gen.trim()) : console.log("This item already exists");
                   }
@@ -187,15 +187,11 @@
       var selector = $(this).text();
       $("#cards #card").filter(function() {
         if (selector !== 'All') {
-          $(this).toggle($(this).text().includes(selector));
-          filter_themes.push($(this));
-          console.log($(this));
-        } else {
-          for (var element in filter_themes) {
-            console.log(element);
-            element.toggle(element.text().toLowerCase().includes(""));
+          if ($(this).attr("theme") != selector) {
+            $(this).style.display = "none";
           }
-          filter_themes = [];
+        } else {
+          $(this).style.display = "block"
         }
       });
     });
