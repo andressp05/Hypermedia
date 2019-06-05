@@ -14,6 +14,75 @@ body {
   --input-padding-y: .75rem;
 }
 
+.card-book {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 20rem;
+}
+
+.hoverWrapper:hover {
+  display: block;
+}
+
+.hoverWrapper {
+  display: none;
+  position: absolute;
+  background-color: #ff0000;
+  width: 250px;
+  height: 250px;
+  left: 200px;
+  top: 100px;
+}
+
+.card-book-body {
+  display: none;
+}
+
+.card-book:hover #card-book-body {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+.card-book-body h4 {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  color: #f8f9fa;
+}
+
+.card-book-body h5 {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
+  color: #f8f9fa;
+}
+
+.list-group ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-group ul a{
+  border: 1px solid #ddd;
+  margin-left: 1rem;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+}
+.list-group-item {}
+
+.list-group-item .active{}
+
+.card-book-body p {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  color: #f8f9fa;
+}
+
 .card-signin {
   border: 0;
   border-radius: 1rem;
