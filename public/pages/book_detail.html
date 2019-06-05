@@ -44,8 +44,8 @@
 	         <div class="col-12 col-lg-6">
 	             <div class="card bg-light mb-3">
 	                 <div class="card-body" >
-	                         <div class="" id="image"> </div>
-	                         <p class="text-center" id="title">
+	                         <div class="" id="image" align="middle"> </div>
+	                         <p class="text-center" align="middle" id="title">
 							 </p>
 	                 </div>
 	             </div>
@@ -231,9 +231,6 @@
 			 var { img_path, name, author, theme, literary_gen, edition, publisher, ISBN, year, page_num, abstract, interview} = json[i];
 			 console.log(json[i]);
 
-			 if (img_path == null) {
-				 img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
-			 }
 
 		 }
 		 console.log(json[0].author + author);
@@ -251,6 +248,9 @@
 		 var interview = json[0].interview;
 		 console.log(json[0].theme + theme);
 		 console.log(author);
+		 if (img_path == null) {
+			 image = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+		 }
 		 document.getElementById("image").innerHTML='<img class="img-fluid" src="' + image + '" />';
 		 document.getElementById("title").innerHTML=name;
 		 document.getElementById("author").innerHTML=author;
