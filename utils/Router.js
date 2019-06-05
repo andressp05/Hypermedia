@@ -16,5 +16,9 @@ router.get('/pages/authors.html', function(req, res, next){
   res.sendFile(path.join(__dirname, '../public', 'pages', 'authors.html'));
 });
 
+router.get('/pages/books/', function(req, res, next){
+  res.sendFile(path.join(__dirname, '../public', 'pages', 'book_details.html'));
+});
+
 
 module.exports = router;
