@@ -1,12 +1,81 @@
 /* Additional modifications to all the content of the pages */
+/* #f0c65c	(240,198,92)
+#d39f4c	(211,159,76)
+#b77e31	(183,126,49)
+#8c512d	(140,81,45)
+#64260c	(100,38,12) */
 body {
   padding-top: 70px;
-  background-color: #C1876B;
-  background: linear-gradient(to right, #C1876B, #b97859);
+  background-color: #b77e31;
+  background: linear-gradient(to right, #d39f4c, #b77e31);
 }
 
-#footer {
-  padding-top: 70px;
+div #footer {
+  padding-top: 1rem;
+  background-color: #64260c;
+  clear: both;
+  margin-top: 8rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+div #footer p {
+  color: white;
+}
+
+div #header .navbar {
+  background-color: #64260c;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: #8c512d;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #64260c;
+  text-decoration: none;
+}
+
+h1 {
+  color: #64260c;
+}
+
+
+
+.list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: #b77e31;
+  border-color: #b77e31;
+}
+
+.list-group-item.active a {
+  text-decoration: none;
+}
+
+.list-group-item.active a:hover {
+  text-decoration: none;
+}
+
+.mx-auto hr {
+  width: 70px;
+  background-color: #f0c65c
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #8c512d;
+  border-color: #64260c;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #64260c;
+  border-color: #64260c;
 }
 
 :root {
@@ -66,16 +135,18 @@ body {
   margin: 0;
 }
 
-.list-group ul a{
+.list-group ul a {
   border: 1px solid #ddd;
   margin-left: 1rem;
-  margin-top: -1px; /* Prevent double borders */
+  margin-top: -1px;
+  /* Prevent double borders */
   background-color: #f6f6f6;
   padding: 12px;
 }
+
 .list-group-item {}
 
-.list-group-item .active{}
+.list-group-item .active {}
 
 .card-book-body p {
   margin-top: 1rem;
