@@ -44,6 +44,14 @@ h1 {
   color: #64260c;
 }
 
+hr #hrspecial {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;
+  background-color:#FFFF00;
+  height: 1px;
+}
 
 
 .list-group-item.active {
@@ -165,6 +173,12 @@ h1 {
   margin-bottom: 2rem;
   font-weight: 300;
   font-size: 1.5rem;
+}
+
+.card-signin .card-img-left-event {
+  width: 65%;
+  /* Link to your background image using in the property below! */
+  background-size: cover;
 }
 
 .card-signin .card-img-left {
