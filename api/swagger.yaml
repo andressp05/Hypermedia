@@ -433,6 +433,15 @@ definitions:
         type: "string"
       img_path:
         type: "string"
+      books:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            ISBN:
+              type: "string"
+            name:
+              type: "string"
     title: "Author"
     description: "An author who writes books"
     example:
