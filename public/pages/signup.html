@@ -46,7 +46,7 @@
               </div>
 
               <div class="form-label-group">
-                <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" required autofocus>
+                <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" required >
                 <label for="surname">Surname</label>
               </div>
 
@@ -67,7 +67,7 @@
                 <label for="confirmPassword">Confirm password</label>
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onclick="validate_passwords()">Register</button>
+              <a class="btn btn-lg btn-primary btn-block text-uppercase"  onclick="validate_passwords()">Register</a>
               <a class="d-block text-center mt-2 small" href="/pages/login.html">Login</a>
 
               <!-- <hr class="my-4">
@@ -80,37 +80,42 @@
 
 
               function validate_passwords() {
-
-                if (input_field_1.value === input_field_2.value) {
-                  let myForm = document.getElementById('signupForm');
-                  let formData = new URLSearchParams(new FormData(myForm));
-                  let options = {
-                    body: formData,
-                    method: "POST",
-                    headers: {
-                      'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                  }
-
-                  fetch('/test/user/register', options)
-                    .then(response => {
-                      if (response.status === 200) {
-                        return response.json();
-                      } else {
-                        throw new Error(response.status);
+                var myForm = document.getElementById('signupForm');
+                if(myForm.reportValidity()){
+                  if (input_field_1.value === input_field_2.value) {
+                    
+                    let formData = new URLSearchParams(new FormData(myForm));
+                    let options = {
+                      body: formData,
+                      method: "POST",
+                      credentials: 'same-origin',
+                      headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
                       }
-                    })
-                    .then(json => {
-                      console.log(json);
-                      let previousUrl = document.referrer;
-                      // window.location.href = previousUrl;
-                    })
-                    .catch(e => {
-                      console.error(e);
-                    });
-                } else {
-                  alert("Passwords do not match !");
-                };
+                    }
+
+                    fetch('/test/user/register', options)
+                      .then(response => {
+                        if (response.status === 200) {
+                          return response.json();
+                        } else {
+                          throw response;
+                        }
+                      })
+                      .then(json => {
+                        console.log(json);
+                        let previousUrl = document.referrer;
+                        window.location.href = previousUrl;
+                      })
+                      .catch(e => {
+                        e.json().then( json => {
+                          console.log(json.message)
+                        })
+                      });
+                  } else {
+                    alert("Passwords do not match !");
+                  };
+                }
               };
             </script>
           </div>
