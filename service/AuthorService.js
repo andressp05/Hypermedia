@@ -40,7 +40,6 @@ exports.authorsGET = async function (offset = 0, limit = 20) {
       resolve(data);
     });
   } catch (e) {
-
     return new Promise((res, rej) => {
       console.log(e);
       rej(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${e}"`))
@@ -56,39 +55,26 @@ exports.authorsGET = async function (offset = 0, limit = 20) {
  * returns Book
  **/
 exports.getAuthorById = async function (authorId) {
-  const data = await sqlDb.select(`${Data.Tables.author}.*`,
-    sqlDb.raw(`array_agg(${Data.Tables.book}."ISBN") AS "ISBN"`),
-    sqlDb.raw(`array_agg(${Data.Tables.book}.name) book_name`))
-    .from(Data.Tables.author)
-    .leftJoin(Data.Tables.written_by, `${Data.Tables.author}.author_id`, `${Data.Tables.written_by}.author_id`)
-    .leftJoin(Data.Tables.book, `${Data.Tables.written_by}.ISBN`, `${Data.Tables.book}.ISBN`)
-    .groupBy(`${Data.Tables.author}.author_id`).where(`${Data.Tables.author}.author_id`, authorId);
+  try{
+    const data = await sqlDb.select(`${Data.Tables.author}.*`,
+      sqlDb.raw(`array_agg(${Data.Tables.book}."ISBN") AS "ISBN"`),
+      sqlDb.raw(`array_agg(${Data.Tables.book}.name) book_name`))
+      .from(Data.Tables.author)
+      .leftJoin(Data.Tables.written_by, `${Data.Tables.author}.author_id`, `${Data.Tables.written_by}.author_id`)
+      .leftJoin(Data.Tables.book, `${Data.Tables.written_by}.ISBN`, `${Data.Tables.book}.ISBN`)
+      .groupBy(`${Data.Tables.author}.author_id`).where(`${Data.Tables.author}.author_id`, authorId);
 
-  return new Promise(function (resolve, reject) {
-    if (Object.keys(data).length > 0) {
-      resolve(data);
-    } else {
-      reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Author not found"}'));
-    }
-  });
-
-
-  //   return new Promise(function(resolve, reject) {
-  //     var examples = {};
-  //     examples['application/json'] = {
-  //   "id" : 0,
-  //   "title" : "Il deserto dei tartari",
-  //   "author" : "Dino Buzzati",
-  //   "price" : {
-  //     "value" : 10,
-  //     "currency" : "EUR"
-  //   },
-  //   "status" : "available"
-  // };
-  //     if (Object.keys(examples).length > 0) {
-  //       resolve(examples[Object.keys(examples)[0]]);
-  //     } else {
-  //       resolve();
-  //     }
-  //   });
+    return new Promise(function (resolve, reject) {
+      if (Object.keys(data).length > 0) {
+        resolve(data);
+      } else {
+        reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Author not found"}'));
+      }
+    });
+  } catch (e) {
+    return new Promise((res, rej) => {
+      console.log(e);
+      rej(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${e}"`))
+    })
+  }
 }
