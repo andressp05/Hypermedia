@@ -6,10 +6,7 @@ let Data = require('../utils/Data');
 
 let sqlDb = Data.database;
 
-let bookQuery;
-  
-
-exports.booksDbSetup = async function(database) {
+exports.booksDbSetup = async function (database) {
   sqlDb = database;
   console.log("Checking if books table exists");
   const exists = await sqlDb.schema.hasTable(Data.Tables.book);
@@ -17,16 +14,6 @@ exports.booksDbSetup = async function(database) {
     console.log("It doesn't so we create it");
   }
   else {
-    bookQuery = sqlDb
-    .select(
-      Data.Tables.book+'.*',
-      sqlDb.raw(`array_agg(${Data.Tables.author}.name ORDER BY ${Data.Tables.author}.author_id) AS a_name`),
-      sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`))
-    .from(Data.Tables.book)
-    .leftJoin(Data.Tables.written_by, Data.Tables.book + '.ISBN', Data.Tables.written_by + '.ISBN')
-    .leftJoin(Data.Tables.author, Data.Tables.written_by + '.author_id', Data.Tables.author + '.author_id')
-    .groupBy(`${Data.Tables.book}.ISBN`);
-
     console.log("Books table exists");
   }
 };
@@ -45,7 +32,15 @@ exports.booksGET = async function(offset=0, limit=20) {
   //   resolve(books.then(data => mapBook(data)));
   // });
 
-  const data = await bookQuery;
+  const data = await sqlDb
+  .select(
+    Data.Tables.book + '.*',
+    sqlDb.raw(`array_agg(${Data.Tables.author}.name ORDER BY ${Data.Tables.author}.author_id) AS a_name`),
+    sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`))
+  .from(Data.Tables.book)
+  .leftJoin(Data.Tables.written_by, Data.Tables.book + '.ISBN', Data.Tables.written_by + '.ISBN')
+  .leftJoin(Data.Tables.author, Data.Tables.written_by + '.author_id', Data.Tables.author + '.author_id')
+  .groupBy(`${Data.Tables.book}.ISBN`).limit(limit).offset(offset);
   return new Promise((resolve, reject) => {
     resolve(mapBook(data));
   });
@@ -60,7 +55,15 @@ exports.booksGET = async function(offset=0, limit=20) {
  * returns Book
  **/
 exports.getBookById = async function(bookId) {
-  const data = await bookQuery.where(`${Data.Tables.book}.ISBN`, bookId);
+  const data = await sqlDb
+  .select(
+    Data.Tables.book + '.*',
+    sqlDb.raw(`array_agg(${Data.Tables.author}.name ORDER BY ${Data.Tables.author}.author_id) AS a_name`),
+    sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`))
+  .from(Data.Tables.book)
+  .leftJoin(Data.Tables.written_by, Data.Tables.book + '.ISBN', Data.Tables.written_by + '.ISBN')
+  .leftJoin(Data.Tables.author, Data.Tables.written_by + '.author_id', Data.Tables.author + '.author_id')
+  .groupBy(`${Data.Tables.book}.ISBN`).where(`${Data.Tables.book}.ISBN`, bookId);
   return new Promise(function(resolve, reject) {
       if (Object.keys(data).length > 0) {
         console.log(data);
@@ -89,9 +92,4 @@ let mapBook = function(data) {
       return e;
     });
   // });
-}
-
-
-let getBookAuthor = function(bookId) {
-  
 }

@@ -1,11 +1,12 @@
 'use strict';
 
-let Codes = require('../utils/Codes.js');
-var utils = require('../utils/writer.js');
+let Codes = require('../utils/Codes');
+var utils = require('../utils/writer');
+let Data = require('../utils/Data');
 
-let sqlDb;
+let sqlDb = Data.database;
 
-exports.authorsDbSetup = function(database) {
+exports.authorsDbSetup = function (database) {
   sqlDb = database;
   console.log("Checking if authors table exists");
   return database.schema.hasTable("authors").then(exists => {
@@ -25,9 +26,26 @@ exports.authorsDbSetup = function(database) {
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.authorsGET = function(offset=0, limit=500) {
-  let authors = sqlDb.select().table('authors').limit(limit).offset(offset);
-  return mapAuthor(authors);
+exports.authorsGET = async function (offset = 0, limit = 20) {
+  // let authors = sqlDb.select().table('authors').limit(limit).offset(offset);
+  try {
+    const data = await sqlDb.select(`${Data.Tables.author}.*`,
+      sqlDb.raw(`array_agg(${Data.Tables.book}."ISBN") AS "ISBN"`),
+      sqlDb.raw(`array_agg(${Data.Tables.book}.name) book_name`))
+      .from(Data.Tables.author)
+      .leftJoin(Data.Tables.written_by, `${Data.Tables.author}.author_id`, `${Data.Tables.written_by}.author_id`)
+      .leftJoin(Data.Tables.book, `${Data.Tables.written_by}.ISBN`, `${Data.Tables.book}.ISBN`)
+      .groupBy(`${Data.Tables.author}.author_id`).limit(limit).offset(offset);
+    return new Promise((resolve, reject) => {
+      resolve(data);
+    });
+  } catch (e) {
+
+    return new Promise((res, rej) => {
+      console.log(e);
+      rej(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${e}"`))
+    })
+  }
 }
 
 /**
@@ -37,54 +55,40 @@ exports.authorsGET = function(offset=0, limit=500) {
  * bookId Long ID of book to return
  * returns Book
  **/
-exports.getAuthorById = function(authorId) {
-  return new Promise(function(resolve, reject) {
-    let author = sqlDb('authors').where('author_id', authorId);
-    author.then(data => {
-      console.log(Object.keys(data).length);
-      if (Object.keys(data).length > 0) {
-        resolve(data.map(e => {
-          e.price = {value: e.price, currency: "EUR"};
-          return e;
-        }));
-      } else {
-        reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Book not found"}'));
-      }
-    });
+exports.getAuthorById = async function (authorId) {
+  const data = await sqlDb.select(`${Data.Tables.author}.*`,
+    sqlDb.raw(`array_agg(${Data.Tables.book}."ISBN") AS "ISBN"`),
+    sqlDb.raw(`array_agg(${Data.Tables.book}.name) book_name`))
+    .from(Data.Tables.author)
+    .leftJoin(Data.Tables.written_by, `${Data.Tables.author}.author_id`, `${Data.Tables.written_by}.author_id`)
+    .leftJoin(Data.Tables.book, `${Data.Tables.written_by}.ISBN`, `${Data.Tables.book}.ISBN`)
+    .groupBy(`${Data.Tables.author}.author_id`).where(`${Data.Tables.author}.author_id`, authorId);
 
+  return new Promise(function (resolve, reject) {
+    if (Object.keys(data).length > 0) {
+      resolve(data);
+    } else {
+      reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Author not found"}'));
+    }
   });
 
 
-//   return new Promise(function(resolve, reject) {
-//     var examples = {};
-//     examples['application/json'] = {
-//   "id" : 0,
-//   "title" : "Il deserto dei tartari",
-//   "author" : "Dino Buzzati",
-//   "price" : {
-//     "value" : 10,
-//     "currency" : "EUR"
-//   },
-//   "status" : "available"
-// };
-//     if (Object.keys(examples).length > 0) {
-//       resolve(examples[Object.keys(examples)[0]]);
-//     } else {
-//       resolve();
-//     }
-//   });
-}
-
-/**
- * Map a book mapping the database call result into the Swagger defined product Book.
- * @param  {[type]} author the result of the call to the database
- * @return {[type]}      the Swagger spec compliant Book product.
- */
-let mapAuthor = function(author) {
-  return author.then(data => {
-    return data.map(e => {
-      e.price = {value: e.price, currency: "EUR"};
-      return e;
-    });
-  });
+  //   return new Promise(function(resolve, reject) {
+  //     var examples = {};
+  //     examples['application/json'] = {
+  //   "id" : 0,
+  //   "title" : "Il deserto dei tartari",
+  //   "author" : "Dino Buzzati",
+  //   "price" : {
+  //     "value" : 10,
+  //     "currency" : "EUR"
+  //   },
+  //   "status" : "available"
+  // };
+  //     if (Object.keys(examples).length > 0) {
+  //       resolve(examples[Object.keys(examples)[0]]);
+  //     } else {
+  //       resolve();
+  //     }
+  //   });
 }

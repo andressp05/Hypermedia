@@ -17,7 +17,7 @@ module.exports.authorsGET = function authorsGET (req, res, next) {
 
 module.exports.getAuthorById = function getAuthorById (req, res, next) {
   var authorId = req.swagger.params['authorId'].value;
-  Book.getAuthorById(authorId)
+  Author.getAuthorById(authorId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
