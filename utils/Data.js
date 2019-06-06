@@ -3,13 +3,15 @@ const sqlDbFactory = require("knex");
 let { booksDbSetup } = require("../service/BookService.js");
 let { usersDbSetup } = require("../service/UserService.js");
 let { authorsDbSetup } = require("../service/AuthorService.js");
+let { our_favoritesDbSetup } = require("../service/FavoritesService.js");
 
 
 exports.Tables = {
   book: 'books',
   author: 'authors',
   written_by: 'written_by',
-  user: 'clients'
+  user: 'clients',
+  favorite: 'our_favorites'
 }
 
 let sqlDb = sqlDbFactory({
@@ -56,6 +58,7 @@ function setupDataLayer() {
     booksDbSetup(sqlDb);
     usersDbSetup(sqlDb);
     authorsDbSetup(sqlDb);
+    our_favoritesDbSetup(sqlDb);
     resolve();
   });
 }

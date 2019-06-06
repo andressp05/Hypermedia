@@ -82,6 +82,39 @@ paths:
         404:
           description: "Book not found"
       x-swagger-router-controller: "Book"
+  /favorites:
+    get:
+      tags:
+      - "book"
+      summary: "Favorites books available in the inventory"
+      description: "List of favorites books available in the inventory"
+      operationId: "favoritesGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of favorites books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Favorites books not found"
+        500:
+          description: "un paso mas"
+      x-swagger-router-controller: "Favorite"
   /authors:
     get:
       tags:
