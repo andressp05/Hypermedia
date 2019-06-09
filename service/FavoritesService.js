@@ -9,9 +9,9 @@ let sqlDb = Data.database;
 exports.our_favoritesDbSetup = async function (database) {
   sqlDb = database;
   console.log("Checking if our_favorites table exists");
-  const exists = await sqlDb.schema.hasTable(Data.Tables.our_favorites);
+  const exists = await sqlDb.schema.hasTable(Data.Tables.favorite);
   if (!exists) {
-    console.log("It doesn't so we create it");
+    console.log("our_favorites doesn't esist so we need to create it");
   }
   else {
     console.log("our_favorites table exists");
