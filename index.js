@@ -13,6 +13,7 @@ var serverPort = process.env.PORT || 3000;
 // import other file from the server
 var { setupDataLayer } = require('./utils/Data.js');
 var router = require('./utils/Router.js');
+// var auth = require('./utils/Authentication');
 
 // swaggerRouter configuration
 var options = {
@@ -50,6 +51,11 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
   // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
   app.use(middleware.swaggerMetadata());
+
+  // app.use(middleware.swaggerSecurity({
+  //   //manage token function in the 'auth' module
+  //   Bearer: auth.verifyToken
+  // }));
 
   // Validate Swagger requests
   app.use(middleware.swaggerValidator());
