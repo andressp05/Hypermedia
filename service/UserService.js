@@ -74,7 +74,7 @@ exports.loginUser = function(email,password) {
           bcrypt.compare(password, user[0].password).then(res => {
             console.log(res);
             if(res == true){
-              resolve(user[0].client_id);
+              resolve(user[0].id);
             } else {
               // Wrong password
               reject(utils.respondWithCode(400, '{"message": "Wrong username or password"}'));

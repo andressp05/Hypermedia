@@ -403,6 +403,74 @@ paths:
         404:
           description: "User not found"
       x-swagger-router-controller: "User"
+  /cart:
+    # get:
+    #   tags:
+    #   - "cart"
+    #   summary: "Get cart for the current user"
+    #   description: ""
+    #   operationId: "getCart"
+    #   produces:
+    #   - "application/json"
+    #   parameters:
+    #   - name: "username"
+    #     in: "path"
+    #     description: "The name that needs to be fetched. Use user1 for testing. "
+    #     required: true
+    #     type: "string"
+    #   responses:
+    #     200:
+    #       description: "successful operation"
+    #       schema:
+    #         $ref: "#/definitions/User"
+    #     400:
+    #       description: "Invalid username supplied"
+    #     404:
+    #       description: "User not found"
+    #   x-swagger-router-controller: "User"
+    post:
+      tags:
+      - "cart"
+      summary: "Add an item to the cart"
+      description: ""
+      operationId: "addToCart"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: body
+        description: "The isbn of the book to be added to the cart"
+        schema:
+          type: "object"
+          required:
+            - "isbn"
+            - "quantity"
+          properties:
+            isbn:
+              type: "integer"
+              format: "int64"
+            quantity:
+              type: "integer"
+              format: "int32"
+      #   required: true
+      #   type: "string"
+      # - name: "quntity"
+      #   in: body
+      #   description: "The quantity of the item to add to the cart"
+      #   required: true
+      #   type: "integer"
+      #   format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        500:
+          description: "Error on the server"
+      x-swagger-router-controller: "Cart"
+
 definitions:
   Book:
     type: "object"

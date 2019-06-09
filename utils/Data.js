@@ -5,6 +5,7 @@ let { usersDbSetup } = require("../service/UserService.js");
 let { authorsDbSetup } = require("../service/AuthorService.js");
 let { our_favoritesDbSetup } = require("../service/FavoritesService.js");
 let { eventsDbSetup } = require("../service/EventService.js");
+let { cartDbSetup } = require("../service/CartService");
 
 
 exports.Tables = {
@@ -13,7 +14,9 @@ exports.Tables = {
   written_by: 'written_by',
   user: 'clients',
   favorite: 'our_favorites',
-  evento: 'events'
+  evento: 'events',
+  cart: 'cart',
+  cart_detail: 'cart_detail'
 }
 
 let sqlDb = sqlDbFactory({
@@ -62,6 +65,7 @@ function setupDataLayer() {
     authorsDbSetup(sqlDb);
     our_favoritesDbSetup(sqlDb);
     eventsDbSetup(sqlDb);
+    cartDbSetup(sqlDb);
     resolve();
   });
 }
