@@ -3,16 +3,16 @@
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home</a>
+          <a id="home" class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/pages/books.html">Books</a>
+          <a id='books' class="nav-link" href="/pages/books.html">Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/pages/authors.html">Authors</a>
+          <a id='authors' class="nav-link" href="/pages/authors.html">Authors</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/pages/events.html">Events</a>
+          <a id='events' class="nav-link" href="/pages/events.html">Events</a>
         </li>
       </ul>
     </div>
@@ -25,12 +25,19 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/pages/login.html">Login</a>
+          <a id='login' class="nav-link" href="/pages/login.html">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/pages/signup.html">Register</a>
+          <a id='signup' class="nav-link" href="/pages/signup.html">Register</a>
         </li>
       </ul>
     </div>
   </nav>
+
+  <script>
+    console.log(window.location.pathname);
+    var path = window.location.pathname.split('/');
+    var page = path[path.length - 1];
+
+  </script>
 </header>
