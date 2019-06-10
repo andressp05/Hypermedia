@@ -404,30 +404,55 @@ paths:
           description: "User not found"
       x-swagger-router-controller: "User"
   /cart:
-    # get:
-    #   tags:
-    #   - "cart"
-    #   summary: "Get cart for the current user"
-    #   description: ""
-    #   operationId: "getCart"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "username"
-    #     in: "path"
-    #     description: "The name that needs to be fetched. Use user1 for testing. "
-    #     required: true
-    #     type: "string"
-    #   responses:
-    #     200:
-    #       description: "successful operation"
-    #       schema:
-    #         $ref: "#/definitions/User"
-    #     400:
-    #       description: "Invalid username supplied"
-    #     404:
-    #       description: "User not found"
-    #   x-swagger-router-controller: "User"
+    get:
+      tags:
+      - "cart"
+      summary: "Get cart for the current user"
+      description: ""
+      operationId: "getCart"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                ISBN: 
+                  type: "integer"
+                  format: "int64"
+                quantity:
+                  type: "integer"
+                  format: "int32"
+      x-swagger-router-controller: "Cart"
+    delete:
+      tags:
+      - "cart"
+      summary: "Get remove an item in the current user cart"
+      description: ""
+      operationId: "removeFromCart"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "isbn"
+        in : query
+        description: "The isbn of the book to remove"
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Successful operation. Returns the new cart of the user"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Cart"
+        400:
+          description: "The request has an invalid syntax"
+        404:
+          description: "The item requested is not in the shopping cart"
+      x-swagger-router-controller: "Cart"
     post:
       tags:
       - "cart"
@@ -443,17 +468,7 @@ paths:
         in: body
         description: "The isbn of the book to be added to the cart"
         schema:
-          type: "object"
-          required:
-            - "isbn"
-            - "quantity"
-          properties:
-            isbn:
-              type: "integer"
-              format: "int64"
-            quantity:
-              type: "integer"
-              format: "int32"
+          $ref: "#/definitions/Cart"
       #   required: true
       #   type: "string"
       # - name: "quntity"
@@ -547,6 +562,19 @@ definitions:
     pattern: "^[A-Z]{3,3}$"
     description: "Currency in standar format: 3 letters\n"
     example: "EUR"
+  Cart:
+    description: "The cart of the user"
+    type: "object"
+    required:
+      - "isbn"
+      - "quantity"
+    properties:
+      isbn:
+        type: "integer"
+        format: "int64"
+      quantity:
+        type: "integer"
+        format: "int32"
   User:
     type: "object"
     properties:

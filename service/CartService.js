@@ -49,3 +49,37 @@ exports.addItem = function(user_id, isbn, quantity) {
     });
 
 }
+
+
+exports.removeItem = async function(user_id, isbn) {
+  try {
+    let subquery = sqlDb.select('id').from(Data.Tables.cart).where('client_id', user_id);
+    const data = await sqlDb(Data.Tables.cart_detail).where('ISBN', isbn).andWhere('cart_id', subquery).del();
+    console.log(data);
+    return new Promise((resolve, reject) => {
+      resolve(data);
+    });
+  } catch (e) {
+    return new Promise((res, rej) => {
+      console.log(e);
+      rej(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${e}"`))
+    })
+  }
+}
+
+
+exports.getUserCart = async function(user_id) {
+  try {
+    const data = await sqlDb.select(`${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.cart_detail}.quantity`).from(Data.Tables.cart).where('client_id', user_id)
+      .join(Data.Tables.cart_detail, `${Data.Tables.cart}.id`, `${Data.Tables.cart_detail}.cart_id`);
+      return new Promise((resolve, reject) => {
+        resolve(data);
+      });
+  } catch (e) {
+    return new Promise((res, rej) => {
+      console.log(e);
+      rej(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${e}"`))
+    })
+  }
+}
+
