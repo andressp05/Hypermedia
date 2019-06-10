@@ -29,10 +29,10 @@ exports.usersDbSetup = function(database) {
  * password The password for login
  * no response value expected for this operation
  **/
-exports.createUser = function(name, surname, email, password, address) {
+exports.createUser = function(name, surname, email, password, address, userid) {
   return new Promise(function(resolve, reject) {
     bcrypt.hash(password, 10).then((hash) => {
-      var id = shortid.generate();
+      var id = userid ? userid : shortid.generate();
       return sqlDb(Data.Tables.user)
       .returning('id')
       .insert({

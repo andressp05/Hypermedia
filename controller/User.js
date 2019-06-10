@@ -12,7 +12,7 @@ module.exports.createUser = function createUser (req, res, next) {
   if(req.session.loggedin && req.session.loggedin == true){
     utils.writeJson(res, utils.respondWithCode(403, '{"message": "user already logged in"}'));
   } else {
-    User.createUser(name,surname,email,password,address)
+    User.createUser(name,surname,email,password,address, req.session.userid)
       .then(function (response) {
         req.session.loggedin = true;
         req.session.userid = response;
@@ -34,6 +34,9 @@ module.exports.loginUser = function loginUser (req, res, next) {
     User.loginUser(username,password)
       .then(function (response) {
         req.session.loggedin = true;
+        if (req.session.userid && req.session.userid != response) {
+          
+        }
         req.session.userid = response;
         utils.writeJson(res, response);
       })
