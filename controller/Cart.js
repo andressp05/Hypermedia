@@ -23,7 +23,7 @@ module.exports.addToCart = function addToCart (req, res, next) {
 
 
 module.exports.removeFromCart = function removeFromCart(req, res, next) {
-    var userid = getUserId(req);
+    var userid = auth.getUserId(req);
     var isbn = req.swagger.params['isbn'].value;
 
     Cart.removeItem(userid, isbn)
@@ -36,7 +36,7 @@ module.exports.removeFromCart = function removeFromCart(req, res, next) {
 }
 
 module.exports.getCart = function getCart(req, res, next) {
-    var userid = getUserId(req);
+    var userid = auth.getUserId(req);
     Cart.getUserCart(userid)
     .then(response => {
         utils.writeJson(res, response);
@@ -44,13 +44,4 @@ module.exports.getCart = function getCart(req, res, next) {
     .catch(err => {
         utils.writeJson(res, err);
     });
-}
-
-
-function getUserId(req){
-    if(!req.session.userid){
-        let id = auth.generateUserId();
-        req.session.userid = id;
-    }
-    return req.session.userid;
 }

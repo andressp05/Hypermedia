@@ -13,3 +13,11 @@ exports.generateUserId = function() {
   let id = shortid.generate();
   return id;
 }
+
+exports.getUserId = function(req){
+  if(!req.session.userid){
+      let id = auth.generateUserId();
+      req.session.userid = id;
+  }
+  return req.session.userid;
+}
