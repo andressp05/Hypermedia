@@ -34,9 +34,9 @@ module.exports.loginUser = function loginUser (req, res, next) {
     User.loginUser(username,password)
       .then(function (response) {
         req.session.loggedin = true;
-        if (req.session.userid && req.session.userid != response) {
+        // if (req.session.userid && req.session.userid != response) {
           
-        }
+        // }
         req.session.userid = response;
         utils.writeJson(res, response);
       })
