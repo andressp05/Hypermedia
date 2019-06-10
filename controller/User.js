@@ -1,5 +1,7 @@
 'use strict';
 
+var cookie = require('cookie');
+
 var utils = require('../utils/writer.js');
 var User = require('../service/UserService.js');
 
@@ -35,13 +37,14 @@ module.exports.loginUser = function loginUser (req, res, next) {
       .then(function (response) {
         req.session.loggedin = true;
         // if (req.session.userid && req.session.userid != response) {
-          
+        
         // }
+        res.cookie('logged', 'true' , { expires: req.sessionOptions.expires});
         req.session.userid = response;
         utils.writeJson(res, response);
       })
       .catch(function (response) {
-        console.log('catch')
+        console.log('loginUser error! ' + response)
         req.session.loggedin = false;
         req.session.userid = null;
         utils.writeJson(res, response);
