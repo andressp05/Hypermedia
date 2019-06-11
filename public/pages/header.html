@@ -38,7 +38,7 @@
     console.log(window.location.pathname);
     // var path = window.location.pathname.split('/');
     // var page = path[path.length - 1];
-    document.getElementsByClassName('active').forEach(element => {
+    Array.from(document.getElementsByClassName('nav-item active')).forEach(element => {
       element.classList.remove('active');
     });
 
