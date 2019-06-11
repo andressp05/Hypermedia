@@ -36,8 +36,14 @@
 
   <script>
     console.log(window.location.pathname);
-    var path = window.location.pathname.split('/');
-    var page = path[path.length - 1];
+    // var path = window.location.pathname.split('/');
+    // var page = path[path.length - 1];
+    document.getElementsByClassName('active').forEach(element => {
+      element.classList.remove('active');
+    });
+
+    var currentMenu = document.querySelector(`[href="${window.location.pathname}"]`).parentElement;
+    currentMenu.classList.add('active');
 
   </script>
 </header>
