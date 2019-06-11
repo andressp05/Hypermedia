@@ -28,7 +28,6 @@ exports.our_favoritesDbSetup = async function (database) {
  **/
 
 exports.favoritesGET = async function(offset = 0, limit = 4) {
-  console.log("el error va ACA");
   try {
     const data = await sqlDb
       .select(
