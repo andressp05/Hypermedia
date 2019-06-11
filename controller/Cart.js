@@ -5,7 +5,7 @@ var auth = require('../utils/Authentication');
 var Cart = require('../service/CartService');
 
 module.exports.addToCart = function addToCart (req, res, next) {
-    var userid = getUserId(req);
+    var userid = auth.getUserId(req);
     var isbn = req.swagger.params.body.value.isbn;
     var qty = req.swagger.params.body.value.quantity;
     // console.log(userid)

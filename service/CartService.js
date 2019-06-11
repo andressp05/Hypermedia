@@ -57,12 +57,17 @@ exports.removeItem = async function(user_id, isbn) {
     const data = await sqlDb(Data.Tables.cart_detail).where('ISBN', isbn).andWhere('cart_id', subquery).del();
     console.log(data);
     return new Promise((resolve, reject) => {
-      resolve(data);
+      if(data > 0){
+        resolve(data);
+      } else {
+        console.log('removeItem - ERROR 404 - no book found in the cart with isbn ' + isbn);
+        reject(utils.respondWithCode(Codes.NOT_FOUND, `{"message": "book ${isbn} not in the shopping cart"`));
+      }
     });
   } catch (e) {
     return new Promise((res, rej) => {
       console.log(e);
-      rej(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${e}"`))
+      rej(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${e}"`));
     })
   }
 }
