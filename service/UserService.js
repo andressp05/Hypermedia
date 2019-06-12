@@ -107,10 +107,16 @@ exports.loginUser = function(email,password) {
  * username String The name that needs to be deleted
  * no response value expected for this operation
  **/
-exports.deleteUser = function(username) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.deleteUser = async function(user_id) {
+  try{
+    const data = await sqlDb(Data.Tables.author).where('id', user_id).del();
+    return new Promise(function(resolve, reject) {
+      resolve(Codes.OK, data);
+    });
+  } catch(e){
+    console.log(err);
+    reject(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${err}"`))
+  }
 }
 
 
@@ -132,7 +138,7 @@ exports.getUserByName = function(username) {
   "id" : 0,
   "email" : "email",
   "username" : "username"
-};
+  };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -149,6 +155,7 @@ exports.getUserByName = function(username) {
  * no response value expected for this operation
  **/
 exports.logoutUser = function() {
+
   return new Promise(function(resolve, reject) {
     resolve();
   });

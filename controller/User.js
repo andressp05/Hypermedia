@@ -18,6 +18,7 @@ module.exports.createUser = function createUser (req, res, next) {
       .then(function (response) {
         req.session.loggedin = true;
         req.session.userid = response;
+        res.cookie('logged', 'true' , { expires: req.sessionOptions.expires});
         utils.writeJson(res, response);
       })
       .catch(function (response) {
@@ -75,6 +76,9 @@ module.exports.getUserByName = function getUserByName (req, res, next) {
 };
 
 module.exports.logoutUser = function logoutUser (req, res, next) {
+  req.session.loggedin = false;
+  req.session.userid = null;
+  res.cookie('logged', 'fasle');
   User.logoutUser()
     .then(function (response) {
       utils.writeJson(res, response);
