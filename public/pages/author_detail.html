@@ -74,19 +74,19 @@
 
 		var array_theme = [];
 		var array_litGen = [];
-		for(let i = 0; i < json.length; i++){
-			var { author_id, img_path, name, surname, short_bio} = json[i];
-			console.log(json[i]);
-		}
-		var author_id = json[0].author_id;
-		var image = json[0].img_path;
-		var name = json[0].name;
-		var surname = json[0].surname;
-		var short_bio = json[0].short_bio;
+		// for(let i = 0; i < json.length; i++){
+			var { author_id, img_path, name, surname, short_bio, books} = json;
+		// 	console.log(json[i]);
+		// }
+		// var author_id = json[0].author_id;
+		// var image = json[0].img_path;
+		// var name = json[0].name;
+		// var surname = json[0].surname;
+		// var short_bio = json[0].short_bio;
 		if (img_path == null) {
-			image = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+			img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
 		}
-		document.getElementById("image").innerHTML='<img alt="" class="img-rounded" src="' + image + '" />';
+		document.getElementById("image").innerHTML='<img alt="" class="img-rounded" src="' + img_path + '" />';
 		document.getElementById("name").innerHTML=name;
 		document.getElementById("surname").innerHTML=surname;
 		document.getElementById("short_bio").innerHTML=short_bio;
