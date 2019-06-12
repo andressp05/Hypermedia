@@ -8,15 +8,16 @@ let shortid = require('shortid');
 //     return bearerToken;
 //   }
 // }
-
-exports.generateUserId = function() {
+let generateUserId = function() {
   let id = shortid.generate();
   return id;
 }
 
+module.exports.generateUserId = generateUserId;
+
 exports.getUserId = function(req){
   if(!req.session.userid){
-      let id = auth.generateUserId();
+      let id = generateUserId();
       req.session.userid = id;
   }
   return req.session.userid;
