@@ -70,7 +70,7 @@ exports.getBookById = async function (bookId) {
     return new Promise(function (resolve, reject) {
       if (Object.keys(data).length > 0) {
         console.log(data);
-        resolve(mapBook(data));
+        resolve(mapBook(data)[0]);
       } else {
         reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Book not found"}'));
       }

@@ -137,11 +137,15 @@
 								<th align="left"> Number of Pages </th>
 								<td id="pages" align="right"> </td>
 							</tr>
+							<tr>
+								<th align="left"> Price </th>
+								<td id="price" align="right"> </td>
+							</tr>
 						</table>
 
 	                     <form method="get" action="cart.html">
 	                         <div class="form-group">
-								 <p> </p>
+															 <p> </p>
 	                             <label>Quantity :</label>
 	                             <div class="input-group mb-3">
 	                                 <div class="input-group-prepend">
@@ -277,31 +281,33 @@
 
 		 var array_theme = [];
 		 var array_litGen = [];
-		 for(let i = 0; i < json.length; i++){
-			 var { img_path, name, author, theme, literary_gen, edition, publisher, ISBN, year, page_num, abstract, interview} = json[i];
-			 console.log(json[i]);
+		//  for(let i = 0; i < json.length; i++){
+			 var { img_path, name, author, theme, literary_gen, edition, publisher, ISBN, year, page_num, abstract, interview, price} = json;
+		// 	 console.log(json[i]);
 
 
-		 }
-		 console.log(json[0].author + author);
-		 var image = json[0].img_path;
-		 var name = json[0].name;
-		 var author = json[0].author[0];
-		 var theme = json[0].theme;
-		 var literary_gen = json[0].literary_gen;
-		 var edition = json[0].edition;
-		 var publisher = json[0].publisher;
-		 var isbn = json[0].ISBN;
-		 var year = json[0].year;
-		 var page_num = json[0].page_num;
-		 var abstract = json[0].abstract;
-		 var interview = json[0].interview;
-		 console.log(json[0].theme + theme);
-		 console.log(author);
+		//  }
+		 var price = price.value.toString().concat(price.currency);
+		//  console.log(price);
+		//  console.log(json[0].author + author);
+		//  var image = json[0].img_path;
+		//  var name = json[0].name;
+		//  var author = json[0].author[0];
+		//  var theme = json[0].theme;
+		//  var literary_gen = json[0].literary_gen;
+		//  var edition = json[0].edition;
+		//  var publisher = json[0].publisher;
+		//  var isbn = json[0].ISBN;
+		//  var year = json[0].year;
+		//  var page_num = json[0].page_num;
+		//  var abstract = json[0].abstract;
+		//  var interview = json[0].interview;
+		//  console.log(json[0].theme + theme);
+		//  console.log(author);
 		 if (img_path == null) {
-			 image = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+			img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
 		 }
-		 document.getElementById("image").innerHTML='<img class="img-fluid" src="' + image + '" />';
+		 document.getElementById("image").innerHTML='<img class="img-fluid" src="' + img_path + '" />';
 		 document.getElementById("title").innerHTML=name;
 		 document.getElementById("author").innerHTML=author;
 		 document.getElementById("theme").innerHTML=theme;
@@ -313,6 +319,7 @@
 		 document.getElementById("pages").innerHTML=page_num;
 		 document.getElementById("description").innerHTML=abstract;
 		 document.getElementById("interview").innerHTML=interview;
+		 document.getElementById("price").innerHTML=price;
 	 })
 
 	 </script>
