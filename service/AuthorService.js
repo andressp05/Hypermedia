@@ -66,7 +66,8 @@ exports.getAuthorById = async function (authorId) {
 
     return new Promise(function (resolve, reject) {
       if (Object.keys(data).length > 0) {
-        console.log('BOOK: \n' + data);
+        console.log('Author:');
+        console.log(data);
         resolve(mapAuthor(data)[0]);
       } else {
         reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Author not found"}'));
