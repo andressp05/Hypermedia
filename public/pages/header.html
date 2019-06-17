@@ -1,4 +1,31 @@
 <header id="header" style="background-color: #4e3b31;">
+    <script>
+        function logout() {
+          let options = {
+          body: formData,
+          method: "POST",
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          }
+          fetch('/test/user/logout', options)
+          .then(response => {
+            if (response.status === 200) {
+              window.location.reload(true); //Reload from the server; false to reload from cache
+            } else {
+              throw response;
+            }
+          })
+          .catch(e => {
+            e.text().then( json => {
+              console.log(json.message)
+            })
+          });
+        }
+    </script>
+
+
   <nav class="navbar fixed-top navbar-expand-md navbar-dark">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto">
@@ -25,16 +52,25 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
+          <a id='cart-menu' class="nav-link" href="./cart.html">
+            <i class="fa fa-shopping-cart"></i>
+          </a>
+        </li>
+        <li class="nav-item">
           <a id='login-menu' class="nav-link" href="/pages/login.html">Login</a>
         </li>
         <li class="nav-item">
           <a id='signup-menu' class="nav-link" href="/pages/signup.html">Register</a>
+        </li>
+        <li class="nav-item">
+          <a id='logout-menu' class="nav-link" onclick="logout()">Logout</a>
         </li>
       </ul>
     </div>
   </nav>
 
   <script>
+    /* MENU HIGHLIGHT SECION */
     console.log(window.location.pathname);
     // var path = window.location.pathname.split('/');
     // var page = path[path.length - 1];
@@ -45,5 +81,16 @@
     var currentMenu = document.querySelector(`[href="${window.location.pathname}"]`).parentElement;
     currentMenu.classList.add('active');
 
+    /* ----- end MENU HIGHLIGHT SECION ----- */
+
+    /* */
+    let logged = getCookie('logged');
+    if(logged && logged !== "") {
+      document.getElementById('login-menu').parentElement.style = "display: none;"
+      document.getElementById('signup-menu').parentElement.style = "display: none;"
+      document.getElementById('logout-menu').parentElement.style = "display: inline-block;"
+    } else {
+      document.getElementById('logout-menu').parentElement.style = "display: none;"
+    }
   </script>
 </header>
