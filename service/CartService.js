@@ -58,7 +58,11 @@ exports.removeItem = async function(user_id, isbn) {
     console.log(data);
     return new Promise((resolve, reject) => {
       if(data > 0){
-        resolve(data);
+        sqlDb.select('ISBN', quantity).from(Data.Tables.cart_detail).where('cart_id', subquery)
+        .then(items => {
+          resolve(items);
+        });
+        // resolve(data);
       } else {
         console.log('removeItem - ERROR 404 - no book found in the cart with isbn ' + isbn);
         reject(utils.respondWithCode(Codes.NOT_FOUND, `{"message": "book ${isbn} not in the shopping cart"`));
