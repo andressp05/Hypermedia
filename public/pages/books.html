@@ -81,8 +81,10 @@
                 var array_litGen = [];
                 for (let i = 0; i < json.length; i++) {
                   let listItem = document.createElement('div');
-                  listItem.classList.add('col-lg-4');
-                  listItem.classList.add('col-md-6');
+                  listItem.classList.add('col-xl-3');
+                  listItem.classList.add('col-lg-3');
+                  listItem.classList.add('col-md-4');
+                  listItem.classList.add('col-sm-6');
                   listItem.classList.add('mb-4');
                   listItem.id = 'card';
                   let {
@@ -110,7 +112,7 @@
                     img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
                   }
                   listItem.innerHTML = `
-                        <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}");'>
+                        <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>
                           <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${ISBN}';" class="card-book card-book-body">
                             <h4 class="card-title">${name}</h4>
                             <p class="theme">Theme: ${theme}</p>
