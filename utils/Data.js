@@ -5,7 +5,9 @@ let { usersDbSetup } = require("../service/UserService.js");
 let { authorsDbSetup } = require("../service/AuthorService.js");
 let { our_favoritesDbSetup } = require("../service/FavoritesService.js");
 let { eventsDbSetup } = require("../service/EventService.js");
-let { cartDbSetup } = require("../service/CartService");
+let { cartDbSetup } = require("../service/CartService.js");
+let { saleDbSetup } = require("../service/SaleService.js");
+
 
 
 exports.Tables = {
@@ -16,7 +18,8 @@ exports.Tables = {
   favorite: 'our_favorites',
   evento: 'events',
   cart: 'cart',
-  cart_detail: 'cart_detail'
+  cart_detail: 'cart_detail',
+  sale: 'sales'
 }
 
 let sqlDb = sqlDbFactory({
@@ -66,6 +69,7 @@ function setupDataLayer() {
     our_favoritesDbSetup(sqlDb);
     eventsDbSetup(sqlDb);
     cartDbSetup(sqlDb);
+    saleDbSetup(sqlDb);
     resolve();
   });
 }

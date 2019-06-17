@@ -113,8 +113,41 @@ paths:
         404:
           description: "Favorites books not found"
         500:
-          description: "un paso mas"
+          description: "error"
       x-swagger-router-controller: "Favorite"
+  /bestsellers:
+    get:
+      tags:
+      - "book"
+      summary: "Best sellers books available in the inventory"
+      description: "List of best sellers books available in the inventory"
+      operationId: "bestSellersGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of best sellers books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Best sellers books not found"
+        500:
+          description: "error"
+      x-swagger-router-controller: "Sale"
   /authors:
     get:
       tags:
@@ -420,7 +453,7 @@ paths:
             items:
               type: "object"
               properties:
-                ISBN: 
+                ISBN:
                   type: "integer"
                   format: "int64"
                 quantity:

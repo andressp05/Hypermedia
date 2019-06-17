@@ -76,71 +76,14 @@
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-12 center">
-        <div class="row">
-          <h4>Best Sellers</h4>
-          <hr>
-          <hr>
-        </div>
-
-        <div class="row gallery-thumbs container">
-          <div class="col-lg-3 col-md-4 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <h4>Our Selection of Books</h4>
+        <div>
+          <h4>Best  Sellers</h4>
           <hr>
         </div>
 
-        <div class="row gallary-thumbs container" id="cards">
+        <div class="row gallary-thumbs container" id="bestsellers">
           <script type="text/javascript">
-            fetch('../test/favorites/').then(function(response) {
+            fetch('../test/bestsellers/').then(function(response) {
                 console.log(response.status);
                 if (response.status === 200) {
                   return response.json();
@@ -151,8 +94,10 @@
               .then(json => {
                 for (let i = 0; i < json.length; i++) {
                   let listItem = document.createElement('div');
+                  listItem.classList.add('col-xl-2');
                   listItem.classList.add('col-lg-3');
                   listItem.classList.add('col-md-4');
+                  listItem.classList.add('col-sm-6');
                   listItem.classList.add('mb-4');
                   listItem.id = 'card';
                   let {
@@ -175,7 +120,68 @@
                     img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
                   }
                   listItem.innerHTML = `
-                        <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}");'>
+                        <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${ISBN}';" class="card-book card-book-body">
+                            <h4 class="card-title">${name}</h4>
+                            <p class="theme">Theme: ${theme}</p>
+                            <p class="lit_gen">Literary Genre: ${literary_gen}</p>
+                            <h5>${price.value}${price.currency}</h5>
+                          </div>
+                      </div>
+                      `;
+                  document.getElementById('bestsellers').append(listItem);
+                }
+              })
+              .catch(e => {
+                console.error(e);
+              });
+          </script>
+        </div>
+        <div>
+          <h4>Our Selection of Books</h4>
+          <hr>
+        </div>
+
+        <div class="row gallary-thumbs container" id="cards">
+          <script type="text/javascript">
+            fetch('../test/favorites/').then(function(response) {
+                console.log(response.status);
+                if (response.status === 200) {
+                  return response.json();
+                } else {
+                  throw new Error(response.status);
+                }
+              })
+              .then(json => {
+                for (let i = 0; i < json.length; i++) {
+                  let listItem = document.createElement('div');
+                  listItem.classList.add('col-xl-2');
+                  listItem.classList.add('col-lg-3');
+                  listItem.classList.add('col-md-4');
+                  listItem.classList.add('col-sm-6');
+                  listItem.classList.add('mb-4');
+                  listItem.id = 'card';
+                  let {
+                    ISBN,
+                    name,
+                    price,
+                    theme,
+                    literary_gen,
+                    img_path
+                  } = json[i];
+                  console.log(json[i]);
+                  listItem.setAttribute("style", "display: block");
+                  if (theme != null) {
+                    listItem.setAttribute("theme", theme.trim());
+                  }
+                  if (literary_gen != null) {
+                    listItem.setAttribute("litgen", literary_gen.trim());
+                  }
+                  if (img_path == null) {
+                    img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+                  }
+                  listItem.innerHTML = `
+                        <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>
                           <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${ISBN}';" class="card-book card-book-body">
                             <h4 class="card-title">${name}</h4>
                             <p class="theme">Theme: ${theme}</p>
