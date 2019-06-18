@@ -342,3 +342,7 @@ hr #hrspecial {
 .cursor-pointer{
   cursor: pointer;
 }
+
+.subtotal{
+  margin-right: 7rem;
+}

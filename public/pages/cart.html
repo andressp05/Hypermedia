@@ -21,7 +21,7 @@
   <div id='header'></div>
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container-fluid">
     
     <div class="row">
       <div class="col-12">
@@ -33,18 +33,21 @@
     <hr />
       
     <div class="row"></div>
-      <div id="cartList" class="col-12">
-          <div class="row align-items-center">
-              <div class="col">
-                <div class="product_details text-center">
-                  <h4>Descitprion</h4>
-                </div>
-              </div>
-              <div class="col-2 "><h4>Price</h4></div>
-              <div class="col-2 "><h4>Quantity</h4></div>
-              <div class="col-2 "></div>
-              <div class="col-1 "><h4>Total</h4></div>
+      <div class="col-12">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="product_details text-center">
+              <h4>Descitprion</h4>
             </div>
+          </div>
+          <div class="col-2 "><h4>Price</h4></div>
+          <div class="col-2 "><h4>Quantity</h4></div>
+          <div class="col-2 "></div>
+          <div class="col-2 "><h4>Total</h4></div>
+        </div>
+      </div>
+      <div id="cartList" class="col-12">
+          
       
       
             <hr />
@@ -68,6 +71,11 @@
               <div class="col-1">${Total}</div>
             </div> -->
       </div>
+      <div class="row justify-content-end">
+        <div id="subtotal" class="col-5 text-right subtotal">
+          
+        </div>
+      </div>
     </div>
   </div>
 
@@ -83,7 +91,7 @@
       // }
     }
 
-    fetch('../test/cart', options)
+    fetch('/test/cart', options)
       .then(function (response) {
         if (response.status === 200) {
           return response.json();
@@ -96,9 +104,13 @@
         console.log(json);
       })
       .catch(e => {
-        e.text().then(json => {
-          console.log(json.message)
-        })
+        if(e.text()){
+          e.text().then(json => {
+            console.error(json.message)
+          })
+        } else {
+          console.error(e);
+        }
       });
   </script>
 </body>
