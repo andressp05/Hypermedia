@@ -1,316 +1,324 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>PaperHouse</title>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-      <link rel="stylesheet" href="/assets/css/style.css">
+  <title>PaperHouse</title>
 
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="../assets/js/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="../assets/js/scripts.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-	<script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../assets/js/scripts.js"></script>
+
+  <script>
     // function setHeaderFooter(){
     //   $("#header").load("header.html");
     //   $("#footer").load("footer.html");
     // }
-		const urlParams = new URLSearchParams(window.location.search);
-		const isbn = urlParams.get('isbn');
-	</script>
-	<script>
-		function addToCart(){
-			var quantity = parseInt(document.getElementById('quantity').value);
-			var book = parseInt(isbn);
-			var obj = {
-				isbn: book,
-				quantity: quantity
-			};
-			var json = JSON.stringify(obj);
-			console.log(json);
-			let options = {
-				body: json,
-				method: "POST",
-				credentials: 'same-origin',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}
 
-			fetch('/test/cart', options)
-			.then(response => {
-				if (response.status === 200) {
-					return response.json();
-				} else {
-					throw response;
-				}
-			})
-			.then(json => {
-				console.log(json);
-				// RETURN
-				// {
-				// 	"ISBN": "718157835",
-				// 	"quantity": 1
-				// }
-				// TODO add here what to do with the response
-			})
-			.catch(e => {
-				if(e.status === 400){
-					console.log('Error 400 from the server ');
-					e.text().then( text => {
-					console.log(text);
-					});
-				} else {
-					e.json().then( json => {
-						console.log(json.message);
-					});
-				}
-			});
-		}
-	</script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const isbn = urlParams.get('isbn');
+  </script>
+  <script>
+    function addToCart() {
+      var quantity = parseInt(document.getElementById('quantity').value);
+      var book = parseInt(isbn);
+      var obj = {
+        isbn: book,
+        quantity: quantity
+      };
+      var json = JSON.stringify(obj);
+      console.log(json);
+      let options = {
+        body: json,
+        method: "POST",
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
 
-  </head>
-
-  <body onload="setHeaderFooter()">
-
-	  <!-- HEADER -->
-      <div id='header'></div>
-
-	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-
-	 <div class="container">
-	     <div class="row">
-	         <!-- Book Image + Title-->
-	         <div class="col-12 col-lg-6">
-	             <div class="card bg-light mb-3">
-	                 <div class="card-body" >
-	                         <div class="" id="image" align="middle"> </div>
-	                         <p class="text-center" align="middle" id="title">
-							 </p>
-	                 </div>
-	             </div>
-	         </div>
-
-	         <!-- Add to cart -->
-	         <div class="col-12 col-lg-6 add_to_cart_block">
-	             <div class="card bg-light mb-3">
-	                 <div class="card-body">
-
-	                     <a class="author" id="author" href="#reviews">
-						 </a>
-
-						 <table class="table" id="general_info">
-							 <tr>
-								 <th align="left"> Theme </th>
-								 <td id="theme" align="right"> </td>
-							 </tr>
-							 <tr>
-								 <th align="left"> Literary Genre </th>
-								 <td id="literary_gen" align="right"> </td>
-							 </tr>
-							 <tr>
-								 <th align="left"> Edition </th>
-								 <td id="edition" align="right"> </td>
-							 </tr>
-							 <tr>
-								 <th align="left"> Publisher </th>
-								 <td id="publisher" align="right"> </td>
-							 </tr>
-							 <tr>
- 								<th align="left"> ISBN </th>
- 								<td id="isbn" align="right"> </td>
- 							</tr>
-							<tr>
-								<th align="left"> Year </th>
-								<td id="year" align="right"> </td>
-							</tr>
-							<tr>
-								<th align="left"> Number of Pages </th>
-								<td id="pages" align="right"> </td>
-							</tr>
-							<tr>
-								<th align="left"> Price </th>
-								<td id="price" align="right"> </td>
-							</tr>
-						</table>
-
-	                     <form method="get" action="cart.html">
-	                         <div class="form-group">
-															 <p> </p>
-	                             <label>Quantity :</label>
-	                             <div class="input-group mb-3">
-	                                 <div class="input-group-prepend">
-	                                     <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
-	                                         <i class="fa fa-minus"></i>
-	                                     </button>
-	                                 </div>
-	                                 <input type="text" class="form-control" id="quantity" name="quantity" min="1" max="100" value="1">
-	                                 <div class="input-group-append">
-	                                     <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-	                                         <i class="fa fa-plus"></i>
-	                                     </button>
-	                                 </div>
-	                             </div>
-	                         </div>
-	                         <a onclick="addToCart()" class="btn btn-success btn-lg btn-block text-uppercase">
-	                             <i class="fa fa-shopping-cart"></i> Add To Cart
-	                         </a>
-	                     </form>
-
-	                     <div class="reviews_product p-3 mb-2 ">
-	                         3 reviews
-	                         <i class="fa fa-star"></i>
-	                         <i class="fa fa-star"></i>
-	                         <i class="fa fa-star"></i>
-	                         <i class="fa fa-star"></i>
-	                         <i class="fa fa-star"></i>
-	                         (4/5)
-	                         <a class="pull-right" href="#reviews">View all reviews</a>
-	                     </div>
-	                 </div>
-	             </div>
-	         </div>
-	     </div>
-
-	     <div class="row">
-	         <!-- Description -->
-	         <div class="col-12">
-	             <div class="card border-light mb-3">
-	                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-align-justify"></i> Description</div>
-	                 <div class="card-body" id="description">
-	                         ${abstract}
-	                 </div>
-	             </div>
-	         </div>
-
-			 <!-- Interview -->
-	         <div class="col-12">
-	             <div class="card border-light mb-3">
-	                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-align-justify"></i> Interview</div>
-	                 <div class="card-body" id="interview">
-	                         ${interview}
-	                 </div>
-	             </div>
-	         </div>
-
-	         <!-- Reviews -->
-	         <div class="col-12" id="reviews">
-	             <div class="card border-light mb-3">
-	                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i> Reviews</div>
-	                 <div class="card-body">
-	                     <div class="review">
-	                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-	                         <meta itemprop="datePublished" content="01-01-2016">January 01, 2018
-
-	                         <span class="fa fa-star"></span>
-	                         <span class="fa fa-star"></span>
-	                         <span class="fa fa-star"></span>
-	                         <span class="fa fa-star"></span>
-	                         <span class="fa fa-star"></span>
-	                         by Paul Smith
-	                         <p class="blockquote">
-	                             <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-	                         </p>
-	                         <hr>
-	                     </div>
-	                     <div class="review">
-	                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-	                         <meta itemprop="datePublished" content="01-01-2016">January 01, 2018
-
-	                         <span class="fa fa-star" aria-hidden="true"></span>
-	                         <span class="fa fa-star" aria-hidden="true"></span>
-	                         <span class="fa fa-star" aria-hidden="true"></span>
-	                         <span class="fa fa-star" aria-hidden="true"></span>
-	                         <span class="fa fa-star" aria-hidden="true"></span>
-	                         by Paul Smith
-	                         <p class="blockquote">
-	                             <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-	                         </p>
-	                         <hr>
-	                     </div>
-	                 </div>
-	             </div>
-	         </div>
-	     </div>
-	 </div>
-
-	 <script>
-	 $(document).ready(function(){
-        var quantity = 1;
-
-        $('.quantity-right-plus').click(function(e){
-            e.preventDefault();
-            var quantity = parseInt($('#quantity').val());
-            $('#quantity').val(quantity + 1);
+      fetch('/test/cart', options)
+        .then(response => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        })
+        .then(json => {
+          console.log(json);
+          // RETURN
+          // {
+          // 	"ISBN": "718157835",
+          // 	"quantity": 1
+          // }
+          // TODO add here what to do with the response
+        })
+        .catch(e => {
+          if (e.status === 400) {
+            console.log('Error 400 from the server ');
+            e.text().then(text => {
+              console.log(text);
+            });
+          } else {
+            e.json().then(json => {
+              console.log(json.message);
+            });
+          }
         });
+    }
+  </script>
 
-        $('.quantity-left-minus').click(function(e){
-            e.preventDefault();
-            var quantity = parseInt($('#quantity').val());
-            if(quantity > 1){
-                $('#quantity').val(quantity - 1);
-            }
-        });
+</head>
+
+<body onload="setHeaderFooter()">
+
+  <!-- HEADER -->
+  <div id='header'></div>
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+  <div class="container">
+    <div class="row">
+      <!-- Book Image + Title-->
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6" id="image"></div>
+
+      <!-- Add to cart -->
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card card-rounded" style="height: 100%;">
+          <div class="card-body">
+            <table class="table" id="general_info">
+
+                <th align="left"> Name </th>
+                <td id="title" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> Author </th>
+                <td id="author" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> Theme </th>
+                <td id="theme" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> Literary Genre </th>
+                <td id="literary_gen" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> Edition </th>
+                <td id="edition" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> Publisher </th>
+                <td id="publisher" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> ISBN </th>
+                <td id="isbn" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> Year </th>
+                <td id="year" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> Number of Pages </th>
+                <td id="pages" align="right"> </td>
+              </tr>
+              <tr>
+                <th align="left"> Price </th>
+                <td id="price" align="right"> </td>
+              </tr>
+            </table>
+
+            <form method="get" action="cart.html">
+              <div class="form-group">
+                <p> </p>
+                <label>Quantity :</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </div>
+                  <input type="text" class="form-control" id="quantity" name="quantity" min="1" max="100" value="1">
+                  <div class="input-group-append">
+                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <a onclick="addToCart()" class="btn btn-success btn-lg btn-block text-uppercase">
+                <i class="fa fa-shopping-cart"></i> Add To Cart
+              </a>
+            </form>
+
+            <div class="reviews_product p-3 mb-2 ">
+              3 reviews
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              (4/5)
+              <a class="pull-right" href="#reviews">View all reviews</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2rem;">
+      <!-- Description -->
+      <div class="col-12">
+        <div class="card mb-3" style="border: 0; border-radius: 1rem; box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1); overflow: hidden;">
+          <div class="card-header  text-white text-uppercase" style="box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);"><i class="fa fa-align-justify"></i> Description</div>
+          <div class="card-body" id="description">
+            ${abstract}
+          </div>
+        </div>
+      </div>
+
+      <!-- Interview -->
+      <div class="col-12">
+        <div class="card mb-3" style="border: 0; border-radius: 1rem; box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1); overflow: hidden;">
+          <div class="card-header text-white text-uppercase" style="box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);"><i class="fa fa-align-justify"></i> Interview</div>
+          <div class="card-body" id="interview">
+            ${interview}
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="col-12" id="reviews">
+        <div class="card mb-3" style="border: 0; border-radius: 1rem; box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1); overflow: hidden;">
+          <div class="card-header text-white text-uppercase" style="box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);"><i class="fa fa-comment"></i> Reviews</div>
+          <div class="card-body">
+            <div class="review">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+              <meta itemprop="datePublished" content="01-01-2016">January 01, 2018
+
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              by Paul Smith
+              <p class="blockquote">
+                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+              </p>
+              <hr>
+            </div>
+            <div class="review">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+              <meta itemprop="datePublished" content="01-01-2016">January 01, 2018
+
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              <span class="fa fa-star" aria-hidden="true"></span>
+              by Paul Smith
+              <p class="blockquote">
+                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+              </p>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      var quantity = 1;
+
+      $('.quantity-right-plus').click(function(e) {
+        e.preventDefault();
+        var quantity = parseInt($('#quantity').val());
+        $('#quantity').val(quantity + 1);
+      });
+
+      $('.quantity-left-minus').click(function(e) {
+        e.preventDefault();
+        var quantity = parseInt($('#quantity').val());
+        if (quantity > 1) {
+          $('#quantity').val(quantity - 1);
+        }
+      });
 
     });
-	</script>
 
-	 <!-- FOOTER -->
-	 <div id="footer"></div>
+  </script>
 
-	 <script type="text/javascript">
-	 console.log(isbn)
-	 fetch('../test/books/' + isbn).then(  function(response) {
-		 console.log(response.status);
-		 if (response.status === 200) {
-			 return response.json();
-		 } else {
-			 throw new Error(response.status);
-		 }
-	 }).then(json => {
-		 console.log(json);
+  <!-- FOOTER -->
+  <div id="footer"></div>
 
-		 var array_theme = [];
-		 var array_litGen = [];
-		//  for(let i = 0; i < json.length; i++){
-			 var { img_path, name, author, theme, literary_gen, edition, publisher, ISBN, year, page_num, abstract, interview, price} = json;
-		// 	 console.log(json[i]);
+  <script type="text/javascript">
+    console.log(isbn)
+    fetch('../test/books/' + isbn).then(function(response) {
+      console.log(response.status);
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error(response.status);
+      }
+    }).then(json => {
+      console.log(json);
 
+      var array_theme = [];
+      var array_litGen = [];
+      //  for(let i = 0; i < json.length; i++){
+      var {
+        img_path,
+        name,
+        author,
+        theme,
+        literary_gen,
+        edition,
+        publisher,
+        ISBN,
+        year,
+        page_num,
+        abstract,
+        interview,
+        price
+      } = json;
 
-		//  }
-		 var price = price.value.toString().concat(price.currency);
-		 if (img_path == null) {
-			img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
-		 }
-		 if (interview == null) {
-			 interview = "No interview found"
-		 }
-		 document.getElementById("image").innerHTML='<img class="img-fluid" src="' + img_path + '" />';
-		 document.getElementById("title").innerHTML=name;
-		 document.getElementById("author").innerHTML=author;
-		 document.getElementById("theme").innerHTML=theme;
-		 document.getElementById("literary_gen").innerHTML=literary_gen;
-		 document.getElementById("edition").innerHTML=edition;
-		 document.getElementById("publisher").innerHTML=publisher;
-		 document.getElementById("isbn").innerHTML=isbn;
-		 document.getElementById("year").innerHTML=year;
-		 document.getElementById("pages").innerHTML=page_num;
-		 document.getElementById("description").innerHTML=abstract;
-		 document.getElementById("interview").innerHTML=interview;
-		 document.getElementById("price").innerHTML=price;
-	 })
+      var price = price.value.toString().concat(price.currency);
+      if (img_path == null) {
+        img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+      }
+      console.log(img_path);
+      document.getElementById("image").innerHTML = `<div class="card card-book-big card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>`;
+      document.getElementById("title").innerHTML = `${name}`;
+      document.getElementById("author").innerHTML = `${author}`;
+      document.getElementById("theme").innerHTML = `${theme}`;
+      document.getElementById("literary_gen").innerHTML = literary_gen;
+      document.getElementById("edition").innerHTML = edition;
+      document.getElementById("publisher").innerHTML = publisher;
+      document.getElementById("isbn").innerHTML = isbn;
+      document.getElementById("year").innerHTML = year;
+      document.getElementById("pages").innerHTML = page_num;
+      document.getElementById("description").innerHTML = abstract;
+      document.getElementById("interview").innerHTML = interview;
+      document.getElementById("price").innerHTML = price;
+    })
+  </script>
+</body>
 
-	 </script>
-	</body>
 </html>
