@@ -94,10 +94,10 @@
   <div class="container">
     <div class="row">
       <!-- Book Image + Title-->
-      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6" id="image"></div>
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" id="image"></div>
 
       <!-- Add to cart -->
-      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
         <div class="card card-rounded" style="height: 100%;">
           <div class="card-body">
             <table class="table" id="general_info">
@@ -287,6 +287,7 @@
         img_path,
         name,
         author,
+        authors_id,
         theme,
         literary_gen,
         edition,
@@ -306,7 +307,9 @@
       console.log(img_path);
       document.getElementById("image").innerHTML = `<div class="card card-book-big card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>`;
       document.getElementById("title").innerHTML = `${name}`;
-      document.getElementById("author").innerHTML = `${author}`;
+      console.log("authors_id");
+      console.log(authors_id);
+      document.getElementById("author").innerHTML = `<a href='/pages/author_detail.html?author_id=${authors_id}'>${author}</a>`;
       document.getElementById("theme").innerHTML = `${theme}`;
       document.getElementById("literary_gen").innerHTML = literary_gen;
       document.getElementById("edition").innerHTML = edition;

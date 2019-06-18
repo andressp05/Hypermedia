@@ -62,7 +62,8 @@ exports.getBookById = async function (bookId) {
       .select(
         Data.Tables.book + '.*',
         sqlDb.raw(`array_agg(${Data.Tables.author}.name ORDER BY ${Data.Tables.author}.author_id) AS a_name`),
-        sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`))
+        sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`),
+        sqlDb.raw(`array_agg(${Data.Tables.author}.author_id ORDER BY  ${Data.Tables.author}.author_id) a_id`))
       .from(Data.Tables.book)
       .leftJoin(Data.Tables.written_by, Data.Tables.book + '.ISBN', Data.Tables.written_by + '.ISBN')
       .leftJoin(Data.Tables.author, Data.Tables.written_by + '.author_id', Data.Tables.author + '.author_id')
@@ -96,8 +97,12 @@ let mapBook = function (data) {
     for (let i = 0; i < e.a_name.length; i++) {
       e.author.push(e.a_name[i] + ' ' + e.a_surname[i]);
     }
+    e.authors_id = [];
+    for (let i = 0; i < e.a_id.length; i++) {
+      e.authors_id.push(e.a_id[i]);
+    }
     delete e.a_name;
-    delete e.a_surname; 
+    delete e.a_surname;
     return e;
   });
   // });
