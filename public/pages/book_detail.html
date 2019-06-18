@@ -62,7 +62,7 @@
 				// 	"ISBN": "718157835",
 				// 	"quantity": 1
 				// }
-				// TODO add here what to do with the response 
+				// TODO add here what to do with the response
 			})
 			.catch(e => {
 				if(e.status === 400){
@@ -107,7 +107,8 @@
 	             <div class="card bg-light mb-3">
 	                 <div class="card-body">
 
-	                     <p class="author" id="author"></p>
+	                     <a class="author" id="author" href="#reviews">
+						 </a>
 
 						 <table class="table" id="general_info">
 							 <tr>
@@ -289,24 +290,11 @@
 
 		//  }
 		 var price = price.value.toString().concat(price.currency);
-		//  console.log(price);
-		//  console.log(json[0].author + author);
-		//  var image = json[0].img_path;
-		//  var name = json[0].name;
-		//  var author = json[0].author[0];
-		//  var theme = json[0].theme;
-		//  var literary_gen = json[0].literary_gen;
-		//  var edition = json[0].edition;
-		//  var publisher = json[0].publisher;
-		//  var isbn = json[0].ISBN;
-		//  var year = json[0].year;
-		//  var page_num = json[0].page_num;
-		//  var abstract = json[0].abstract;
-		//  var interview = json[0].interview;
-		//  console.log(json[0].theme + theme);
-		//  console.log(author);
 		 if (img_path == null) {
 			img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+		 }
+		 if (interview == null) {
+			 interview = "No interview found"
 		 }
 		 document.getElementById("image").innerHTML='<img class="img-fluid" src="' + img_path + '" />';
 		 document.getElementById("title").innerHTML=name;
