@@ -1,3 +1,4 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <header id="header" style="background-color: #4e3b31;">
     <script>
         function logout() {
@@ -52,7 +53,7 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a id='cart-menu' class="nav-link" href="./cart.html">
+          <a id='cart-menu' class="nav-link" href="/pages/login.html">
             <i class="fa fa-shopping-cart"></i>
           </a>
         </li>
@@ -78,8 +79,11 @@
       element.classList.remove('active');
     });
 
-    var currentMenu = document.querySelector(`[href="${window.location.pathname}"]`).parentElement;
-    currentMenu.classList.add('active');
+    var currentMenu = document.querySelector(`[href="${window.location.pathname}"]`)
+    if(currentMenu !== null && currentMenu !== undefined){
+      currentMenu.parentElement.classList.add('active');
+    };
+    
 
     /* ----- end MENU HIGHLIGHT SECION ----- */
 
