@@ -508,7 +508,18 @@ paths:
         in: body
         description: "The isbn of the book to be added to the cart"
         schema:
-          $ref: "#/definitions/Cart"
+          type: "object"
+          required:
+           - "isbn"
+           - "quantity"
+          properties:
+            isbn:
+              type: "integer"
+              format: "int64"
+            quantity:
+              type: "integer"
+              format: "int32"
+          # $ref: "#/definitions/Cart"
       #   required: true
       #   type: "string"
       # - name: "quntity"
@@ -521,7 +532,9 @@ paths:
         200:
           description: "successful operation"
           schema:
-            type: "string"
+            type: "array"
+            items:
+              $ref: "#/definitions/Cart"
         500:
           description: "Error on the server"
       x-swagger-router-controller: "Cart"

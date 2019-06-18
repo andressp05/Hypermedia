@@ -13,7 +13,14 @@ module.exports.addToCart = function addToCart (req, res, next) {
     // console.log(qty)
     Cart.addItem(userid, isbn, qty)
     .then(response => {
-        utils.writeJson(res, response);
+        Cart.getUserCart(userid)
+        .then(response => {
+            utils.writeJson(res, response);
+        })
+        .catch(err => {
+            utils.writeJson(res, err);
+        });
+        // utils.writeJson(res, response);
     })
     .catch(err => {
         utils.writeJson(res, err);
@@ -28,7 +35,14 @@ module.exports.removeFromCart = function removeFromCart(req, res, next) {
 
     Cart.removeItem(userid, isbn)
     .then(response => {
-        utils.writeJson(res, response);
+        Cart.getUserCart(userid)
+        .then(response => {
+            utils.writeJson(res, response);
+        })
+        .catch(err => {
+            utils.writeJson(res, err);
+        });
+        // utils.writeJson(res, response);
     })
     .catch(err => {
         utils.writeJson(res, err);
