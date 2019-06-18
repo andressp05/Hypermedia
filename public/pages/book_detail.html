@@ -242,6 +242,11 @@
       </div>
     </div>
     <hr style="width: 98%;">
+    <h4>Events where is presented this book</h4>
+    <hr style="width: 98%;">
+    <div class="row" style="margin-top: 2rem;" id="relateds"></div>
+
+    <div class="row" style="margin-top: 2rem;" id="events"></div>
 
 
   </div>
@@ -282,8 +287,6 @@
       }
     });
     let e_id = await json_response["e_id"];
-    console.log("e_id");
-    console.log(e_id);
     for (let i = 0; i < e_id.length; i++) {
       fetch('../test/events/' + e_id[i]).then(function(response) {
           console.log(response.status);
@@ -311,8 +314,6 @@
               description
             } = json[i];
             console.log(json[i]);
-            // newEventCard.setAttribute("style", "display: block");
-            //
             if (img_path == null) {
               img_path = "http://placehold.it/700x300";
             }
@@ -333,15 +334,70 @@
               </div>
                 <hr style="width: 98%;">
                 `;
-            document.getElementById('additional').append(newEventCard);
+            document.getElementById('events').append(newEventCard);
           }
         })
         .catch(e => {
           console.error(e);
         });
-    }
+    };
+    let b_related = await json_response["b_related"];
+    console.log(b_related);
+    for (let i = 0; i < b_related.length; i++) {
+      console.log("QUECHUCHA");
+      fetch('../test/books/' + b_related[i]).then(function(response) {
+          console.log(response.status);
+          console.log("ENTRAMO");
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            throw new Error(response.status);
+          }
+        })
+        .then(json2 => {
+            let listItem = document.createElement('div');
+            listItem.classList.add('col-xl-2');
+            listItem.classList.add('col-lg-4');
+            listItem.classList.add('col-md-4');
+            listItem.classList.add('col-sm-6');
+            listItem.classList.add('mb-4');
+            listItem.id = 'card_related';
+            let {
+              ISBN,
+              name,
+              price,
+              theme,
+              literary_gen,
+              img_path
+            } = json2;
+            listItem.setAttribute("style", "display: block");
+            if (theme != null) {
+              listItem.setAttribute("theme", theme.trim());
+            }
+            if (literary_gen != null) {
+              listItem.setAttribute("litgen", literary_gen.trim());
+            }
+            if (img_path == null) {
+              img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+            }
+            listItem.innerHTML = `
+                  <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>
+                    <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${ISBN}';" class="card-book card-book-body">
+                      <h4 class="card-title">${name}</h4>
+                      <h6 class="theme">Theme: ${theme}</h6>
+                      <h7 class="lit_gen">Literary Genre: ${literary_gen}</h7>
+                      <h5>${price.value}${price.currency}</h5>
+                    </div>
+                </div>
+                `;
+            console.log("finalizando vamos a appendar");
+            document.getElementById('relateds').append(listItem);
+        })
+        .catch(e => {
+          console.error(e);
+        });
+      }
   }
-    console.log(isbn)
     fetch('../test/books/' + isbn).then(function(response) {
       console.log(response.status);
       if (response.status === 200) {
@@ -376,7 +432,7 @@
       if (img_path == null) {
         img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
       }
-      console.log(img_path);
+      console.log(json);
       document.getElementById("image").innerHTML = `<div class="card card-book-big card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>`;
       document.getElementById("title").innerHTML = `${name}`;
 

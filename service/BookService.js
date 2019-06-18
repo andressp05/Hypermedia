@@ -64,16 +64,18 @@ exports.getBookById = async function (bookId) {
         sqlDb.raw(`array_agg(${Data.Tables.author}.name ORDER BY ${Data.Tables.author}.author_id) AS a_name`),
         sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`),
         sqlDb.raw(`array_agg(${Data.Tables.author}.author_id ORDER BY  ${Data.Tables.author}.author_id) authors_id`),
-        sqlDb.raw(`array_agg(${Data.Tables.presented_in}."event_id") AS e_id`))
+        sqlDb.raw(`array_agg(${Data.Tables.presented_in}."event_id") AS e_id`),
+        sqlDb.raw(`array_agg(${Data.Tables.similars}."ISBN2") AS b_related`))
       .from(Data.Tables.book)
       .leftJoin(Data.Tables.written_by, Data.Tables.book + '.ISBN', Data.Tables.written_by + '.ISBN')
       .leftJoin(Data.Tables.author, Data.Tables.written_by + '.author_id', Data.Tables.author + '.author_id')
       .leftJoin(Data.Tables.presented_in, Data.Tables.book + '.ISBN', Data.Tables.presented_in + '.ISBN')
+      .leftJoin(Data.Tables.similars, Data.Tables.book + '.ISBN', Data.Tables.similars + '.ISBN1')
       .groupBy(`${Data.Tables.book}.ISBN`).where(`${Data.Tables.book}.ISBN`, bookId);
     return new Promise(function (resolve, reject) {
       if (Object.keys(data).length > 0) {
         console.log(data);
-        resolve(mapBook(data)[0]);
+        resolve(mapBook2(data)[0]);
       } else {
         reject(utils.respondWithCode(Codes.NOT_FOUND, '{"message": "Book not found"}'));
       }
@@ -98,10 +100,33 @@ let mapBook = function (data) {
     e.author = [];
     for (let i = 0; i < e.a_name.length; i++) {
       e.author.push(e.a_name[i] + ' ' + e.a_surname[i]);
-    }
+    };
     delete e.a_name;
     delete e.a_surname;
     return e;
   });
   // });
+}
+let mapBook2 = function (data) {
+  // return book.then(data => {
+  return data.map(e => {
+    e.price = { value: e.price, currency: "EUR" };
+    e.author = [];
+    for (let i = 0; i < e.a_name.length; i++) {
+      e.author.push(e.a_name[i] + ' ' + e.a_surname[i]);
+    };
+    e.e_id = uniqBy(e.e_id, JSON.stringify);
+    delete e.a_name;
+    delete e.a_surname;
+    return e;
+  });
+  // });
+}
+
+function uniqBy(a, key) {
+    var index = [];
+    return a.filter(function (item) {
+        var k = key(item);
+        return index.indexOf(k) >= 0 ? false : index.push(k);
+    });
 }

@@ -20,7 +20,8 @@ exports.Tables = {
   cart: 'cart',
   cart_detail: 'cart_detail',
   sale: 'sales',
-  presented_in: 'presented_in'
+  presented_in: 'presented_in',
+  similars: 'similars'
 }
 
 let sqlDb = sqlDbFactory({
