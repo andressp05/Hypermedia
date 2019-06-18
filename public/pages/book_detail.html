@@ -181,7 +181,7 @@
       </div>
     </div>
 
-    <div class="row" style="margin-top: 2rem;">
+    <div class="row" style="margin-top: 2rem;" id="additional">
       <!-- Description -->
       <div class="col-12">
         <div class="card mb-3" style="border: 0; border-radius: 1rem; box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1); overflow: hidden;">
@@ -241,6 +241,9 @@
         </div>
       </div>
     </div>
+    <hr style="width: 98%;">
+
+
   </div>
 
   <script>
@@ -269,6 +272,75 @@
   <div id="footer"></div>
 
   <script type="text/javascript">
+  async function loadEvents() {
+    let json_response = await fetch('../test/books/' + isbn).then(function(response) {
+      console.log(response.status);
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error(response.status);
+      }
+    });
+    let e_id = await json_response["e_id"];
+    console.log("e_id");
+    console.log(e_id);
+    for (let i = 0; i < e_id.length; i++) {
+      fetch('../test/events/' + e_id[i]).then(function(response) {
+          console.log(response.status);
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            throw new Error(response.status);
+          }
+        })
+        .then(json => {
+          for (let i = 0; i < json.length; i++) {
+            let newEventCard = document.createElement('div');
+            newEventCard.classList.add('col-lg-12');
+            newEventCard.id = 'event';
+            newEventCard.style.width = "100%";
+            newEventCard.style.align = "centered";
+            let {
+              event_id,
+              name,
+              date_start,
+              time_start,
+              date_end,
+              time_end,
+              img_path,
+              description
+            } = json[i];
+            console.log(json[i]);
+            // newEventCard.setAttribute("style", "display: block");
+            //
+            if (img_path == null) {
+              img_path = "http://placehold.it/700x300";
+            }
+            newEventCard.innerHTML = `
+              <hr style="width: 98%;">
+              <h4>Events where is presented this book</h4>
+              <hr style="width: 98%;">
+              <div class="card card-signin flex-row my-2">
+                <div class="card-img-left-event d-none d-md-flex" style="background: scroll center url(${img_path});">
+                  <!-- Background image for card ! -->
+                </div>
+                <div class="card-body">
+                  <h3>${name}</h3>
+                  <p>Duration: ${date_start} - ${date_end}</p>
+                  <p>${description}</p>
+                  <a class="btn btn-primary" href="/pages/event_detail.html?eventId=${event_id}">Details</a>
+                </div>
+              </div>
+                <hr style="width: 98%;">
+                `;
+            document.getElementById('additional').append(newEventCard);
+          }
+        })
+        .catch(e => {
+          console.error(e);
+        });
+    }
+  }
     console.log(isbn)
     fetch('../test/books/' + isbn).then(function(response) {
       console.log(response.status);
@@ -307,8 +379,6 @@
       console.log(img_path);
       document.getElementById("image").innerHTML = `<div class="card card-book-big card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>`;
       document.getElementById("title").innerHTML = `${name}`;
-      console.log("authors_id");
-      console.log(authors_id);
 
         document.getElementById("author").innerHTML += `- `;
       for (var i = 0; i < author.length; i++) {
@@ -326,6 +396,7 @@
       document.getElementById("interview").innerHTML = interview;
       document.getElementById("price").innerHTML = price;
     })
+    loadEvents();
   </script>
 </body>
 
