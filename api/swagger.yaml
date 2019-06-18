@@ -456,6 +456,8 @@ paths:
                 ISBN:
                   type: "integer"
                   format: "int64"
+                book_name:
+                  type: "string"
                 quantity:
                   type: "integer"
                   format: "int32"
