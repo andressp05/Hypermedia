@@ -32,7 +32,8 @@ exports.booksGET = async function (offset = 0, limit = 20) {
       .select(
         Data.Tables.book + '.*',
         sqlDb.raw(`array_agg(${Data.Tables.author}.name ORDER BY ${Data.Tables.author}.author_id) AS a_name`),
-        sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`))
+        sqlDb.raw(`array_agg(${Data.Tables.author}.surname ORDER BY  ${Data.Tables.author}.author_id) a_surname`),
+        sqlDb.raw(`array_agg(${Data.Tables.author}.author_id ORDER BY  ${Data.Tables.author}.author_id) a_id`))
       .from(Data.Tables.book)
       .leftJoin(Data.Tables.written_by, Data.Tables.book + '.ISBN', Data.Tables.written_by + '.ISBN')
       .leftJoin(Data.Tables.author, Data.Tables.written_by + '.author_id', Data.Tables.author + '.author_id')
