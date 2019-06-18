@@ -17,14 +17,13 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
-  <script src="./assets/js/scripts.js"></script>
 
-  <!-- <script>
+  <script>
     function setHeaderFooter() {
       $("#header").load("/pages/header.html");
       $("#footer").load("/pages/footer.html");
     }
-  </script> -->
+  </script>
 
 </head>
 
@@ -96,7 +95,7 @@
                 for (let i = 0; i < json.length; i++) {
                   let listItem = document.createElement('div');
                   listItem.classList.add('col-xl-2');
-                  listItem.classList.add('col-lg-3');
+                  listItem.classList.add('col-lg-4');
                   listItem.classList.add('col-md-4');
                   listItem.classList.add('col-sm-6');
                   listItem.classList.add('mb-4');
@@ -124,8 +123,8 @@
                         <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>
                           <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${ISBN}';" class="card-book card-book-body">
                             <h4 class="card-title">${name}</h4>
-                            <p class="theme">Theme: ${theme}</p>
-                            <p class="lit_gen">Literary Genre: ${literary_gen}</p>
+                            <h6 class="theme">Theme: ${theme}</h6>
+                            <h7 class="lit_gen">Literary Genre: ${literary_gen}</h7>
                             <h5>${price.value}${price.currency}</h5>
                           </div>
                       </div>
@@ -157,7 +156,7 @@
                 for (let i = 0; i < json.length; i++) {
                   let listItem = document.createElement('div');
                   listItem.classList.add('col-xl-2');
-                  listItem.classList.add('col-lg-3');
+                  listItem.classList.add('col-lg-4');
                   listItem.classList.add('col-md-4');
                   listItem.classList.add('col-sm-6');
                   listItem.classList.add('mb-4');
@@ -185,8 +184,8 @@
                         <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>
                           <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${ISBN}';" class="card-book card-book-body">
                             <h4 class="card-title">${name}</h4>
-                            <p class="theme">Theme: ${theme}</p>
-                            <p class="lit_gen">Literary Genre: ${literary_gen}</p>
+                            <h6 class="theme">Theme: ${theme}</h6>
+                            <h7 class="lit_gen">Literary Genre: ${literary_gen}</h7>
                             <h5>${price.value}${price.currency}</h5>
                           </div>
                       </div>
