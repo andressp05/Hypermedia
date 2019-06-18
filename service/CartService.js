@@ -79,7 +79,7 @@ exports.removeItem = async function(user_id, isbn) {
 
 exports.getUserCart = async function(user_id) {
   try {
-    const data = await sqlDb.select(`${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.book}.name as book_name`, `${Data.Tables.cart_detail}.quantity`, `${Data.Tables.book}.price`).from(Data.Tables.cart).where('client_id', user_id)
+    const data = await sqlDb.select(`${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.book}.name as book_name`, `${Data.Tables.cart_detail}.quantity`, `${Data.Tables.book}.price`, `${Data.Tables.book}.img_path`).from(Data.Tables.cart).where('client_id', user_id)
       .join(Data.Tables.cart_detail, `${Data.Tables.cart}.id`, `${Data.Tables.cart_detail}.cart_id`)
       .join(Data.Tables.book, `${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.book}.ISBN`);
       return new Promise((resolve, reject) => {

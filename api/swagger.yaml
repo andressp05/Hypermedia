@@ -723,6 +723,8 @@ definitions:
               $ref: "#/definitions/Amount"
             total:
               $ref: "#/definitions/Amount"
+            img_path:
+              type: "string"
       subtotal:
         type: "number"
         format: "float"
