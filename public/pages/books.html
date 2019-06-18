@@ -24,7 +24,7 @@
       $("#footer").load("footer.html");
     }
   </script> -->
-  
+
 
 </head>
 
@@ -116,8 +116,8 @@
                         <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>
                           <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${ISBN}';" class="card-book card-book-body">
                             <h4 class="card-title">${name}</h4>
-                            <p class="theme">Theme: ${theme}</p>
-                            <p class="lit_gen">Literary Genre: ${literary_gen}</p>
+                            <h6 class="theme">Theme: ${theme}</h6>
+                            <h7 class="lit_gen">Literary Genre: ${literary_gen}</h7>
                             <h5>${price.value}${price.currency}</h5>
                           </div>
                           <!--
