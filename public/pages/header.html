@@ -88,7 +88,7 @@
 
     /* */
     let logged = getCookie('logged');
-    if(logged && logged !== "") {
+    if(logged && logged !== "" && logged == "true") {
       document.getElementById('login-menu').parentElement.style = "display: none;"
       document.getElementById('signup-menu').parentElement.style = "display: none;"
       document.getElementById('logout-menu').parentElement.style = "display: inline-block;"
