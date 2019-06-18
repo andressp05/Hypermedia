@@ -33,6 +33,40 @@
     console.log(author_id);
   </script>
 
+  <script>
+    async function fillWrittenBooks(books) {
+      for (const written of books) {
+
+        let book = await fetch('../test/books/' + written.ISBN).then(function(response) {
+          console.log(response.status);
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            throw new Error(response.status);
+          }
+        });
+
+        let listItem = document.createElement('div');
+        listItem.classList.add('col-xl-2');
+        listItem.classList.add('col-lg-4');
+        listItem.classList.add('col-md-4');
+        listItem.classList.add('col-sm-6');
+        listItem.classList.add('mb-4');
+        listItem.innerHTML = `
+          <div class="card card-book card-img-top"  style='background: scroll center url("${book.img_path}"); background-size: cover;'>
+            <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${book.ISBN}';" class="card-book card-book-body">
+              <h4 class="card-title">${book.name}</h4>
+              <h6 class="theme">Theme: ${book.theme}</h6>
+              <h7 class="lit_gen">Literary Genre: ${book.literary_gen}</h7>
+              <h5>${book.price.value}${book.price.currency}</h5>
+            </div>
+          </div>
+          `;
+        document.getElementById('cards').append(listItem);
+      }
+    }
+  </script>
+
 </head>
 
 <body onload="setHeaderFooter()">
@@ -62,6 +96,17 @@
         </div>
       </div>
     </div>
+    <hr style="width: 98%; margin-top: 5rem;">
+
+    <div class="gallery-thumbs container">
+      <h4>Books written by the author</h4>
+    </div>
+
+    <hr style="width: 98%;">
+
+    <div class="row gallary-thumbs container" id="cards"></div>
+
+    <hr style="width: 98%;">
   </div>
   </div>
 
@@ -104,6 +149,9 @@
       document.getElementById("image").innerHTML = `<div class="card card-book-big card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>`;
       document.getElementById("content").innerHTML = `<h4 style="text-align: center; padding: 20px;">${name}  ${surname}</h4>
       <p style="text-align: justify; line-height: 1.5; display: inline-block; vertical-align: middle; margin: auto; font-size: 1.2rem;">${short_bio}</p>`;
+
+      // Async function to fetch the books written
+      fillWrittenBooks(json.books);
     })
   </script>
 
