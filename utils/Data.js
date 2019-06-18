@@ -19,7 +19,8 @@ exports.Tables = {
   evento: 'events',
   cart: 'cart',
   cart_detail: 'cart_detail',
-  sale: 'sales'
+  sale: 'sales',
+  presented_in: 'presented_in'
 }
 
 let sqlDb = sqlDbFactory({

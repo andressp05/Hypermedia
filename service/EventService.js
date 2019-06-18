@@ -6,7 +6,7 @@ let Data = require('../utils/Data');
 
 let sqlDb = Data.database;
 
-exports.eventsDbSetup = function (database) {
+exports.eventsDbSetup = function(database) {
   sqlDb = database;
   console.log("Checking if events table exists");
   return database.schema.hasTable("events").then(exists => {
@@ -26,7 +26,7 @@ exports.eventsDbSetup = function (database) {
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.eventsGET = async function (offset = 0, limit = 20) {
+exports.eventsGET = async function(offset = 0, limit = 20) {
   // let events = sqlDb.select().table('events').limit(limit).offset(offset);
   try {
     const data = await sqlDb.select(`${Data.Tables.evento}.*`)
@@ -49,12 +49,17 @@ exports.eventsGET = async function (offset = 0, limit = 20) {
  * eventId Long ID of event to return
  * returns Event
  **/
-exports.getEventById = async function (authorId) {
-  try{
-    const data = await sqlDb.select(`${Data.Tables.evento}.*`)
-      .from(Data.Tables.evento).where(`${Data.Tables.evento}.event_id`, eventId);
+exports.getEventById = async function(eventId) {
+  try {
+    const data = await sqlDb
+      .select(
+        `${Data.Tables.evento}.*`,
+        sqlDb.raw(`array_agg("ISBN") AS b_isbn`))
+      .from(Data.Tables.evento)
+      .leftJoin(Data.Tables.presented_in, Data.Tables.evento + '.event_id', Data.Tables.presented_in + '.event_id')
+      .groupBy(`${Data.Tables.evento}.event_id`).where(`${Data.Tables.evento}.event_id`, eventId);
 
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       if (Object.keys(data).length > 0) {
         resolve(mapEvent(data));
       } else {
@@ -74,15 +79,15 @@ exports.getEventById = async function (authorId) {
  * @param  {[type]} evento the result of the call to the database
  * @return {[type]}      the Swagger spec compliant Book product.
  */
-let mapEvent = function (data) {
+let mapEvent = function(data) {
   // return book.then(data => {
   return data.map(e => {
-    e.date_start = e.date_start.getDate().toString().padStart(2,"0")
-    + "/" + e.date_start.getMonth().toString().padStart(2,"0")
-    + "/" + e.date_start.getFullYear().toString();
-    e.date_end = e.date_end.getDate().toString().padStart(2,"0")
-    + "/" + e.date_end.getMonth().toString().padStart(2,"0")
-    + "/" + e.date_end.getFullYear().toString();;
+    e.date_start = e.date_start.getDate().toString().padStart(2, "0") +
+      "/" + e.date_start.getMonth().toString().padStart(2, "0") +
+      "/" + e.date_start.getFullYear().toString();
+    e.date_end = e.date_end.getDate().toString().padStart(2, "0") +
+      "/" + e.date_end.getMonth().toString().padStart(2, "0") +
+      "/" + e.date_end.getFullYear().toString();;
 
     return e;
   });

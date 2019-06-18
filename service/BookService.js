@@ -97,7 +97,7 @@ let mapBook = function (data) {
       e.author.push(e.a_name[i] + ' ' + e.a_surname[i]);
     }
     delete e.a_name;
-    delete e.a_surname;
+    delete e.a_surname; 
     return e;
   });
   // });
