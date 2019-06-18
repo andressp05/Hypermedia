@@ -562,15 +562,6 @@ paths:
             quantity:
               type: "integer"
               format: "int32"
-          # $ref: "#/definitions/Cart"
-      #   required: true
-      #   type: "string"
-      # - name: "quntity"
-      #   in: body
-      #   description: "The quantity of the item to add to the cart"
-      #   required: true
-      #   type: "integer"
-      #   format: "int32"
       responses:
         200:
           description: "successful operation"
