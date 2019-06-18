@@ -309,7 +309,12 @@
       document.getElementById("title").innerHTML = `${name}`;
       console.log("authors_id");
       console.log(authors_id);
-      document.getElementById("author").innerHTML = `<a href='/pages/author_detail.html?author_id=${authors_id}'>${author}</a>`;
+
+        document.getElementById("author").innerHTML += `- `;
+      for (var i = 0; i < author.length; i++) {
+        document.getElementById("author").innerHTML += `<a href='/pages/author_detail.html?author_id=${authors_id[i]}'>${author[i]}</a> - `;
+      }
+
       document.getElementById("theme").innerHTML = `${theme}`;
       document.getElementById("literary_gen").innerHTML = literary_gen;
       document.getElementById("edition").innerHTML = edition;
