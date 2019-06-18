@@ -53,6 +53,9 @@ hr #hrspecial {
   height: 1px;
 }
 
+.card-header{
+  background-color: #64260c	!important;
+}
 
 .list-group-item.active {
   z-index: 2;
@@ -97,6 +100,23 @@ hr #hrspecial {
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
   padding-top: 150%;
+  background-size: cover;
+}
+
+.card-book-big {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding-top: 167%;
+  background-size: cover;
+}
+
+.card-rounded {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   background-size: cover;
 }
 
