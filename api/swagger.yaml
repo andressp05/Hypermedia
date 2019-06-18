@@ -449,18 +449,23 @@ paths:
         200:
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              type: "object"
-              properties:
-                ISBN:
-                  type: "integer"
-                  format: "int64"
-                book_name:
-                  type: "string"
-                quantity:
-                  type: "integer"
-                  format: "int32"
+            $ref: "#/definitions/Cart"
+            # type: "object"
+            # properties:
+            #   books: 
+            #     type: "array"
+            #     items:
+            #       type: "object"
+            #       properties:
+            #         ISBN:
+            #           type: "integer"
+            #           format: "int64"
+            #         book_name:
+            #           type: "string"
+            #         quantity:
+            #           type: "integer"
+            #           format: "int32"
+            #         price:
       x-swagger-router-controller: "Cart"
     delete:
       tags:
@@ -555,12 +560,6 @@ definitions:
         format: "int32"
       price:
         $ref: "#/definitions/Amount"
-      status:
-        type: "string"
-        description: "book availability in the inventory"
-        enum:
-        - "available"
-        - "out of stock"
     title: "Book"
     description: "A book for sale in the store"
     example:
@@ -597,19 +596,6 @@ definitions:
     pattern: "^[A-Z]{3,3}$"
     description: "Currency in standar format: 3 letters\n"
     example: "EUR"
-  Cart:
-    description: "The cart of the user"
-    type: "object"
-    required:
-      - "isbn"
-      - "quantity"
-    properties:
-      isbn:
-        type: "integer"
-        format: "int64"
-      quantity:
-        type: "integer"
-        format: "int32"
   User:
     type: "object"
     properties:
@@ -704,6 +690,30 @@ definitions:
       date_end: "05/05/19"
       time_end: "22:30:00"
       img_path: "http://placehold.it/700x300"
+  Cart:
+    type: "object"
+    properties:
+      books: 
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            ISBN:
+              type: "integer"
+              format: "int64"
+            book_name:
+              type: "string"
+            quantity:
+              type: "integer"
+              format: "int32"
+            price:
+              $ref: "#/definitions/Amount"
+            total:
+              $ref: "#/definitions/Amount"
+      subtotal:
+        type: "number"
+        format: "float"
+
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"

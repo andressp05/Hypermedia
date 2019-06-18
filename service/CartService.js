@@ -58,11 +58,11 @@ exports.removeItem = async function(user_id, isbn) {
     console.log(data);
     return new Promise((resolve, reject) => {
       if(data > 0){
-        sqlDb.select('ISBN', quantity).from(Data.Tables.cart_detail).where('cart_id', subquery)
-        .then(items => {
-          resolve(items);
-        });
-        // resolve(data);
+        // sqlDb.select('ISBN', quantity).from(Data.Tables.cart_detail).where('cart_id', subquery)
+        // .then(items => {
+        //   resolve(items);
+        // });
+        resolve(data);
       } else {
         console.log('removeItem - ERROR 404 - no book found in the cart with isbn ' + isbn);
         reject(utils.respondWithCode(Codes.NOT_FOUND, `{"message": "book ${isbn} not in the shopping cart"`));
@@ -79,11 +79,11 @@ exports.removeItem = async function(user_id, isbn) {
 
 exports.getUserCart = async function(user_id) {
   try {
-    const data = await sqlDb.select(`${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.book}.name as book_name`, `${Data.Tables.cart_detail}.quantity`).from(Data.Tables.cart).where('client_id', user_id)
+    const data = await sqlDb.select(`${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.book}.name as book_name`, `${Data.Tables.cart_detail}.quantity`, `${Data.Tables.book}.price`).from(Data.Tables.cart).where('client_id', user_id)
       .join(Data.Tables.cart_detail, `${Data.Tables.cart}.id`, `${Data.Tables.cart_detail}.cart_id`)
       .join(Data.Tables.book, `${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.book}.ISBN`);
       return new Promise((resolve, reject) => {
-        resolve(data);
+        resolve(mapCart(data));
       });
   } catch (e) {
     return new Promise((res, rej) => {
@@ -91,5 +91,24 @@ exports.getUserCart = async function(user_id) {
       rej(utils.respondWithCode(Codes.GENERIC_ERROR, `{"message": "${e}"`))
     })
   }
+}
+
+
+let mapCart = function(data) {
+  var subtotal = 0;
+  
+  data.map(e => {
+    e.price = { value: e.price, currency: "EUR" };
+    e.total = { value: parseFloat((e.price.value * e.quantity).toFixed(2)), currency: e.price.currency };
+    subtotal = subtotal + e.total.value;
+    console.log(subtotal)
+    
+  });
+  var res = {
+    books: data,
+    subtotal: subtotal
+  };
+  console.log(res)
+  return res;
 }
 
