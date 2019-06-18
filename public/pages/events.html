@@ -66,7 +66,8 @@
                       time_start,
                       date_end,
                       time_end,
-                      img_path
+                      img_path,
+                      description
                     } = json[i];
                     console.log(json[i]);
                     // newEventCard.setAttribute("style", "display: block");
@@ -83,7 +84,7 @@
                         <div class="card-body">
                           <h3>${name}</h3>
                           <p>Duration: ${date_start} - ${date_end}</p>
-                          <p>Some useful info that we dont have in our DB</p>
+                          <p>${description}</p>
                           <a class="btn btn-primary" href="/pages/event_detail.html?eventId=${event_id}">Details</a>
                         </div>
                       </div>

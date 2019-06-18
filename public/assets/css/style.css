@@ -217,7 +217,7 @@ hr #hrspecial {
 }
 
 .card-signin .card-img-left-event {
-  width: 65%;
+  width: 65% !important;
   /* Link to your background image using in the property below! */
   background-size: cover;
 }
@@ -231,6 +231,7 @@ hr #hrspecial {
 
 .card-signin .card-body {
   padding: 2rem;
+  width: 45% !important;
 }
 
 .form-signin {
