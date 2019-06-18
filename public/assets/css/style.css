@@ -338,3 +338,7 @@ hr #hrspecial {
   color: white;
   background-color: #3b5998;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}
