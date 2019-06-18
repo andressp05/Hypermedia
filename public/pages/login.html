@@ -15,7 +15,7 @@
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="../assets/js/jquery.js"></script>
   <script src="../assets/js/scripts.js"></script>
-  
+
   <!-- <script>
     function setHeaderFooter() {
       $("#header").load("header.html");
@@ -30,7 +30,7 @@
   function login() {
     var myForm = document.getElementById('loginForm');
     if(myForm.reportValidity()){
-        
+
         let formData = new URLSearchParams(new FormData(myForm));
         let options = {
           body: formData,
@@ -90,7 +90,7 @@
               </div>
 
               <a class="btn btn-lg btn-primary btn-block text-uppercase" onclick="login()">Login</a>
-              <a class="d-block text-center mt-2 small" href="#">Register</a>
+              <a class="d-block text-center mt-2 small" href="/pages/signup.html">Register</a>
 
 
               <!-- <hr class="my-4">
