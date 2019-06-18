@@ -25,7 +25,28 @@ module.exports.addToCart = function addToCart (req, res, next) {
     .catch(err => {
         utils.writeJson(res, err);
     })
-    
+}
+
+
+module.exports.updateQuantity = function updateQuantity(req, res, next){
+    var userid = auth.getUserId(req);
+    var isbn = req.swagger.params.body.value.isbn;
+    var qty = req.swagger.params.body.value.quantity;
+
+    Cart.updateItemQuantity(userid, isbn, qty)
+    .then(response => {
+        Cart.getUserCart(userid)
+        .then(response => {
+            utils.writeJson(res, response);
+        })
+        .catch(err => {
+            utils.writeJson(res, err);
+        });
+        // utils.writeJson(res, response);
+    })
+    .catch(err => {
+        utils.writeJson(res, err);
+    })
 }
 
 

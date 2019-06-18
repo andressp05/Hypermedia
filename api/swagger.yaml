@@ -485,9 +485,8 @@ paths:
         200:
           description: "Successful operation. Returns the new cart of the user"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Cart"
+            type: "object"
+            $ref: "#/definitions/Cart"
         400:
           description: "The request has an invalid syntax"
         404:
@@ -532,9 +531,52 @@ paths:
         200:
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Cart"
+            type: "object"
+            $ref: "#/definitions/Cart"
+        500:
+          description: "Error on the server"
+      x-swagger-router-controller: "Cart"
+    patch:
+      tags:
+      - "cart"
+      summary: "Update item quantity in the cart with the current value"
+      description: ""
+      operationId: "updateQuantity"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: body
+        description: "The isbn of the book to be added to the cart"
+        schema:
+          type: "object"
+          required:
+           - "isbn"
+           - "quantity"
+          properties:
+            isbn:
+              type: "integer"
+              format: "int64"
+            quantity:
+              type: "integer"
+              format: "int32"
+          # $ref: "#/definitions/Cart"
+      #   required: true
+      #   type: "string"
+      # - name: "quntity"
+      #   in: body
+      #   description: "The quantity of the item to add to the cart"
+      #   required: true
+      #   type: "integer"
+      #   format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            $ref: "#/definitions/Cart"
         500:
           description: "Error on the server"
       x-swagger-router-controller: "Cart"
