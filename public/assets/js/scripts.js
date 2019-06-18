@@ -1,6 +1,6 @@
 function setHeaderFooter() {
-  $("#header").load("header.html");
-  $("#footer").load("footer.html");
+  $("#header").load("/pages/header.html");
+  $("#footer").load("/pages/footer.html");
 }
 
 function getCookie(cname) {
