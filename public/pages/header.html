@@ -3,12 +3,11 @@
     <script>
         function logout() {
           let options = {
-          body: formData,
-          method: "POST",
+          method: "GET",
           credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-            }
+          // headers: {
+          //   'Content-Type': 'application/x-www-form-urlencoded'
+          //   }
           }
           fetch('/test/user/logout', options)
           .then(response => {
@@ -53,7 +52,7 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a id='cart-menu' class="nav-link" href="/pages/login.html">
+          <a id='cart-menu' class="nav-link" href="/pages/cart.html">
             <i class="fa fa-shopping-cart"></i>
           </a>
         </li>
