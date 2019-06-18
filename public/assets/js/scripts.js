@@ -47,10 +47,10 @@ function fillCartPage(json) {
       </div>
       <div class="col-2 ">${price}</div>
       <div class="col-2 ">
-        <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="999" step="1" value="${quantity}"
-        style="width: 75px">
+        <input data-isbn="${book.ISBN}" type="number" class="form-control" name="quantity" min="1" max="999" step="1" value="${quantity}"
+        style="width: 75px" onchange="updateCartItemQuantity(this)">
       </div>
-      <div class="col-2 "><button id='${book.ISBN}' type="button" class="btn btn-danger" onclick='removeFromCart(this)'>Remove</button></div>
+      <div class="col-2 "><button data-isbn='${book.ISBN}' type="button" class="btn btn-danger" onclick='removeFromCart(this)'>Remove</button></div>
       <div class="col-2"><h5>${book.total.currency}<span style="color: blue"> ${book.total.value}</span></h5></div>`
 
     // add entry book
@@ -65,7 +65,7 @@ function fillCartPage(json) {
 
 
 function removeFromCart(evtTarget){
-  var isbn = evtTarget.id;
+  var isbn = evtTarget.getAttribute('data-isbn');
   
   let options = {
     method: "DELETE",
@@ -93,6 +93,46 @@ function removeFromCart(evtTarget){
       console.error(e);
       e.text().then(json => {
         console.error(json.message)
+      })
+    });
+}
+
+
+function updateCartItemQuantity(evtTarget) {
+  var isbn = evtTarget.getAttribute('data-isbn');
+  var quantity = evtTarget.value;
+  var obj = {
+    isbn: parseInt(isbn),
+    quantity: parseInt(quantity)
+  };
+  var json = JSON.stringify(obj);
+  let options = {
+    body: json,
+    method: "PATCH",
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  fetch(`/test/cart`, options)
+    .then(function (response) {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw response;
+      }
+    })
+    .then(jsonCart => {
+      // window.location.reload(true);
+      document.getElementById('cartList').innerHTML = "";
+      fillCartPage(jsonCart);
+      console.log(jsonCart);
+    })
+    .catch(e => {
+      console.error(e);
+      e.json().then(body => {
+        console.error(body)
       })
     });
 }
