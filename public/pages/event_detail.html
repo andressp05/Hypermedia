@@ -70,8 +70,6 @@
       let b_isbn_almost = await json_response[0];
       let b_isbn = await b_isbn_almost["b_isbn"];
 
-      console.log("json_response");
-      console.log(b_isbn);
       for (let i = 0; i < b_isbn.length; i++) {
         fetch('../test/books/' + b_isbn[i]).then(function(response) {
             console.log(response.status);
