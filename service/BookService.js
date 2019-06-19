@@ -115,6 +115,7 @@ let mapBook2 = function (data) {
     for (let i = 0; i < e.a_name.length; i++) {
       e.author.push(e.a_name[i] + ' ' + e.a_surname[i]);
     };
+    e.author = uniqBy(e.author, JSON.stringify);
     e.e_id = uniqBy(e.e_id, JSON.stringify);
     delete e.a_name;
     delete e.a_surname;
