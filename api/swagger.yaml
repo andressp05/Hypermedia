@@ -436,6 +436,33 @@ paths:
         404:
           description: "User not found"
       x-swagger-router-controller: "User"
+  /review:
+    get:
+      tags:
+       - "reviews"
+      summary: "Get all the reviews of the given book"
+      operationId: "getReviews"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "isbn"
+        in: "query"
+        description: "isbn of the book to get the reviews"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        400:
+          description: "Invalid ISBN supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Review"
   /cart:
     get:
       tags:
@@ -761,6 +788,19 @@ definitions:
       subtotal:
         type: "number"
         format: "float"
+  Review:
+    type: "object"
+    properties:
+      ISBN:
+        type: "integer"
+        format: "int64"
+      review:
+        type: "string"
+      email:
+        type: "string"
+      name:
+        type: "string"
+
 
 externalDocs:
   description: "Find out more about Swagger"
