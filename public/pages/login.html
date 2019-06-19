@@ -54,6 +54,14 @@
             }
           })
           .catch(e => {
+            if(e.status === 401) {
+              e.json().then( json => {
+                console.log(json.message)
+                document.getElementById('error-msg').innerHTML = json.message;
+                $('#popup-login-error').fadeIn('slow');
+                setTimeout(() => {$('#popup-login-error').hide('slow');}, 5000);
+              })
+            }
             e.text().then( json => {
               console.log(json.message)
             })
@@ -76,6 +84,11 @@
     <div id="popup-logged" class="row not-display">
       <div class="alert alert-success">
         Logged in successfully, welcome <span id="user-id" class="h5"></span>!
+      </div>
+    </div>
+    <div id="popup-login-error" class="row not-display text-center">
+      <div class="alert alert-danger">
+        <span id="error-msg"></span>!
       </div>
     </div>
     <div class="row">

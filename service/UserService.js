@@ -77,12 +77,12 @@ exports.loginUser = function(email,password) {
               resolve(user[0].id);
             } else {
               // Wrong password
-              reject(utils.respondWithCode(400, '{"message": "Wrong username or password"}'));
+              reject(utils.respondWithCode(401, '{"message": "Wrong username or password"}'));
             }
           });
         } else {
           // Wrong email
-          reject(utils.respondWithCode(400, '{"message": "Wrong username or password"}'));
+          reject(utils.respondWithCode(401, '{"message": "Wrong username or password"}'));
         }
       });
 
