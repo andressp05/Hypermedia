@@ -7,7 +7,7 @@ let Codes = require('../utils/Codes');
 let utils = require('../utils/writer');
 let Data = require('../utils/Data');
 
-let sqlDb = Data.database;
+let sqlDb;
 
 exports.usersDbSetup = function(database) {
   sqlDb = database;
