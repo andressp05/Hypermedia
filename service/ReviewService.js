@@ -18,14 +18,6 @@ exports.reviewsDbSetup = async function (database) {
   }
 };
 
-/**
- * Favorites books available in the inventory
- * List of favorites books available in the inventory
- *
- * offset Integer Pagination offset. Default is 0. (optional)
- * limit Integer Maximum number of items per page. Default is 4 and cannot exceed 500. (optional)
- * returns List
- **/
 
 exports.getBookReviews = async function(isbn) {
   try {
