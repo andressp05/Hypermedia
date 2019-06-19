@@ -32,6 +32,11 @@
 
   <!-- Page Content -->
   <div class="container">
+    <div id="popup-logged" class="row not-display">
+      <div class="alert alert-success">
+        Signup completed successfully, Welcome <span id="user-id" class="h5"></span>!
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto">
         <div class="card card-signin flex-row my-5">
@@ -105,8 +110,11 @@
                       })
                       .then(json => {
                         console.log(json);
-                        let previousUrl = document.referrer;
-                        window.location.href = previousUrl;
+                        var previousUrl = document.referrer;
+                        setTimeout(() => {window.location.href = previousUrl;}, 2000);
+                        document.getElementById('user-id').innerHTML = document.getElementById('inputEmail').value;
+                        $('#popup-logged').fadeIn('slow');
+                        // window.location.href = previousUrl;
                       })
                       .catch(e => {
                         e.json().then( json => {

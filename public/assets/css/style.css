@@ -346,3 +346,7 @@ hr #hrspecial {
 .subtotal{
   margin-right: 7rem;
 }
+
+.not-display{
+  display: none;
+}

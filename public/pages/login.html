@@ -45,7 +45,10 @@
           .then(response => {
             if (response.status === 200) {
               let previousUrl = document.referrer;
-              window.location.href = previousUrl;
+              setTimeout(() => {window.location.href = previousUrl;}, 2000);
+              // window.location.href = previousUrl;
+              document.getElementById('user-id').innerHTML = document.getElementById('inputEmail').value;
+              $('#popup-logged').fadeIn('slow');
             } else {
               throw response;
             }
@@ -70,6 +73,11 @@
 
   <!-- Page Content -->
   <div class="container">
+    <div id="popup-logged" class="row not-display">
+      <div class="alert alert-success">
+        Logged in successfully, welcome <span id="user-id" class="h5"></span>!
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto">
         <div class="card card-signin flex-row my-5">
