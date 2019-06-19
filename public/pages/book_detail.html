@@ -39,7 +39,6 @@
         quantity: quantity
       };
       var json = JSON.stringify(obj);
-      console.log(json);
       let options = {
         body: json,
         method: "POST",
@@ -58,7 +57,6 @@
           }
         })
         .then(json => {
-          console.log(json);
           setTimeout(() => {$('#popup-added').hide('slow');}, 2000);
           document.getElementById('added-book-quantity').innerHTML = quantity;
           document.getElementById('added-book-quantity').innerHTML = document.getElementById('isbn').innerHTML;
@@ -211,47 +209,21 @@
         </div>
       </div>
 
+
       <!-- Reviews -->
-      <div class="col-12" id="reviews">
+      <div class="col-12">
         <div class="card mb-3" style="border: 0; border-radius: 1rem; box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1); overflow: hidden;">
           <div class="card-header text-white text-uppercase" style="box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);"><i class="fa fa-comment"></i> Reviews</div>
-          <div class="card-body">
-            <div class="review">
-              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-              <meta itemprop="datePublished" content="01-01-2016">January 01, 2018
+          <div class="card-body" id="reviews">
 
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              by Paul Smith
-              <p class="blockquote">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-              </p>
-              <hr>
-            </div>
-            <div class="review">
-              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-              <meta itemprop="datePublished" content="01-01-2016">January 01, 2018
-
-              <span class="fa fa-star" aria-hidden="true"></span>
-              <span class="fa fa-star" aria-hidden="true"></span>
-              <span class="fa fa-star" aria-hidden="true"></span>
-              <span class="fa fa-star" aria-hidden="true"></span>
-              <span class="fa fa-star" aria-hidden="true"></span>
-              by Paul Smith
-              <p class="blockquote">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-              </p>
-              <hr>
-            </div>
           </div>
         </div>
       </div>
+      <!-- !Reviews -->
+
     </div>
     <hr style="width: 98%;">
-    <h4>Events where is presented this book</h4>
+    <h4>Similar Books</h4>
     <hr style="width: 98%;">
     <div class="row" style="margin-top: 2rem;" id="relateds"></div>
 
@@ -322,7 +294,6 @@
               img_path,
               description
             } = json[i];
-            console.log(json[i]);
             if (img_path == null) {
               img_path = "http://placehold.it/700x300";
             }
@@ -351,12 +322,9 @@
         });
     };
     let b_related = await json_response["b_related"];
-    console.log(b_related);
     for (let i = 0; i < b_related.length; i++) {
-      console.log("QUECHUCHA");
       fetch('../test/books/' + b_related[i]).then(function(response) {
           console.log(response.status);
-          console.log("ENTRAMO");
           if (response.status === 200) {
             return response.json();
           } else {
@@ -399,7 +367,6 @@
                     </div>
                 </div>
                 `;
-            console.log("finalizando vamos a appendar");
             document.getElementById('relateds').append(listItem);
         })
         .catch(e => {
@@ -407,6 +374,20 @@
         });
       }
   }
+    fetch('../test/review?isbn=' + isbn).then(function(response) {
+      console.log(response.status);
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error(response.status);
+      }
+    }).then(json2 => {
+      putReviews(json2,"reviews");
+    })
+    .catch(e => {
+      console.error(e);
+    });
+
     fetch('../test/books/' + isbn).then(function(response) {
       console.log(response.status);
       if (response.status === 200) {
@@ -415,8 +396,6 @@
         throw new Error(response.status);
       }
     }).then(json => {
-      console.log(json);
-
       var array_theme = [];
       var array_litGen = [];
       //  for(let i = 0; i < json.length; i++){
@@ -441,7 +420,6 @@
       if (img_path == null) {
         img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
       }
-      console.log(json);
       document.getElementById("image").innerHTML = `<div class="card card-book-big card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>`;
       document.getElementById("title").innerHTML = `${name}`;
 

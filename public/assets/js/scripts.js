@@ -143,3 +143,22 @@ function updateCartItemQuantity(evtTarget) {
       })
     });
 }
+
+function putReviews(b_reviews, put_in) {
+  for (let i = 0; i < b_reviews.length; i++) {
+          let listItem = document.createElement('div');
+          listItem.classList.add('review');
+          let {
+            ISBN,
+            review,
+            name,
+            email
+          } = b_reviews[i]
+          listItem.innerHTML = `
+              <h6>Review by ${name} - ${email}</h6>
+              <p>${review}</p>
+              <hr>
+              `;
+          document.getElementById(put_in).append(listItem);
+    }
+  }
