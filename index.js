@@ -32,6 +32,7 @@ app.use(cookieSession({
   // maxAge: 3600000,
   expires: new Date(Date.now() + 3600000),
   path: '/test',
+  secure: false,
   signed: true,
   keys: ['key1', 'key2']
 }));
