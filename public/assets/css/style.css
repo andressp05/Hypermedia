@@ -120,6 +120,15 @@ hr #hrspecial {
   background-size: cover;
 }
 
+.card-cart {
+  height: 150px;
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-size: cover;
+}
+
 .hoverWrapper:hover {
   display: block;
 }
