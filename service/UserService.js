@@ -74,6 +74,7 @@ exports.loginUser = function(email,password) {
           bcrypt.compare(password, user[0].password).then(res => {
             console.log(res);
             if(res == true){
+              console.log(`User id = ${user[0].id}`);
               resolve(user[0].id);
             } else {
               // Wrong password
