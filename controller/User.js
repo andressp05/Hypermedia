@@ -18,7 +18,7 @@ module.exports.createUser = function createUser (req, res, next) {
       .then(function (response) {
         req.session.loggedin = true;
         req.session.userid = response;
-        res.cookie('logged', 'true' , { expires: req.sessionOptions.expires});
+        res.cookie('logged', 'true' , { maxAge: req.sessionOptions.maxAge});
         utils.writeJson(res, response);
       })
       .catch(function (response) {
@@ -40,7 +40,7 @@ module.exports.loginUser = function loginUser (req, res, next) {
         // if (req.session.userid && req.session.userid != response) {
         
         // }
-        res.cookie('logged', 'true' , { expires: req.sessionOptions.expires});
+        res.cookie('logged', 'true' , { maxAge: req.sessionOptions.maxAge});
         req.session.userid = response;
         console.log(`User ${response} logged in`);
         utils.writeJson(res, response);

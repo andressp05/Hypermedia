@@ -29,10 +29,9 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 
 app.use(cookieSession({
   name: 'user_session',
-  // maxAge: 3600000,
-  expires: new Date(Date.now() + 3600000),
+  maxAge: 180000,
+  // expires: new Date(Date.now() + 3600000),
   path: '/test',
-  secure: false,
   signed: true,
   keys: ['key1', 'key2']
 }));
@@ -44,6 +43,18 @@ app.use(cookieSession({
 //   // res.end(n + ' views')
 //   next();
 // });
+app.use(function (req, res, next) {
+  
+    // req.sessionOptions.expires = req.sessionOptions.expires + 900000;
+  if(!req.session.isNew) {
+    req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
+    if(req.session.loggedin) {
+      res.cookie('logged', req.session.loggedin, { maxAge: req.sessionOptions.maxAge });
+    }
+    let loggedin = req.session.loggedin
+  }
+  next();
+})
 
 app.use('/', router);
 app.use(express.static(path.join(__dirname,'public')));
