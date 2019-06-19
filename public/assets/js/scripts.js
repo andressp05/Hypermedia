@@ -31,27 +31,34 @@ function fillCartPage(json) {
     let img_path = book.img_path;
 
     let listItem = document.createElement('div');
-                  listItem.classList.add('row');
-                  listItem.classList.add('align-items-center');
+    listItem.classList.add('row');
+    listItem.classList.add('align-items-center');
 
     listItem.innerHTML = `
-      <div class="col">
-        <div id="product_details" class="row align-items-center">
-          <div class="col-3">
-            <img src="${img_path}" alt="thumbnail" class="img-thumbnail">
-          </div>
-          <div class="col">
-            <span>${book_name}</span>
-          </div>
-        </div>
+      <div class="col-12 col-sm-12 col-md-2 text-center">
+              <img src="${img_path}" alt="thumbnail" class="img-thumbnail">
       </div>
-      <div class="col-2 ">${price}</div>
-      <div class="col-2 ">
-        <input data-isbn="${book.ISBN}" type="number" class="form-control" name="quantity" min="1" max="999" step="1" value="${quantity}"
-        style="width: 75px" onchange="updateCartItemQuantity(this)">
+      <div class="col-12 text-sm-center col-sm-12 col-md-3 text-md-center">
+          <h4 class="product-name"><strong>${book_name}</strong></h4>
       </div>
-      <div class="col-2 "><button data-isbn='${book.ISBN}' type="button" class="btn btn-danger" onclick='removeFromCart(this)'>Remove</button></div>
-      <div class="col-2"><h5>${book.total.currency}<span style="color: blue"> ${book.total.value}</span></h5></div>`
+      <div class="col-12 col-sm-12 text-sm-center col-md-7 text-md-center row">
+          <div class="col-3 col-sm-3 col-md-3 text-md-left" style="padding-top: 5px">
+              <h6><strong>${price}</strong></h6>
+          </div>
+          <div class="col-2 col-sm-2 col-md-2 text-md-center">
+          <input data-isbn="${book.ISBN}" type="number" class="form-control" name="quantity" min="1" max="999" step="1" value="${quantity}"
+          style="width: 75px" onchange="updateCartItemQuantity(this)">
+          </div>
+          <div class="col-1 col-sm-1 col-md-1 text-md-center"></div>
+          <div class="col-2 col-sm-2 col-md-2 text-md-center">
+              <button type="button" data-isbn='${book.ISBN}' onclick='removeFromCart(this)' class="btn btn-outline-danger btn-xs">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+          </div>
+          <div class="col-3 col-sm-3 col-md-3 text-right">
+            <p>${book.total.currency} ${book.total.value}</p>
+          </div>
+      </div>`
 
     // add entry book
     document.getElementById('cartList').append(listItem);
@@ -59,14 +66,14 @@ function fillCartPage(json) {
     document.getElementById('cartList').append(document.createElement('hr'));
   }
 
-  document.getElementById('subtotal').innerHTML = `<h4>Subtotal: ${json.books[0].total.currency} <span style="color: blue">${subtotal}</span></h4>`;
+  document.getElementById('subtotal').innerHTML = `${json.books[0].total.currency} ${subtotal}`;
 
 }
 
 
-function removeFromCart(evtTarget){
+function removeFromCart(evtTarget) {
   var isbn = evtTarget.getAttribute('data-isbn');
-  
+
   let options = {
     method: "DELETE",
     credentials: 'same-origin',
@@ -76,7 +83,7 @@ function removeFromCart(evtTarget){
   }
 
   fetch(`/test/cart?isbn=${isbn}`, options)
-    .then(function (response) {
+    .then(function(response) {
       if (response.status === 200) {
         return response.json();
       } else {
@@ -116,7 +123,7 @@ function updateCartItemQuantity(evtTarget) {
   }
 
   fetch(`/test/cart`, options)
-    .then(function (response) {
+    .then(function(response) {
       if (response.status === 200) {
         return response.json();
       } else {
