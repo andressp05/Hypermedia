@@ -42,6 +42,7 @@ module.exports.loginUser = function loginUser (req, res, next) {
         // }
         res.cookie('logged', 'true' , { expires: req.sessionOptions.expires});
         req.session.userid = response;
+        console.log(`User ${response} logged in`);
         utils.writeJson(res, response);
       })
       .catch(function (response) {
