@@ -43,7 +43,7 @@ function fillCartPage(json) {
       </div>
       <div class="col-12 col-sm-12 text-sm-center col-md-7 text-md-center row">
           <div class="col-3 col-sm-3 col-md-3 text-md-left" style="padding-top: 5px">
-              <h6><strong>${price}</strong></h6>
+              <h6>${price}</h6>
           </div>
           <div class="col-2 col-sm-2 col-md-2 text-md-center">
           <input data-isbn="${book.ISBN}" type="number" class="form-control" name="quantity" min="1" max="999" step="1" value="${quantity}"
@@ -56,7 +56,7 @@ function fillCartPage(json) {
               </button>
           </div>
           <div class="col-3 col-sm-3 col-md-3 text-right">
-            <p>${book.total.currency} ${book.total.value}</p>
+            <p><strong>${book.total.currency} ${book.total.value}</strong></p>
           </div>
       </div>`
 
