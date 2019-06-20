@@ -26,14 +26,16 @@ var options = {
 var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
-
+//Setup cookie-session
+let secretSession1 = process.env.SECRET_SESSION1 || 'key1';
+let secretSession2 = process.env.SECRET_SESSION2 || 'key2';
 app.use(cookieSession({
   name: 'user_session',
   maxAge: 900000,
   // expires: new Date(Date.now() + 3600000),
   path: '/test',
   signed: true,
-  keys: ['key1', 'key2']
+  keys: [secretSession1, secretSession2]
 }));
 // app.use(function (req, res, next) {
 //   console.log(req.session.views);
