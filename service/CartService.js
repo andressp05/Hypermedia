@@ -113,7 +113,6 @@ exports.getUserCart = async function(user_id) {
       .join(Data.Tables.book, `${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.book}.ISBN`)
       .orderBy(`${Data.Tables.cart_detail}.ISBN`);
       return new Promise((resolve, reject) => {
-        console.log(data.length)
         if(data.length > 0){
           resolve(mapCart(data));
         } else {
