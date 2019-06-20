@@ -57,7 +57,7 @@ application. How these map to the OpenAPI data model?
 ## Implementation
 ### Tools used
 
-The server is developed using NodeJS technology and with PostgreSQL as database. The database is accessed from the server through an [ORM](https://knexjs.org/).
+The server is developed using NodeJS technology and with PostgreSQL as database. The database is accessed from the server through an [query builder](https://knexjs.org/).
 
 To parse the handle the REST endpoint structure we used the middleware [swagger-tools](https://www.npmjs.com/package/swagger-tools).
 
