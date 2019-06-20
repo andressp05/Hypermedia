@@ -74,7 +74,7 @@
         console.error(e);
         if(e.status){
           e.text().then(json => {
-            console.error(json.message)
+            console.error(json)
           })
         }
       });
