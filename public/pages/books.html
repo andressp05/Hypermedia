@@ -71,7 +71,7 @@
         <!-- Cards per books -->
         <div class="row gallary-thumbs container" id="cards">
           <script type="text/javascript">
-            fetch('../test/books/').then(function(response) {
+            fetch('/api/books/').then(function(response) {
                 if (response.status === 200) {
                   return response.json();
                 } else {

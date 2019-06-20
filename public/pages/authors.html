@@ -49,7 +49,7 @@
 
           <div class="row gallary-thumbs container" id="cards">
             <script type="text/javascript">
-              fetch('../test/authors/').then(function(response) {
+              fetch('/api/authors/').then(function(response) {
                   console.log(response.status);
                   if (response.status === 200) {
                     return response.json();

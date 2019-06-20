@@ -46,7 +46,7 @@
     <div class=" gallary-thumbs container" id="events">
       <hr style="width: 98%;">
             <script type="text/javascript">
-              fetch('../test/events/').then(function(response) {
+              fetch('/api/events/').then(function(response) {
                   console.log(response.status);
                   if (response.status === 200) {
                     return response.json();

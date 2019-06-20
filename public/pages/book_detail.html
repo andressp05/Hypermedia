@@ -48,7 +48,7 @@
         }
       }
 
-      fetch('/test/cart', options)
+      fetch('/api/cart', options)
         .then(response => {
           if (response.status === 200) {
             return response.json();
@@ -252,7 +252,7 @@
 
   <script type="text/javascript">
   async function loadEvents() {
-    let json_response = await fetch('../test/books/' + isbn).then(function(response) {
+    let json_response = await fetch('/api/books/' + isbn).then(function(response) {
       console.log(response.status);
       if (response.status === 200) {
         return response.json();
@@ -262,7 +262,7 @@
     });
     let e_id = await json_response["e_id"];
     for (let i = 0; i < e_id.length; i++) {
-      fetch('../test/events/' + e_id[i]).then(function(response) {
+      fetch('/api/events/' + e_id[i]).then(function(response) {
           console.log(response.status);
           if (response.status === 200) {
             return response.json();
@@ -316,7 +316,7 @@
     };
     let b_related = await json_response["b_related"];
     for (let i = 0; i < b_related.length; i++) {
-      fetch('../test/books/' + b_related[i]).then(function(response) {
+      fetch('/api/books/' + b_related[i]).then(function(response) {
           console.log(response.status);
           if (response.status === 200) {
             return response.json();
@@ -367,7 +367,7 @@
         });
       }
   }
-    fetch('../test/review?isbn=' + isbn).then(function(response) {
+    fetch('/api/review?isbn=' + isbn).then(function(response) {
       console.log(response.status);
       if (response.status === 200) {
         return response.json();
@@ -381,7 +381,7 @@
       console.error(e);
     });
 
-    fetch('../test/books/' + isbn).then(function(response) {
+    fetch('/api/books/' + isbn).then(function(response) {
       console.log(response.status);
       if (response.status === 200) {
         return response.json();

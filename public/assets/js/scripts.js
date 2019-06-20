@@ -106,7 +106,7 @@ function removeFromCart(evtTarget) {
     // }
   }
 
-  fetch(`/test/cart?isbn=${isbn}`, options)
+  fetch(`/api/cart?isbn=${isbn}`, options)
     .then(function(response) {
       if (response.status === 200) {
         return response.json();
@@ -146,7 +146,7 @@ function updateCartItemQuantity(evtTarget) {
     }
   }
 
-  fetch(`/test/cart`, options)
+  fetch(`/api/cart`, options)
     .then(function(response) {
       if (response.status === 200) {
         return response.json();

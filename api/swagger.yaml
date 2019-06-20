@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   description: >-
     Hypermedia Applications project year 2018-2019. A bookstore with book lists
-    and user functions.
+    and user functions. You can use email `test@test.com` and password `123` to test the login features
   version: 1.0.0
   title: Book House
   termsOfService: ''
@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 host: hypermedia-bookshop.herokuapp.com
-basePath: /test
+basePath: /api
 tags:
   - name: book
     description: All the book related commands
@@ -351,6 +351,8 @@ paths:
             type: string
         '400':
           description: Invalid username/password supplied
+        '403':
+          description: user already logged in
       x-swagger-router-controller: User
   /user/logout:
     get:
@@ -365,8 +367,11 @@ paths:
       responses:
         '200':
           description: successful operation
-        '403':
-          description: Not authorized
+          headers:
+            Set-Cookie:
+              type: string
+              format: date-time
+              description: The cookie-session related to the user logged out
       x-swagger-router-controller: User
   /review:
     get:

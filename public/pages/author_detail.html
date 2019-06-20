@@ -37,7 +37,7 @@
     async function fillWrittenBooks(books) {
       for (const written of books) {
 
-        let book = await fetch('../test/books/' + written.ISBN).then(function(response) {
+        let book = await fetch('/api/books/' + written.ISBN).then(function(response) {
           console.log(response.status);
           if (response.status === 200) {
             return response.json();
@@ -115,7 +115,7 @@
 
 
   <script type="text/javascript">
-    fetch('../test/authors/' + author_id).then(function(response) {
+    fetch('/api/authors/' + author_id).then(function(response) {
       console.log(response.status);
       if (response.status === 200) {
         return response.json();

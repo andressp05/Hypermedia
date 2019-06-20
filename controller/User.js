@@ -54,45 +54,11 @@ module.exports.loginUser = function loginUser (req, res, next) {
   }
 };
 
-module.exports.deleteUser = function deleteUser (req, res, next) {
-  var username = req.swagger.params['username'].value;
-  User.deleteUser(username)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.getUserByName = function getUserByName (req, res, next) {
-  var username = req.swagger.params['username'].value;
-  User.getUserByName(username)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
 module.exports.logoutUser = function logoutUser (req, res, next) {
   req.session.loggedin = false;
   req.session.userid = null;
   res.cookie('logged', 'fasle');
   User.logoutUser()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.updateUser = function updateUser (req, res, next) {
-  var username = req.swagger.params['username'].value;
-  var body = req.swagger.params['body'].value;
-  User.updateUser(username,body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

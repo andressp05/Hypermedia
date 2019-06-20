@@ -59,7 +59,7 @@
 
   <script type="text/javascript">
     async function loadBooks() {
-      let json_response = await fetch('../test/events/' + event_id).then(function(response) {
+      let json_response = await fetch('/api/events/' + event_id).then(function(response) {
         console.log(response.status);
         if (response.status === 200) {
           return response.json();
@@ -71,7 +71,7 @@
       let b_isbn = await b_isbn_almost["b_isbn"];
 
       for (let i = 0; i < b_isbn.length; i++) {
-        fetch('../test/books/' + b_isbn[i]).then(function(response) {
+        fetch('/api/books/' + b_isbn[i]).then(function(response) {
             console.log(response.status);
             if (response.status === 200) {
               return response.json();
@@ -123,7 +123,7 @@
       }
     }
 
-    fetch('../test/events/' + event_id).then(function(response) {
+    fetch('/api/events/' + event_id).then(function(response) {
         console.log(response.status);
         if (response.status === 200) {
           return response.json();

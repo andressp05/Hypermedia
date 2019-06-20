@@ -84,7 +84,7 @@
 
         <div class="row gallary-thumbs container" id="bestsellers">
           <script type="text/javascript">
-            fetch('../test/bestsellers/').then(function(response) {
+            fetch('/api/bestsellers/').then(function(response) {
                 console.log(response.status);
                 if (response.status === 200) {
                   return response.json();
@@ -145,7 +145,7 @@
 
         <div class="row gallary-thumbs container" id="cards">
           <script type="text/javascript">
-            fetch('../test/favorites/').then(function(response) {
+            fetch('/api/favorites/').then(function(response) {
                 console.log(response.status);
                 if (response.status === 200) {
                   return response.json();
