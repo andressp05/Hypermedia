@@ -59,7 +59,7 @@ instructors.</li>
 </ul>
 <h2><a id="Specification_21"></a>Specification</h2>
 <h3><a id="Web_Architecture_22"></a>Web Architecture</h3>
-<p><img src="../public/assets/img/Hypermedia_diagram.jpg" alt="alt text" title="ER diagram"></p>
+<p><img src="/assets/img/Hypermedia_diagram.jpg" alt="alt text" title="ER diagram"></p>
 <p>The <strong><em>Application layer</em></strong> is composed by an <strong>API endpoint</strong> which accepts the calls from the clients. The validate request is passed to the controllers that authenticates it and uses the <strong>data managment</strong> methods to build the data models for the response. The data layer in which is located the PostgreSQL database is accessed by a query builder.</p>
 <p>The HTML files are not being rendered server side because the static files are served to the client with express’s static file managers. By doing so the HTML pages are not rendered before beeing served to the client.</p>
 <h3><a id="API_28"></a>API</h3>
@@ -90,7 +90,7 @@ We Followed these REST principles:</p>
 <h3><a id="Data_model_52"></a>Data model</h3>
 <p>Describe with an ER diagram the model used in the data layer of your web<br>
 application. How these map to the OpenAPI data model?<br>
-<img src="../public/assets/img/ER_Tables.png" alt="alt text" title="Logo Title Text 1"></p>
+<img src="/assets/img/ER_Tables.png" alt="alt text" title="Logo Title Text 1"></p>
 <h2><a id="Implementation_56"></a>Implementation</h2>
 <h3><a id="Tools_used_57"></a>Tools used</h3>
 <p>The server is developed using NodeJS technology and with PostgreSQL as database. The database is accessed from the server through an <a href="https://knexjs.org/">ORM</a>.</p>
