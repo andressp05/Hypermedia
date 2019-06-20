@@ -22,142 +22,146 @@
 		crossorigin="anonymous"></script>
 	<script src="../assets/js/scripts.js"></script>
 
-	<!-- <script>
-    function setHeaderFooter(){
-      $("#header").load("header.html");
-      $("#footer").load("footer.html");
-    }
-    </script> -->
-
 </head>
 
 <body onload="setHeaderFooter()">
 
-	<!-- HEADER -->
-	<div id='header'></div>
+  <!-- HEADER -->
+  <div id='header'></div>
 
-	<!-- Page Content -->
-	<div class="container py-3">
-		<h1 class="text-center"> FAQ </h1>
-		<div class="row">
-			<div class="col-10 mx-auto">
-				<div class="accordion" id="faqExample">
-					<div class="card">
-						<div class="card-header p-2 text-light" id="headingOne">
-							<h5 class="mb-0">
-								<b>1: What is Paper House?</b>
-							</h5>
-						</div>
+  <!-- Page Content -->
+  <div class="container py-3">
+    <h1 class="text-center"> FAQ </h1>
+    <div class="col-10 mx-auto">
+      <div id="faqExample">
 
-						<div id="collapseOne" aria-labelledby="headingOne" data-parent="#faqExample">
-							<div class="card-body">
-								<i>Answer:</i> Paper House is a educational simulation of a bookshop created for the subject Hypermedia
-								Applications of Politecnico di Milano university.
-							</div>
-						</div>
-					</div>
-					<div class="card">
-						<div class="card-header p-2 text-light" id="headingTwo">
-							<h5 class="mb-0">
-								<b>2: How can I filter the books?</b>
-							</h5>
-						</div>
-						<div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqExample">
-							<div class="card-body">
-								<i>Answer:</i> You can filter them by literary genre and by topic. Also you can group them by literary
-								genre and by topic. And in addition, we have a list of favourites and of bestsellers that you can see as
-								well.
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header p-2 text-light" id="headingThree">
-								<h5 class="mb-0">
-									<b>3: How can I filter the authors?</b>
-								</h5>
-							</div>
-							<div id="collapseThree" aria-labelledby="headingThree" data-parent="#faqExample">
-								<div class="card-body">
-									<i>Answer:</i> To see.
-								</div>
-							</div>
+        <div class="card" style="border: 0;">
+          <div class="card-header p-2" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-faq" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                1: What is Paper House?
+              </button>
+            </h5>
+          </div>
 
-							<div class="card">
-								<div class="card-header p-2 text-light" id="headingFour">
-									<h5 class="mb-0">
-										<b>4: What are exactly the events?</b>
-									</h5>
-								</div>
-								<div id="collapseFour" aria-labelledby="headingFour" data-parent="#faqExample">
-									<div class="card-body">
-										<i>Answer:</i> To see.
-									</div>
-								</div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqExample">
+            <div class="card-body">
+              <i>Answer:</i> Paper House is a educational simulation of a bookshop created for the subject Hypermedia Applications of Politecnico di Milano university.
+            </div>
+          </div>
+        </div>
+        <div class="card" style="border: 0;">
+          <div class="card-header p-2" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-faq" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                2: How can I filter the books?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqExample">
+            <div class="card-body">
+              <i>Answer:</i> You can filter them by literary genre and by topic. Also you can group them by literary genre and by topic. And in addition, we have a list of favourites and of bestsellers that you can see as well.
+            </div>
+          </div>
+        </div>
+        <div class="card" style="border: 0;">
+          <div class="card-header p-2" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-faq" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                3: How can I filter the authors?
+              </button>
 
-								<div class="card">
-									<div class="card-header p-2 text-light" id="headingFive">
-										<h5 class="mb-0">
-											<b>5: Which is the criteria used to select some books as favourites?</b>
-										</h5>
-									</div>
-									<div id="collapseFive" aria-labelledby="headingFive" data-parent="#faqExample">
-										<div class="card-body">
-											<i>Answer:</i> It is a personal criteria of the website administration personal.
-										</div>
-									</div>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
+            <div class="card-body">
+              <i>Answer:</i> To see.
+            </div>
+          </div>
+        </div>
 
-									<div class="card">
-										<div class="card-header p-2 text-light" id="headingSix">
-											<h5 class="mb-0">
-												<b>6: Can I buy a book?</b>
-											</h5>
-										</div>
-										<div id="collapseSix" aria-labelledby="headingSix" data-parent="#faqExample">
-											<div class="card-body">
-												<i>Answer:</i> No, our website simulates an e-commerce library in which you can simulate that
-												you are buying a book by making a reservation of it.
-											</div>
-										</div>
+        <div class="card" style="border: 0;">
+          <div class="card-header p-2" id="headingFour">
+            <h5 class="mb-0">
+              <button class="btn btn-faq" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                4: What are exactly the events?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqExample">
+            <div class="card-body">
+              <i>Answer:</i> To see.
+            </div>
+          </div>
+        </div>
 
-										<div class="card">
-											<div class="card-header p-2 text-light" id="headingSeven">
-												<h5 class="mb-0">
-													<b>7: Should I be registered for make a reservation of a book?</b>
-												</h5>
-											</div>
-											<div id="collapseSeven" aria-labelledby="headingSeven" data-parent="#faqExample">
-												<div class="card-body">
-													<i>Answer:</i> Yes. You can create your account totally free.
-												</div>
-											</div>
+        <div class="card" style="border: 0;">
+          <div class="card-header p-2" id="headingFive">
+            <h5 class="mb-0">
+              <button class="btn btn-faq" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                5: Which is the criteria used to select some books as favourites?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqExample">
+            <div class="card-body">
+              <i>Answer:</i> It is a personal criteria of the website administration personal.
+            </div>
+          </div>
+        </div>
 
-											<div class="card">
-												<div class="card-header p-2 text-light" id="headingEigth">
-													<h5 class="mb-0">
-														<b>8: Do you have a physical shop?</b>
-													</h5>
-												</div>
-												<div id="collapseEight" aria-labelledby="headingEight" data-parent="#faqExample">
-													<div class="card-body">
-														<i>Answer:</i> No, we are an online e-commerce bookshop but we have done the website in
-														Milano, Italy. Also, the website has been done by a chilean called Marcelo, a Spanish guy
-														called Andres and an Italian one called Luca.
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="card" style="border: 0;">
+          <div class="card-header p-2" id="headingSix">
+            <h5 class="mb-0">
+              <button class="btn btn-faq" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                6: Can I buy a book?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#faqExample">
+            <div class="card-body">
+              <i>Answer:</i> No, our website simulates an e-commerce library in which you can simulate that you are buying a book by making a reservation of it.
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="border: 0;">
+          <div class="card-header p-2" id="headingSeven">
+            <h5 class="mb-0">
+              <button class="btn btn-faq" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                7: Should I be registered for make a reservation of a book?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#faqExample">
+            <div class="card-body">
+              <i>Answer:</i> Yes. You can create your account totally free.
+            </div>
+          </div>
+        </div>
 
 
-	<!-- FOOTER -->
-	<div id="footer"></div>
+        <div class="card" style="border: 0;">
+          <div class="card-header p-2" id="headingEigth">
+            <h5 class="mb-0">
+              <button class="btn btn-faq" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                8: Do you have a physical shop?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#faqExample">
+            <div class="card-body">
+              <i>Answer:</i> No, we are an online e-commerce bookshop but we have done the website in Milano, Italy. Also, the website has been done by a chilean called Marcelo, a Spanish guy called Andres and an Italian one called Luca.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
 
 </body>
 
