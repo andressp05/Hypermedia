@@ -113,11 +113,12 @@ exports.getUserCart = async function(user_id) {
       .join(Data.Tables.book, `${Data.Tables.cart_detail}.ISBN`, `${Data.Tables.book}.ISBN`)
       .orderBy(`${Data.Tables.cart_detail}.ISBN`);
       return new Promise((resolve, reject) => {
-        if(data.length > 0){
-          resolve(mapCart(data));
-        } else {
-          reject(utils.respondWithCode(Codes.NOT_FOUND, `{"message": "Cart empty or not found"}`))
-        }
+        // if(data.length > 0){
+        //   resolve(mapCart(data));
+        // } else {
+        //   reject(utils.respondWithCode(Codes.NOT_FOUND, `{"message": "Your cart is empty"}`))
+        // }
+        resolve(mapCart(data));
       });
   } catch (e) {
     return new Promise((res, rej) => {

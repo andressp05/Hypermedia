@@ -31,6 +31,15 @@
                   <a href="/pages/books.html" class="btn btn-primary btn-sm pull-right">Continue shopping</a>
                   <div class="clearfix"></div>
               </div>
+                <div id="emptyCart" class="jumbotron text-center not-display">
+                  <h1 class="display-4">Your cart is empty</h1>
+                  <!-- <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                  <hr class="my-4">
+                  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                  <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                  </p> -->
+                </div>
               <div class="card-body" id="cartList">
 
               </div>
@@ -73,8 +82,13 @@
       .catch(e => {
         console.error(e);
         if(e.status){
+          // if(e.status === 404){
+          //   e.json().then(json => {
+          //   console.error(json);
+          // })
+          // }
           e.text().then(json => {
-            console.error(json)
+            console.error(json);
           })
         }
       });
