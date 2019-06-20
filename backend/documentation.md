@@ -35,7 +35,7 @@ We Followed these REST principles:
 - **Statless**: Because the server is not storing anything about past client's requests.
 - **Uniform interface** :
 - **Layered system**: Despite we used only one layer the client can not tell if it is connecting to the end server or to a proxy.
-  
+
 We didn't follow these REST principles:
 - **Cacheable**: Because we didn't had the need to cache anything server side.
 
@@ -69,7 +69,7 @@ We used the [bcrypt](https://www.npmjs.com/package/bcrypt) package to encrypt th
 
 [express](http://expressjs.com/) was used as a middleware to listen for requests from the client and serve static files.
 
-[cookie-session](http://expressjs.com/) was used to save the login information required for authenticating the requests on the client through the cookies. 
+[cookie-session](http://expressjs.com/) was used to save the login information required for authenticating the requests on the client through the cookies.
 ### Discussion
 Describe here:
 - How did you make sure your web application adheres to the provided OpenAPI
@@ -92,12 +92,13 @@ the data model?
 
 To manage the data model we used only [PostgreSQL](https://www.postgresql.org/) which is a relational database.
 ## Other information
+
 ### Task assignment
 Describe here how development tasks have been subdivided among members of the
-group, e.g.:
-- Foo worked on front end (80%) and OpenAPI Spec (20% of the time)
-- Bar worked on ....
-### Analysis of existing API
+group, e.g.
+- Marcelo worked on front end design and development(49% of the time), on the database structure (10%) back end development (40%), back end documentation (1%)
+
+### Analysis of existing A
 4
 Describe here if you have found relevant APIs that have inspired the OpenAPI
 specification and why (at least two).
@@ -109,9 +110,5 @@ And from [OpenWeatherMap's API](https://openweathermap.org/api) we learned how t
 What was the most important thing all the members have learned while developing
 this part of the project, what questions remained unanswered, how you will use
 what you've learned in your everyday life?
-Examples:
-- Foo learned to write SQL queries and Javascript but wanted to know more about
-caching, he's probably going to create his own startup with what she has
-learned
-- Bar learned how to deploy on a cloud platform, he would have liked to know
-more about promises for asynchronous code.. 
+
+- Marcelo has improved his HTML and CSS programming skills, he learn to develop an complete application, also learned about nodejs, npm and nvm, he has also learned JS, jQuery handling and responsive design using Bootstrap. He would like to learn more about React, Vue and Webpack to learn how to do faster and better webapps mixing client-side and server-side libraries.
