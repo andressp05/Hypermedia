@@ -153,18 +153,18 @@
             <form method="get" action="cart.html">
               <div class="form-group">
                 <p> </p>
-                <label>Quantity :</label>
+                <label for="quantity">Quantity :</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
+                    <a class="quantity-left-minus btn btn-danger btn-number text-white cursor-pointer" data-type="minus" data-field="">
                       <i class="fa fa-minus"></i>
-                    </button>
+                    </a>
                   </div>
                   <input type="text" class="form-control" id="quantity" name="quantity" min="1" max="100" value="1">
                   <div class="input-group-append">
-                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                    <a class="quantity-right-plus btn btn-success btn-number text-white cursor-pointer" data-type="plus" data-field="">
                       <i class="fa fa-plus"></i>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
