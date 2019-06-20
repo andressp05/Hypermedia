@@ -29,7 +29,7 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 
 app.use(cookieSession({
   name: 'user_session',
-  maxAge: 180000,
+  maxAge: 900000,
   // expires: new Date(Date.now() + 3600000),
   path: '/test',
   signed: true,
