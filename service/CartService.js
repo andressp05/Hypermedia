@@ -128,7 +128,7 @@ let mapCart = function(data) {
   var subtotal = 0;
   
   data.map(e => {
-    e.price = { value: e.price, currency: "EUR" };
+    e.price = { value: parseFloat(e.price), currency: "EUR" };
     e.total = { value: parseFloat((e.price.value * e.quantity).toFixed(2)), currency: e.price.currency };
     subtotal = subtotal + e.total.value;    
   });

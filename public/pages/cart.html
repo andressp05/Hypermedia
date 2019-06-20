@@ -36,7 +36,7 @@
               </div>
               <div class="card-footer">
                   <div class="pull-right" style="margin: 10px">
-                      <a href="" class="btn btn-success pull-right">Checkout</a>
+                      <!-- <a href="" class="btn btn-success pull-right">Checkout</a> -->
                       <div class="pull-right" style="margin: 5px">
                           Total price: <b id="subtotal"></b>
                       </div>
@@ -63,7 +63,7 @@
         if (response.status === 200) {
           return response.json();
         } else {
-          throw new Error(response.status);
+          throw response;
         }
       })
       .then(json => {
@@ -71,12 +71,11 @@
         console.log(json);
       })
       .catch(e => {
-        if(e.text()){
+        console.error(e);
+        if(e.status){
           e.text().then(json => {
             console.error(json.message)
           })
-        } else {
-          console.error(e);
         }
       });
   </script>

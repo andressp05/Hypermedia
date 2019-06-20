@@ -25,8 +25,10 @@ function fillCartPage(json) {
 
   for (const book of bookArray) {
     let book_name = book.book_name;
-    let price = new String(book.price.currency).concat(" ").concat(book.price.value);
-    let total = new String(book.total.currency).concat(" ").concat(book.total.value);
+    // console.log(typeof book.price.value)
+    // console.log(typeof book.total.value)
+    let price = new String(book.price.currency).concat(" ").concat((book.price.value).toFixed(2));
+    let total = new String(book.total.currency).concat(" ").concat((book.total.value).toFixed(2));
     let quantity = book.quantity;
     let img_path = book.img_path;
 
@@ -46,8 +48,11 @@ function fillCartPage(json) {
               <h6>${price}</h6>
           </div>
           <div class="col-2 col-sm-2 col-md-2 text-md-center">
-          <input data-isbn="${book.ISBN}" type="number" class="form-control" name="quantity" min="1" max="999" step="1" value="${quantity}"
-          style="width: 75px" onchange="updateCartItemQuantity(this)">
+          <label>
+            <span class="not-display">Quantity</span>
+            <input data-isbn="${book.ISBN}" type="number" class="form-control" name="quantity" min="1" max="999" step="1" value="${quantity}"
+            style="width: 75px" onchange="updateCartItemQuantity(this)">
+          </label>
           </div>
           <div class="col-1 col-sm-1 col-md-1 text-md-center"></div>
           <div class="col-2 col-sm-2 col-md-2 text-md-center">
@@ -56,7 +61,7 @@ function fillCartPage(json) {
               </button>
           </div>
           <div class="col-3 col-sm-3 col-md-3 text-right">
-            <p><strong>${book.total.currency} ${book.total.value}</strong></p>
+            <p><strong>${book.total.currency} ${(book.total.value).toFixed(2)}</strong></p>
           </div>
       </div>`
 
@@ -66,7 +71,7 @@ function fillCartPage(json) {
     document.getElementById('cartList').append(document.createElement('hr'));
   }
 
-  document.getElementById('subtotal').innerHTML = `${json.books[0].total.currency} ${subtotal}`;
+  document.getElementById('subtotal').innerHTML = `${json.books[0].total.currency} ${(subtotal).toFixed(2)}`;
 
 }
 
