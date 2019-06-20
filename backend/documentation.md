@@ -21,10 +21,11 @@ is a private repository and, upon request, we will give access to the
 instructors.
 ## Specification
 ### Web Architecture
-Describe here, with a diagram, the components of your web application and how
-3
-they interact. Highlight which parts belong to the application layer, data layer
-or presentation layer. How did you ensure that HTML is not rendered server side?
+![alt text](../Documentation/diagrams/Hypermedia_diagram.jpg "ER diagram")
+
+The **_Application layer_** is composed by an **API endpoint** which accepts the calls from the clients. The validate request is passed to the controllers that authenticates it and uses the **data managment** methods to build the data models for the response. The data layer in which is located the PostgreSQL database is accessed by a query builder.
+
+The HTML files are not being rendered server side because the static files are served to the client with express's static file managers. By doing so the HTML pages are not rendered before beeing served to the client.
 ### API
 #### REST compliance
 
@@ -98,9 +99,10 @@ Describe here how development tasks have been subdivided among members of the
 group, e.g.
 - Marcelo worked on front end design and development(49% of the time), on the database structure (10%) back end development (40%), back end documentation (1%)
 - Andres worked on front end design and development (40% of the time), on the database structure (5%), on the usability documentation (35% of the time), on the design documentation (19% of the time) and on back end documentation (1%).
+- Luca worked primarly on back end, 70% of the time divided in 60% REST web services and 10% working on the database. The remaining time has been spent 20% on front end with bootstrap and writing javascript server requests. 10% of the time was spent writing and reviewing the documentation.
 
-### Analysis of existing A
-4
+### Analysis of existing API
+
 Describe here if you have found relevant APIs that have inspired the OpenAPI
 specification and why (at least two).
 
@@ -112,5 +114,6 @@ What was the most important thing all the members have learned while developing
 this part of the project, what questions remained unanswered, how you will use
 what you've learned in your everyday life?
 
-- Marcelo has improved his HTML and CSS programming skills, he learn to develop an complete application, also learned about nodejs, npm and nvm, he has also learned JS, jQuery handling and responsive design using Bootstrap. He would like to learn more about React, Vue and Webpack to learn how to do faster and better webapps mixing client-side and server-side libraries.
+- Marcelo has improved his HTML and CSS programming skills, he learn to develop a complete application, also learned about nodejs, npm and nvm, he has also learned JS, jQuery handling and responsive design using Bootstrap. He would like to learn more about React, Vue and Webpack to learn how to do faster and better webapps mixing client-side and server-side libraries.
 - Andres has improved his HTML, javascript and CSS programming skills, in fact he learns a lot about taking advantages of using Bootstrap templates. He also learned about nodejs and npm, and about how to deploy an app with heroku and he continues managing SQL as usual. He would like to learn more about the angular js. He has learned that the documentation part of ussability and design is super dense and also its results are the key to know if you have done a good website or not.
+- Luca learned a lot of client-server communication, in particular got to know how a REST web service call works either server side either client side. He has also learned a lot about NodeJS, how its middlewares work, how to export and import objects and how npm works. </br>He is going to use what he has learned in his future projects by crating some web apps that he was thinking about before doing this project but which he has never developed due to lack of knwoledge and lack of time to acquire those.</br>He would have loved to know some front-end framework like React or Angular.
