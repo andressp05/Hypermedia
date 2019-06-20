@@ -14,73 +14,84 @@
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="../assets/js/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="../assets/js/scripts.js"></script>
 
   <script>
-    // function setHeaderFooter(){
-    //   $("#header").load("header.html");
-    //   $("#footer").load("footer.html");
-    // }
-
     const urlParams = new URLSearchParams(window.location.search);
     const isbn = urlParams.get('isbn');
   </script>
+
   <script>
     function addToCart() {
-      var quantity = parseInt(document.getElementById('quantity').value);
-      var book = parseInt(isbn);
-      var obj = {
-        isbn: book,
-        quantity: quantity
-      };
-      var json = JSON.stringify(obj);
-      let options = {
-        body: json,
-        method: "POST",
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
+      // if logged then add to the cart
+      let logged = getCookie('logged');
+      if (logged && logged !== "" && logged == "true") {
+        var quantity = parseInt(document.getElementById('quantity').value);
+        var book = parseInt(isbn);
+        var obj = {
+          isbn: book,
+          quantity: quantity
+        };
+        var json = JSON.stringify(obj);
+        let options = {
+          body: json,
+          method: "POST",
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
+        // if not logged then popup
+      } else {
+        $('#confirmModal').modal('show');
       }
-
-      fetch('/api/cart', options)
-        .then(response => {
-          if (response.status === 200) {
-            return response.json();
-          } else {
-            throw response;
-          }
-        })
-        .then(json => {
-          setTimeout(() => {$('#popup-added').hide('slow');}, 2000);
-          document.getElementById('added-book-quantity').innerHTML = quantity;
-          document.getElementById('added-book-name').innerHTML = document.getElementById('title').innerHTML;
-          $('#popup-added').fadeIn('slow');
-          // RETURN
-          // {
-          // 	"ISBN": "718157835",
-          // 	"quantity": 1
-          // }
-          // TODO add here what to do with the response
-        })
-        .catch(e => {
-          if (e.status === 400) {
-            console.log('Error 400 from the server ');
-            e.text().then(text => {
-              console.log(text);
-            });
-          } else {
-            e.json().then(json => {
-              console.log(json.message);
-            });
-          }
-        });
     }
+
+    function hideModal() {
+        $('#confirmModal').modal('hide')
+    }
+
+
+
+
+    fetch('/api/cart', options)
+      .then(response => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw response;
+        }
+      })
+      .then(json => {
+        setTimeout(() => {
+          $('#popup-added').hide('slow');
+        }, 2000);
+        document.getElementById('added-book-quantity').innerHTML = quantity;
+        document.getElementById('added-book-name').innerHTML = document.getElementById('title').innerHTML;
+        $('#popup-added').fadeIn('slow');
+        // RETURN
+        // {
+        // 	"ISBN": "718157835",
+        // 	"quantity": 1
+        // }
+        // TODO add here what to do with the response
+      })
+      .catch(e => {
+        if (e.status === 400) {
+          console.log('Error 400 from the server ');
+          e.text().then(text => {
+            console.log(text);
+          });
+        } else {
+          e.json().then(json => {
+            console.log(json.message);
+          });
+        }
+      });
   </script>
 
 </head>
@@ -109,8 +120,8 @@
           <div class="card-body">
             <table class="table" id="general_info">
 
-                <th align="left"> Name </th>
-                <td id="title" align="right"> </td>
+              <th align="left"> Name </th>
+              <td id="title" align="right"> </td>
               </tr>
               <tr>
                 <th align="left"> Author </th>
@@ -168,10 +179,32 @@
                   </div>
                 </div>
               </div>
-              <a onclick="addToCart()" class="btn btn-success btn-lg btn-block text-uppercase">
+              <a onclick="addToCart()" class="btn btn-success btn-lg btn-block text-uppercase" data-toggle="modal">
                 <i class="fa fa-shopping-cart"></i> Add To Cart
               </a>
             </form>
+
+            <!-- Modal -->
+            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">You must be logged in</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p>Thank for visiting us but you have to be logged in to add products to your cart.
+                      <br />
+                      <br />
+                      Have a great day!<br />
+                      <p class="font-italic text-right">The Hypermedia bookshop team.</p>
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="hideModal()">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="reviews_product p-3 mb-2 ">
               <a class="pull-right" href="#reviews">View all reviews</a>
@@ -222,8 +255,8 @@
 
     <div class="row" style="margin-top: 2rem;" id="events"></div>
 
-
   </div>
+
 
   <script>
     $(document).ready(function() {
@@ -244,53 +277,52 @@
       });
 
     });
-
   </script>
 
   <!-- FOOTER -->
   <div id="footer"></div>
 
   <script type="text/javascript">
-  async function loadEvents() {
-    let json_response = await fetch('/api/books/' + isbn).then(function(response) {
-      console.log(response.status);
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        throw new Error(response.status);
-      }
-    });
-    let e_id = await json_response["e_id"];
-    for (let i = 0; i < e_id.length; i++) {
-      fetch('/api/events/' + e_id[i]).then(function(response) {
-          console.log(response.status);
-          if (response.status === 200) {
-            return response.json();
-          } else {
-            throw new Error(response.status);
-          }
-        })
-        .then(json => {
-          for (let i = 0; i < json.length; i++) {
-            let newEventCard = document.createElement('div');
-            newEventCard.classList.add('col-lg-12');
-            newEventCard.id = 'event';
-            newEventCard.style.width = "100%";
-            newEventCard.style.align = "centered";
-            let {
-              event_id,
-              name,
-              date_start,
-              time_start,
-              date_end,
-              time_end,
-              img_path,
-              description
-            } = json[i];
-            if (img_path == null) {
-              img_path = "http://placehold.it/700x300";
+    async function loadEvents() {
+      let json_response = await fetch('/api/books/' + isbn).then(function(response) {
+        console.log(response.status);
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error(response.status);
+        }
+      });
+      let e_id = await json_response["e_id"];
+      for (let i = 0; i < e_id.length; i++) {
+        fetch('/api/events/' + e_id[i]).then(function(response) {
+            console.log(response.status);
+            if (response.status === 200) {
+              return response.json();
+            } else {
+              throw new Error(response.status);
             }
-            newEventCard.innerHTML = `
+          })
+          .then(json => {
+            for (let i = 0; i < json.length; i++) {
+              let newEventCard = document.createElement('div');
+              newEventCard.classList.add('col-lg-12');
+              newEventCard.id = 'event';
+              newEventCard.style.width = "100%";
+              newEventCard.style.align = "centered";
+              let {
+                event_id,
+                name,
+                date_start,
+                time_start,
+                date_end,
+                time_end,
+                img_path,
+                description
+              } = json[i];
+              if (img_path == null) {
+                img_path = "http://placehold.it/700x300";
+              }
+              newEventCard.innerHTML = `
               <hr style="width: 98%;">
               <h4>Events where is presented this book</h4>
               <hr style="width: 98%;">
@@ -307,24 +339,24 @@
               </div>
                 <hr style="width: 98%;">
                 `;
-            document.getElementById('events').append(newEventCard);
-          }
-        })
-        .catch(e => {
-          console.error(e);
-        });
-    };
-    let b_related = await json_response["b_related"];
-    for (let i = 0; i < b_related.length; i++) {
-      fetch('/api/books/' + b_related[i]).then(function(response) {
-          console.log(response.status);
-          if (response.status === 200) {
-            return response.json();
-          } else {
-            throw new Error(response.status);
-          }
-        })
-        .then(json2 => {
+              document.getElementById('events').append(newEventCard);
+            }
+          })
+          .catch(e => {
+            console.error(e);
+          });
+      };
+      let b_related = await json_response["b_related"];
+      for (let i = 0; i < b_related.length; i++) {
+        fetch('/api/books/' + b_related[i]).then(function(response) {
+            console.log(response.status);
+            if (response.status === 200) {
+              return response.json();
+            } else {
+              throw new Error(response.status);
+            }
+          })
+          .then(json2 => {
             let listItem = document.createElement('div');
             listItem.classList.add('col-xl-2');
             listItem.classList.add('col-lg-4');
@@ -361,25 +393,25 @@
                 </div>
                 `;
             document.getElementById('relateds').append(listItem);
-        })
-        .catch(e => {
-          console.error(e);
-        });
+          })
+          .catch(e => {
+            console.error(e);
+          });
       }
-  }
+    }
     fetch('/api/review?isbn=' + isbn).then(function(response) {
-      console.log(response.status);
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        throw new Error(response.status);
-      }
-    }).then(json2 => {
-      putReviews(json2,"reviews");
-    })
-    .catch(e => {
-      console.error(e);
-    });
+        console.log(response.status);
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error(response.status);
+        }
+      }).then(json2 => {
+        putReviews(json2, "reviews");
+      })
+      .catch(e => {
+        console.error(e);
+      });
 
     fetch('/api/books/' + isbn).then(function(response) {
       console.log(response.status);
@@ -416,7 +448,7 @@
       document.getElementById("image").innerHTML = `<div class="card card-book-big card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>`;
       document.getElementById("title").innerHTML = `${name}`;
 
-        document.getElementById("author").innerHTML += `- `;
+      document.getElementById("author").innerHTML += `- `;
       for (var i = 0; i < author.length; i++) {
         document.getElementById("author").innerHTML += `<a href='/pages/author_detail.html?author_id=${authors_id[i]}'>${author[i]}</a> - `;
       }
