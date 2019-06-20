@@ -97,6 +97,7 @@ To manage the data model we used only [PostgreSQL](https://www.postgresql.org/) 
 Describe here how development tasks have been subdivided among members of the
 group, e.g.
 - Marcelo worked on front end design and development(49% of the time), on the database structure (10%) back end development (40%), back end documentation (1%)
+- Andres worked on front end design and development (40% of the time), on the database structure (5%), on the usability documentation (35% of the time), on the design documentation (19% of the time) and on back end documentation (1%).
 
 ### Analysis of existing A
 4
@@ -112,3 +113,4 @@ this part of the project, what questions remained unanswered, how you will use
 what you've learned in your everyday life?
 
 - Marcelo has improved his HTML and CSS programming skills, he learn to develop an complete application, also learned about nodejs, npm and nvm, he has also learned JS, jQuery handling and responsive design using Bootstrap. He would like to learn more about React, Vue and Webpack to learn how to do faster and better webapps mixing client-side and server-side libraries.
+- Andres has improved his HTML, javascript and CSS programming skills, in fact he learns a lot about taking advantages of using Bootstrap templates. He also learned about nodejs and npm, and about how to deploy an app with heroku and he continues managing SQL as usual. He would like to learn more about the angular js. He has learned that the documentation part of ussability and design is super dense and also its results are the key to know if you have done a good website or not.
