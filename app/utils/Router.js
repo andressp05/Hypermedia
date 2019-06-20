@@ -8,7 +8,7 @@ router.get('/', function(req, res, next){
 });
 
 router.get('/backend/documentation.html', function(req, res, next){
-  res.sendFile(path.join(__dirname, '../Backend', 'documentation.html'));
+  res.sendFile(path.join(__dirname, '../backend', 'documentation.html'));
 });
 
 /* NOT USEFULL THIS ARE ALREADY INCLUDED IN THE STATIC FILE HANDLING */
