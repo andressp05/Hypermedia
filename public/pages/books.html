@@ -50,13 +50,13 @@
 
         <div class="nav-side-menu">
           <div class="list-group animate-grid">
-            <a href="#" data-toggle="collapse" data-target="#themes" class="collapsed list-group-item themes">Themes <span class="glyphicon glyphicon-align-left" aria-hidden="false"></span></a>
+            <a href="#" data-toggle="collapse" data-target="#themes" class="collapsed list-group-item themes" style="border-radius: 0;"><i class="fa fa-filter"></i>  Themes<span class="glyphicon glyphicon-align-left" aria-hidden="false"></span></a>
             <ul class="sub-menu collapse themes" id="themes">
-              <a href="#" class="list-group-item active">All</a>
+              <a href="#" class="list-group-item active" style="margin: 0; border-radius: 0;">All</a>
             </ul>
-            <a href="#" data-toggle="collapse" data-target="#lit_gen" class="collapsed list-group-item">Literary Genres <span class="arrow"></span></a>
+            <a href="#" data-toggle="collapse" data-target="#lit_gen" class="collapsed list-group-item" style="border-radius: 0;"><i class="fa fa-filter"></i>  Literary Genres<span class="arrow"></span></a>
             <ul class="sub-menu collapse lit_gen" id="lit_gen">
-              <a href="#" class="list-group-item active">All</a>
+              <a href="#" class="list-group-item active" style="margin: 0; border-radius: 0;">All</a>
             </ul>
           </div>
 
@@ -130,6 +130,7 @@
                   var a = document.createElement("a");
                   a.href = "#";
                   a.classList.add('list-group-item');
+                  a.setAttribute("style", "margin-left: 0; border-radius: 0;");
                   a.appendChild(document.createTextNode(array_theme[x]));
                   div_theme.appendChild(a);
                 }
@@ -137,6 +138,7 @@
                   var a2 = document.createElement("a");
                   a2.href = "#";
                   a2.classList.add('list-group-item');
+                  a2.setAttribute("style", "margin-left: 0; border-radius: 0;");
                   a2.appendChild(document.createTextNode(array_litGen[y]));
                   div_litGen.appendChild(a2);
                 }

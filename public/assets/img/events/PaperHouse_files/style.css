@@ -1,0 +1,440 @@
+/* Additional modifications to all the content of the pages */
+/* #f0c65c	(240,198,92)
+#d39f4c	(211,159,76)
+#b77e31	(183,126,49)
+#8c512d	(140,81,45)
+#64260c	(100,38,12) */
+body {
+  padding-top: 70px;
+  background-color: #b77e31;
+  background: linear-gradient(to right, #d39f4c, #b77e31);
+}
+
+div #footer {
+  padding-top: 1rem;
+  background-color: #64260c;
+  clear: both;
+  margin-top: 8rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+div #footer p {
+  color: white;
+}
+
+div #header .navbar {
+  background-color: #64260c;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: #8c512d;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #64260c;
+  text-decoration: none;
+}
+
+h1 {
+  color: #64260c;
+}
+
+hr #hrspecial {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: #FFFF00;
+  height: 1px;
+}
+
+.card-header {
+  background-color: #64260c !important;
+}
+
+.list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: #b77e31;
+  border-color: #b77e31;
+}
+
+.list-group-item.active a {
+  text-decoration: none;
+}
+
+.list-group-item.active a:hover {
+  text-decoration: none;
+}
+
+.mx-auto hr {
+  width: 70px;
+  background-color: #f0c65c
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #8c512d;
+  border-color: #64260c;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #64260c;
+  border-color: #64260c;
+}
+
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: .75rem;
+}
+
+.card-book {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding-top: 150%;
+  background-size: cover;
+}
+
+.card-book-big {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding-top: 167%;
+  background-size: cover;
+}
+
+.card-rounded {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-size: cover;
+}
+
+.card-cart {
+  height: 150px;
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-size: cover;
+}
+
+.hoverWrapper:hover {
+  display: block;
+}
+
+.hoverWrapper {
+  display: none;
+  position: absolute;
+  background-color: #ff0000;
+  width: 250px;
+  height: 250px;
+  left: 200px;
+  top: 100px;
+}
+
+.card-book-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.flexbox-centering {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewport-sizing {
+  font-size: 5vw;
+}
+
+.card-book:hover #card-book-body {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+.card-book-body h4 {
+  position: absolute;
+  font-size: 1.1rem;
+  top: 0;
+  left: 0;
+  padding-left: 5%;
+  padding-top: 5%;
+  color: #f8f9fa;
+}
+
+.card-book-body h5 {
+  position: absolute;
+  font-size: 1rem;
+  bottom: 0%;
+  left: 0;
+  padding-left: 5%;
+  padding-top: 5%;
+  color: #f8f9fa;
+}
+
+.card-book-body h6 {
+  position: absolute;
+  font-size: 0.8rem;
+  bottom: 30%;
+  left: 0;
+  padding-left: 5%;
+  padding-top: 5%;
+  color: #f8f9fa;
+}
+
+.card-book-body h7 {
+  position: absolute;
+  font-size: 0.8rem;
+  bottom: 15%;
+  left: 0;
+  padding-left: 5%;
+  padding-top: 5%;
+  color: #f8f9fa;
+}
+
+.list-group ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-group ul a {
+  border: 1px solid #ddd;
+  margin-left: 1rem;
+  margin-top: -1px;
+  /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+}
+
+.list-group-item {}
+
+.list-group-item .active {}
+
+.card-book-body p {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  color: #f8f9fa;
+}
+
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-img-left-event {
+  width: 65% !important;
+  /* Link to your background image using in the property below! */
+  background-size: cover;
+}
+
+.card-signin .card-img-left {
+  width: 45%;
+  /* Link to your background image using in the property below! */
+  background: scroll center url('https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/07/02/10/old-book.jpg');
+  background-size: cover;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+  width: 45% !important;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  height: auto;
+  border-radius: 2rem;
+}
+
+.form-label-group>input,
+.form-label-group>label {
+  padding: var(--input-padding-y) var(--input-padding-x);
+}
+
+.form-label-group>label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown)~label {
+  padding-top: calc(var(--input-padding-y) / 3);
+  padding-bottom: calc(var(--input-padding-y) / 3);
+  font-size: 12px;
+  color: #777;
+}
+
+.btn-google {
+  color: white;
+  background-color: #ea4335;
+}
+
+.btn-facebook {
+  color: white;
+  background-color: #3b5998;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.subtotal {
+  margin-right: 7rem;
+}
+
+.not-display {
+  display: none;
+}
+
+.quantity {
+  float: left;
+  margin-right: 15px;
+  background-color: #eee;
+  position: relative;
+  width: 80px;
+  overflow: hidden
+}
+
+.quantity input {
+  margin: 0;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  float: right;
+  color: #000;
+  font-size: 20px;
+  border: 0;
+  outline: 0;
+  background-color: #F6F6F6
+}
+
+.quantity input.qty {
+  position: relative;
+  border: 0;
+  width: 100%;
+  height: 40px;
+  padding: 10px 25px 10px 10px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 15px;
+  border-radius: 0;
+  background-clip: padding-box
+}
+
+.quantity .minus, .quantity .plus {
+  line-height: 0;
+  background-clip: padding-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-background-size: 6px 30px;
+  -moz-background-size: 6px 30px;
+  color: #bbb;
+  font-size: 20px;
+  position: absolute;
+  height: 50%;
+  border: 0;
+  right: 0;
+  padding: 0;
+  width: 25px;
+  z-index: 3
+}
+
+.quantity .minus:hover, .quantity .plus:hover {
+  background-color: #dad8da
+}
+
+.quantity .minus {
+  bottom: 0
+}
+
+.shopping-cart {
+  margin-top: 20px;
+}
+
+.btn-faq {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn-faq:hover {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}

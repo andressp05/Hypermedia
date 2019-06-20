@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://localhost:3000/pages/books.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Required meta tags -->
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>PaperHouse</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./PaperHouse_files/bootstrap.min.css">
+  <link rel="stylesheet" href="./PaperHouse_files/style.css">
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./PaperHouse_files/jquery.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+  <script src="./PaperHouse_files/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="./PaperHouse_files/scripts.js"></script>
+
+  <!-- <script>
+    function setHeaderFooter() {
+      $("#header").load("header.html");
+      $("#footer").load("footer.html");
+    }
+  </script> -->
+
+
+</head>
+
+<body onload="setHeaderFooter()">
+
+  <!-- HEADER -->
+  <div id="header"><link href="./PaperHouse_files/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<header id="header" style="background-color: #4e3b31;">
+    <script>
+        function logout() {
+          let options = {
+          method: "GET",
+          credentials: 'same-origin',
+          // headers: {
+          //   'Content-Type': 'application/x-www-form-urlencoded'
+          //   }
+          }
+          fetch('/test/user/logout', options)
+          .then(response => {
+            if (response.status === 200) {
+              window.location.reload(true); //Reload from the server; false to reload from cache
+            } else {
+              throw response;
+            }
+          })
+          .catch(e => {
+            e.text().then( json => {
+              console.log(json.message)
+            })
+          });
+        }
+    </script>
+
+
+  <nav class="navbar fixed-top navbar-expand-md navbar-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a id="home-menu" class="nav-link" href="http://localhost:3000/">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a id="books-menu" class="nav-link" href="http://localhost:3000/pages/books.html">Books</a>
+        </li>
+        <li class="nav-item">
+          <a id="authors-menu" class="nav-link" href="http://localhost:3000/pages/authors.html">Authors</a>
+        </li>
+        <li class="nav-item">
+          <a id="events-menu" class="nav-link" href="http://localhost:3000/pages/events.html">Events</a>
+        </li>
+      </ul>
+    </div>
+    <div class="mx-auto order-0">
+      <a class="navbar-brand mx-auto" href="http://localhost:3000/">PaperHouse</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a id="cart-menu" class="nav-link" href="http://localhost:3000/pages/cart.html">
+            <i class="fa fa-shopping-cart"></i> Cart
+          </a>
+        </li>
+        <li class="nav-item">
+          <a id="login-menu" class="nav-link" href="http://localhost:3000/pages/login.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a id="signup-menu" class="nav-link" href="http://localhost:3000/pages/signup.html">Register</a>
+        </li>
+        <li class="nav-item" style="display: none;">
+          <a id="logout-menu" class="nav-link cursor-pointer" onclick="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <script>
+    /* MENU HIGHLIGHT SECION */
+    console.log(window.location.pathname);
+    // var path = window.location.pathname.split('/');
+    // var page = path[path.length - 1];
+    Array.from(document.getElementsByClassName('nav-item active')).forEach(element => {
+      element.classList.remove('active');
+    });
+
+    var currentMenu = document.querySelector(`[href="${window.location.pathname}"]`)
+    if(currentMenu !== null && currentMenu !== undefined){
+      currentMenu.parentElement.classList.add('active');
+    };
+    
+
+    /* ----- end MENU HIGHLIGHT SECION ----- */
+
+    /* */
+    let logged = getCookie('logged');
+    if(logged && logged !== "" && logged == "true") {
+      document.getElementById('login-menu').parentElement.style = "display: none;"
+      document.getElementById('signup-menu').parentElement.style = "display: none;"
+      document.getElementById('logout-menu').parentElement.style = "display: inline-block;"
+    } else {
+      document.getElementById('logout-menu').parentElement.style = "display: none;"
+    }
+  </script>
+</header>
+</div>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <h1 class="my-4">Books</h1>
+
+    <hr>
+
+
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <label for="myInput" class="not-display">Search</label>
+    <hr>
+    <div class="row justify-content-md-center gallery">
+      <!-- /.col-lg-3 -->
+      <div class="col-lg-3 center">
+
+        <div class="nav-side-menu">
+          <div class="list-group animate-grid">
+            <a href="http://localhost:3000/pages/books.html#" data-toggle="collapse" data-target="#themes" class="list-group-item themes collapsed" aria-expanded="false"><i class="fa fa-filter"></i>  Themes<span class="glyphicon glyphicon-align-left" aria-hidden="false"></span></a>
+            <ul class="sub-menu themes collapse" id="themes" style="">
+              <a href="http://localhost:3000/pages/books.html#" class="list-group-item active" syle="margin-left: 0;">All</a>
+            <a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Science Fiction</a><a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Love</a><a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Family</a><a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Kids</a></ul>
+            <a href="http://localhost:3000/pages/books.html#" data-toggle="collapse" data-target="#lit_gen" class="collapsed list-group-item"><i class="fa fa-filter"></i>  Literary Genres<span class="arrow"></span></a>
+            <ul class="sub-menu collapse lit_gen" id="lit_gen">
+              <a href="http://localhost:3000/pages/books.html#" class="list-group-item active" syle="margin-left: 0;">All</a>
+            <a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Fantasy</a><a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Romance Fiction</a><a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Fable</a><a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Real Romance</a><a href="http://localhost:3000/pages/books.html#" class="list-group-item" style="margin: 0px;">Kids Fable</a></ul>
+          </div>
+
+          <hr>
+
+        </div>
+      </div>
+
+      <div class="col-lg-9 center">
+
+
+        <!-- Cards per books -->
+        <div class="row gallary-thumbs container" id="cards">
+          <script type="text/javascript">
+            fetch('../test/books/').then(function(response) {
+                if (response.status === 200) {
+                  return response.json();
+                } else {
+                  throw new Error(response.status);
+                }
+              })
+              .then(json => {
+                var array_theme = [];
+                var array_litGen = [];
+                console.log(json);
+                for (let i = 0; i < json.length; i++) {
+                  let listItem = document.createElement('div');
+                  listItem.classList.add('col-xl-3');
+                  listItem.classList.add('col-lg-3');
+                  listItem.classList.add('col-md-4');
+                  listItem.classList.add('col-sm-6');
+                  listItem.classList.add('mb-4');
+                  listItem.id = 'card';
+                  let {
+                    ISBN,
+                    name,
+                    price,
+                    theme,
+                    literary_gen,
+                    img_path
+                  } = json[i];
+                  console.log(json[i]);
+                  listItem.setAttribute("style", "display: block");
+                  if (theme != null) {
+                    listItem.setAttribute("theme", theme.trim());
+                    var div_theme = document.getElementById("themes");
+                    array_theme.indexOf(theme.trim()) === -1 ? array_theme.push(theme.trim()) : console.log("This item already exists");;
+                  }
+
+                  if (literary_gen != null) {
+                    listItem.setAttribute("litgen", literary_gen.trim());
+                    var div_litGen = document.getElementById("lit_gen");
+                    array_litGen.indexOf(literary_gen.trim()) === -1 ? array_litGen.push(literary_gen.trim()) : console.log("This item already exists");
+                  }
+                  if (img_path == null) {
+                    img_path = "https://media.licdn.com/dms/image/C4D12AQHGrnS3eZjSPA/article-cover_image-shrink_600_2000/0?e=1562198400&v=beta&t=M2HvdPZBKkWhTVZ_Cblyx1ZRcgtO4muW3sd9D8EnkkY";
+                  }
+                  listItem.innerHTML = `
+                        <div class="card card-book card-img-top"  style='background: scroll center url("${img_path}"); background-size: cover;'>
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location='/pages/book_detail.html?isbn=${ISBN}';" class="card-book card-book-body">
+                            <h4 class="card-title">${name}</h4>
+                            <h6 class="theme">Theme: ${theme}</h6>
+                            <h7 class="lit_gen">Literary Genre: ${literary_gen}</h7>
+                            <h5>${price.value}${price.currency}</h5>
+                          </div>
+                      </div>
+                      `;
+                  document.getElementById('cards').append(listItem);
+                }
+                for (var x in array_theme) {
+                  var a = document.createElement("a");
+                  a.href = "#";
+                  a.style.margin = '0';
+                  a.classList.add('list-group-item');
+                  a.appendChild(document.createTextNode(array_theme[x]));
+                  div_theme.appendChild(a);
+                }
+                for (var y in array_litGen) {
+                  var a2 = document.createElement("a");
+                  a2.href = "#";
+                  a2.style.margin = '0';
+                  a2.classList.add('list-group-item');
+                  a2.appendChild(document.createTextNode(array_litGen[y]));
+                  div_litGen.appendChild(a2);
+                }
+              })
+              .catch(e => {
+                console.error(e);
+              });
+          </script>
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Science Fiction" litgen="Fantasy">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231001.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231001&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">Harry Potter 1</h4>
+                            <h6 class="theme">Theme: Science Fiction</h6>
+                            <h7 class="lit_gen">Literary Genre: Fantasy</h7>
+                            <h5>19.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Love" litgen="Romance Fiction">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231002.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231002&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">Me before you</h4>
+                            <h6 class="theme">Theme: Love</h6>
+                            <h7 class="lit_gen">Literary Genre: Romance Fiction
+</h7>
+                            <h5>13.00EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Science Fiction" litgen="Fantasy">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231003.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231003&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">Harry Potter 2</h4>
+                            <h6 class="theme">Theme: Science Fiction</h6>
+                            <h7 class="lit_gen">Literary Genre: Fantasy</h7>
+                            <h5>17.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Science Fiction" litgen="Fantasy">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231004.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231004&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">Harry Potter 3
+</h4>
+                            <h6 class="theme">Theme: Science Fiction</h6>
+                            <h7 class="lit_gen">Literary Genre: Fantasy</h7>
+                            <h5>18.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Family" litgen="Fable">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231005.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231005&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">The Chronicles of Narnia 2</h4>
+                            <h6 class="theme">Theme: Family</h6>
+                            <h7 class="lit_gen">Literary Genre: Fable</h7>
+                            <h5>14.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Love" litgen="Real Romance">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231006.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231006&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">A Mitad De Camino</h4>
+                            <h6 class="theme">Theme: Love</h6>
+                            <h7 class="lit_gen">Literary Genre: Real Romance</h7>
+                            <h5>15.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Family" litgen="Fable">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231007.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231007&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">The Chronicles of Narnia Special Edition</h4>
+                            <h6 class="theme">Theme: Family</h6>
+                            <h7 class="lit_gen">Literary Genre: Fable</h7>
+                            <h5>23.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Science Fiction" litgen="Fantasy">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231008.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231008&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">Harry Potter And The Cursed Child</h4>
+                            <h6 class="theme">Theme: Science Fiction</h6>
+                            <h7 class="lit_gen">Literary Genre: Fantasy</h7>
+                            <h5>25.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Love" litgen="Real Romance">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231009.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231009&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">Dopo Una Parola</h4>
+                            <h6 class="theme">Theme: Love</h6>
+                            <h7 class="lit_gen">Literary Genre: Real Romance</h7>
+                            <h5>19.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Kids" litgen="Kids Fable">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066231010.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066231010&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">Dora The Explorer</h4>
+                            <h6 class="theme">Theme: Kids</h6>
+                            <h7 class="lit_gen">Literary Genre: Kids Fable</h7>
+                            <h5>17.99EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Family" litgen="Fable">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9780066238500.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9780066238500&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">The Chronicles of Narnia</h4>
+                            <h6 class="theme">Theme: Family</h6>
+                            <h7 class="lit_gen">Literary Genre: Fable</h7>
+                            <h5>17.55EUR</h5>
+                          </div>
+                      </div>
+                      </div><div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" id="card" style="display: block" theme="Love" litgen="Romance Fiction">
+                        <div class="card card-book card-img-top" style="background: scroll center url(&quot;/assets/img/book_cover/9781405909075.jpg&quot;); background-size: cover;">
+                          <div id="card-book-body" style="cursor: pointer;" onclick="window.location=&#39;/pages/book_detail.html?isbn=9781405909075&#39;;" class="card-book card-book-body">
+                            <h4 class="card-title">After you</h4>
+                            <h6 class="theme">Theme: Love</h6>
+                            <h7 class="lit_gen">Literary Genre: Romance Fiction</h7>
+                            <h5>15.44EUR</h5>
+                          </div>
+                      </div>
+                      </div></div>
+
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+
+  <!-- FOOTER -->
+  <div id="footer"><link href="./PaperHouse_files/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!-- Footer -->
+<footer id="footer" class="page-footer font-small">
+  <link rel="stylesheet" href="./PaperHouse_files/style.css">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5">
+
+    <!-- Grid row -->
+    <div class="row mt-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold" style="color: white">Paper House</h6>
+        <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto">
+        <p>Webpage developed by three students at Politecnico di Milano</p>
+        <p>Luca Colombo</p>
+        <p>Marcelo Iturriaga</p>
+        <p>Andrés Salas</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0  mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold" style="color: white">Useful Links</h6>
+        <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto">
+        <p>
+          <a style="color: white" href="http://localhost:3000/pages/faq.html">FAQ</a>
+        </p>
+        <p>
+          <a style="color: white" href="http://localhost:3000/pages/shipping.html">Order &amp; Shipping</a>
+        </p>
+        <p>
+          <a style="color: white" href="http://localhost:3000/pages/contact.html">Contact Us</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold" style="color: white">Contact</h6>
+        <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto">
+        <p>
+          <i class="fa fa-home mr-3"></i> Milano, MI, 20133</p>
+        <p style="display: inline-flex;">
+          <i class="fa fa-envelope mr-3"></i> luca48.colombo@mail.polimi.it</p>
+        <p style="display: inline-flex;">
+          <i class="fa fa-envelope mr-3"></i> muiturriaga@uc.cl</p>
+        <p style="display: inline-flex;">
+          <i class="fa fa-envelope mr-3"></i> asalaspena@gmail.com</p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3"><p style="text-align: center;">© 2019 Copyright:
+    <a style="color: white" href="http://localhost:3000/pages/books.html#"> PaperHouse</a></p>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+</div>
+
+  <script>
+    var selector_theme = 'All';
+    var selector_litGen = 'All';
+    $(document).ready(function() {
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#cards #card").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    $('.animate-grid .themes').on("click", "a", function() {
+      $('.animate-grid .themes .active').removeClass('active');
+      $(this).addClass('active');
+      selector_theme = $(this).text();
+      $("#cards #card").filter(function() {
+        $(this).attr("style", "display: block;");
+        if (selector_theme !== 'All' && selector_litGen !== 'All') {
+          $(this).attr("style", "display: block;");
+          if ($(this).attr("theme") != selector_theme || $(this).attr("litgen") != selector_litGen) {
+            $(this).attr("style", "display: none;");
+          }
+        } else {
+          $(this).attr("style", "display: block;");
+          if (selector_theme != 'All' && $(this).attr("theme") != selector_theme) {
+            $(this).attr("style", "display: none;");
+          } else if (selector_litGen != 'All' && $(this).attr("litgen") != selector_litGen) {
+            $(this).attr("style", "display: none;");
+          }
+        }
+      });
+    });
+    $('.animate-grid .lit_gen').on("click", "a", function() {
+      $('.animate-grid .lit_gen .active').removeClass('active');
+      $(this).addClass('active');
+      selector_litGen = $(this).text();
+      $("#cards #card").filter(function() {
+        $(this).attr("style", "display: block;");
+        if (selector_theme !== 'All' && selector_litGen !== 'All') {
+          $(this).attr("style", "display: block;");
+          if ($(this).attr("theme") != selector_theme || $(this).attr("litgen") != selector_litGen) {
+            $(this).attr("style", "display: none;");
+          }
+        } else {
+          $(this).attr("style", "display: block;");
+          if (selector_theme != 'All' && $(this).attr("theme") != selector_theme) {
+            $(this).attr("style", "display: none;");
+          } else if (selector_litGen != 'All' && $(this).attr("litgen") != selector_litGen) {
+            console.log(selector_litGen);
+            $(this).attr("style", "display: none;");
+          }
+        }
+      });
+    });
+
+
+    // if ($(this).attr("style") === "display: none;") {
+    //   $(this).toggle($(this).text())
+    // }
+  </script>
+
+
+
+
+
+</body></html>
