@@ -80,8 +80,9 @@ function fillCartPage(json) {
   } else {
     
     document.getElementById('emptyCart').classList.remove('not-display');
-    
+    document.getElementById('subtotal').innerHTML = ` ${(json.subtotal).toFixed(2)}`;
   }
+  
 }
 
 // function showEmptyCart(){
