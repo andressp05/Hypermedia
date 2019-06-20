@@ -4,7 +4,7 @@ info:
     Hypermedia Applications project year 2018-2019. A bookstore with book lists
     and user functions. You can use email `test@test.com` and password `123` to test the login features
   version: 1.0.0
-  title: Book House
+  title: Hypermedia Bookshop
   termsOfService: ''
   license:
     name: Apache 2.0
@@ -723,5 +723,5 @@ definitions:
       email: email@test.com
       name: John Doe
 externalDocs:
-  description: Find out more about Swagger
-  url: 'http://swagger.io'
+  description: Go to our Swagger yaml file
+  url: 'https://hypermedia-bookshop.herokuapp.com/openapi.swagger.yaml'
