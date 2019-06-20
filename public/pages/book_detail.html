@@ -54,6 +54,14 @@
     function hideModal() {
         $('#confirmModal').modal('hide')
     }
+    function modalLogin() {
+        $('#confirmModal').modal('hide')
+        window.location.href = "/pages/login.html";
+    }
+    function modalRegister() {
+        $('#confirmModal').modal('hide')
+        window.location.href = "/pages/signup.html";
+    }
 
 
 
@@ -200,7 +208,9 @@
                     </p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="hideModal()">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="modalLogin()">Login</button>
+                    <button type="button" class="btn btn-primary" onclick="modalRegister()">Register</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideModal()">Close</button>
                   </div>
                 </div>
               </div>
