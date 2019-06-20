@@ -164,7 +164,7 @@ hr #hrspecial {
 }
 
 .card-book:hover #card-book-body {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   display: block;
 }
 
