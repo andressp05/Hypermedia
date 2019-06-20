@@ -59,7 +59,7 @@
         .then(json => {
           setTimeout(() => {$('#popup-added').hide('slow');}, 2000);
           document.getElementById('added-book-quantity').innerHTML = quantity;
-          document.getElementById('added-book-quantity').innerHTML = document.getElementById('isbn').innerHTML;
+          document.getElementById('added-book-name').innerHTML = document.getElementById('title').innerHTML;
           $('#popup-added').fadeIn('slow');
           // RETURN
           // {
@@ -95,8 +95,8 @@
 
   <div class="container">
     <div id="popup-added" class="row not-display">
-      <div class="alert alert-success">
-        Added <span id="added-book-quantity"></span> copy of <span id="added-book-name"> to the shopping cart.
+      <div class="alert alert-success text-center">
+        Added <b><span id="added-book-quantity"></span></b> copy of <b><span id="added-book-name"></span></b> to the shopping cart.
       </div>
     </div>
     <div class="row">

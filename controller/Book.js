@@ -16,7 +16,7 @@ module.exports.booksGET = function booksGET (req, res, next) {
 };
 
 module.exports.getBookById = function getBookById (req, res, next) {
-  var bookId = req.swagger.params['bookId'].value;
+  var bookId = req.swagger.params['isbn'].value;
   Book.getBookById(bookId)
     .then(function (response) {
       utils.writeJson(res, response);
