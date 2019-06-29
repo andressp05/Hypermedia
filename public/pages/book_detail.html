@@ -45,28 +45,7 @@
             'Content-Type': 'application/json'
           }
         }
-        // if not logged then popup
-      } else {
-        $('#confirmModal').modal('show');
-      }
-    }
-
-    function hideModal() {
-        $('#confirmModal').modal('hide')
-    }
-    function modalLogin() {
-        $('#confirmModal').modal('hide')
-        window.location.href = "/pages/login.html";
-    }
-    function modalRegister() {
-        $('#confirmModal').modal('hide')
-        window.location.href = "/pages/signup.html";
-    }
-
-
-
-
-    fetch('/api/cart', options)
+        fetch('/api/cart', options)
       .then(response => {
         if (response.status === 200) {
           return response.json();
@@ -100,6 +79,28 @@
           });
         }
       });
+        // if not logged then popup
+      } else {
+        $('#confirmModal').modal('show');
+      }
+    }
+
+    function hideModal() {
+        $('#confirmModal').modal('hide')
+    }
+    function modalLogin() {
+        $('#confirmModal').modal('hide')
+        window.location.href = "/pages/login.html";
+    }
+    function modalRegister() {
+        $('#confirmModal').modal('hide')
+        window.location.href = "/pages/signup.html";
+    }
+
+
+
+
+    
   </script>
 
 </head>
