@@ -51,7 +51,7 @@
           return response.json();
         } else if(response.status == 401) {
           showModalLoginRequired();
-          setCookie(logged, 'false');
+          setCookie('logged', 'false');
           throw response;
         } else {
           throw response;

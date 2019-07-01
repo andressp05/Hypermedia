@@ -27,6 +27,11 @@ tags:
 schemes:
   - https
   - http
+securityDefinitions:
+  JWTtoken:
+    type: apiKey
+    name: Cookie
+    in: header
 paths:
   /books:
     get:
@@ -438,6 +443,8 @@ paths:
           description: The request has an invalid syntax
         '404':
           description: The item requested is not in the shopping cart
+      security:
+        - JWTtoken: []
       x-swagger-router-controller: Cart
     post:
       tags:
@@ -472,6 +479,8 @@ paths:
             $ref: '#/definitions/Cart'
         '500':
           description: Error on the server
+      security:
+        - JWTtoken: []
       x-swagger-router-controller: Cart
     patch:
       tags:
@@ -506,6 +515,8 @@ paths:
             $ref: '#/definitions/Cart'
         '500':
           description: Error on the server
+      security:
+        - JWTtoken: []
       x-swagger-router-controller: Cart
 definitions:
   Book:
