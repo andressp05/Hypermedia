@@ -7,21 +7,15 @@
 | 2 | member | Marcelo | Iturriaga Dewulf | 918113 | muiturriaga@uc.cl |
 | 3 | member | Luca | Colombo | 808637 | luca48.colombo@mail.polimi.it
 ## Links to other deliverables
-- Deliverable D0: the web application is accessible at
-[this address](https://hypermedia-bookshop.herokuapp.com/).
-- Deliverable D2: the YAML or JSON file containing the specification of the app
-API can be found at [this address](https://hypermedia-bookshop.herokuapp.com/openapi/swagger.yaml).
-- Deliverable D3: the SwaggerUI page of the same API is available at
-[this address](https://hypermedia-bookshop.herokuapp.com/docs).
-- Deliverable D4: the source code of D0 is available as a zip file at
-[this address](https://hypermedia-bookshop.herokuapp.com/backend/source.zip).
-- Deliverable D5: the address of the online source control repository is
-available [this address](https://github.com/andressp05/Hypermedia). We hereby declare that this
-is a private repository and, upon request, we will give access to the
-instructors.
+- Deliverable D0: the web application is accessible at [this address](https://hypermedia-bookshop.herokuapp.com/).
+- Deliverable D2: the YAML or JSON file containing the specification of the app API can be found at [this address](https://hypermedia-bookshop.herokuapp.com/openapi/swagger.yaml).
+- Deliverable D3: the SwaggerUI page of the same API is available at [this address](https://hypermedia-bookshop.herokuapp.com/docs).
+- Deliverable D4: the source code of D0 is available as a zip file at [this address](https://hypermedia-bookshop.herokuapp.com/backend/source.zip).
+- Deliverable D5: the address of the online source control repository is available [this address](https://github.com/andressp05/Hypermedia).  
+We hereby declare that this is a private repository and, upon request, we will give access to the instructors.
 ## Specification
 ### Web Architecture
-![alt text](../public/assets/img/Hypermedia_diagram.jpg "ER diagram")
+![alt text](../public/assets/img/Hypermedia_diagram.jpg "Layer diagram")
 
 The **_Application layer_** is composed by an **API endpoint** which accepts the calls from the clients. The validate request is passed to the controllers that authenticates it and uses the **data managment** methods to build the data models for the response. The data layer in which is located the PostgreSQL database is accessed by a query builder.
 
@@ -34,8 +28,8 @@ We Followed these REST principles:
 
 - **Client-server**: The client and the server are separated in our application. Infact the client uses static html pages to display the information to the user, these information are gathered with javascript fetches operated by the scripts inside the static pages that call the web services reachable through the `/api` address.
 - **Statless**: Because the server is not storing anything about past client's requests.
-- **Uniform interface**: Because we used different URIs for different resources with the same pattern. We used different HTTP method to fulfill different type of request related to the same resource and used different HTTP status based on the type of response.
-- **Layered system**: Despite we used only one layer the client can not tell if it is connecting to the end server or to a proxy.
+- **Uniform interface**: Because we used different URIs for different resources with the same pattern. We used different HTTP method to fulfill different type of request related to the same resource and used different HTTP status based on the type of response. Also every message sent is self-descriptive.
+- **Layered system**: Despite we used only one layer, the client can not tell if it is connecting to the end server or to a proxy.
 
 We didn't follow these REST principles:
 - **Cacheable**: Because we didn't had the need to cache anything server side.
@@ -53,7 +47,7 @@ We have introduced these models:
 ### Data model
 Describe with an ER diagram the model used in the data layer of your web
 application. How these map to the OpenAPI data model?
-![alt text](../public/assets/img/ER_Tables.png "Logo Title Text 1")
+![alt text](../public/assets/img/ER_Tables.png "ER diagram")
 ## Implementation
 ### Tools used
 
@@ -63,11 +57,13 @@ To parse the handle the REST endpoint structure we used the middleware [swagger-
 
 We used the [bcrypt](https://www.npmjs.com/package/bcrypt) package to encrypt the user password on the database.
 
-[shortid](https://www.npmjs.com/package/shortid) was used to generate unique ids to identify the users on the database.
+[Shortid](https://www.npmjs.com/package/shortid) was used to generate unique ids to identify the users on the database.
 
-[express](http://expressjs.com/) was used as a middleware to listen for requests from the client and serve static files.
+[Express](http://expressjs.com/) was used as a middleware to listen for requests from the client and serve static files.
 
-[cookie-session](http://expressjs.com/) was used to save the login information required for authenticating the requests on the client through the cookies.
+[Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) was used to generate and verify the user token required for authenticating the requests of the client.
+
+[Cookie-parser](https://www.npmjs.com/package/cookie-parser) is used to read the cookies of the requests and get the token inside them.
 ### Discussion
 Describe here:
 > How did you make sure your web application adheres to the provided OpenAPI specification?
@@ -80,7 +76,7 @@ Because we developed the server side and the client side at the same time just u
 
 > Describe synthetically why and how did you manage session state, what are the state change triggering actions (e.g., POST to login etc..).
 
-The session state changes only when a user uses the `/api/user/...` endpoints. These are used to authenticate the following requests of a user. The user receives a cookie containing the information needed to authenticate his requests when accessing private resources for example his shoping cart.  
+The session state changes only when a user uses the `/api/user/...` endpoints. These are used to authenticate the following requests of a user. The user receives a cookie http only that contains the token needed to authenticate his requests when accessing private resources for example his shoping cart.  
 
 > Which technology did you use (relational or a no-SQL database) for managing the data model?
 
