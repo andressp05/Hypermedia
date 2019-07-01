@@ -18,6 +18,30 @@ function getCookie(cname) {
   return "";
 }
 
+function setCookie(name, value){
+  document.cookie = `${name}=${(value || "")}; path=/`;
+}
+
+
+function showModalLoginRequired() {
+  $('#confirmModal').modal('show');
+}
+function hideModalLoginRequired() {
+  $('#confirmModal').modal('hide')
+}
+function modalLogin() {
+  $('#confirmModal').modal('hide')
+  window.location.href = "/pages/login.html";
+}
+function modalRegister() {
+  $('#confirmModal').modal('hide')
+  window.location.href = "/pages/signup.html";
+}
+
+
+
+/* ------------- CART ------------- */
+
 function fillCartPage(json) {
   
   console.log(json.books.length)
@@ -107,11 +131,11 @@ function removeFromCart(evtTarget) {
   }
 
   fetch(`/api/cart?isbn=${isbn}`, options)
-    .then(function(response) {
+    .then(function(response) {  
       if (response.status === 200) {
         return response.json();
       } else {
-        throw new Error(response.status);
+        throw response;
       }
     })
     .then(json => {
@@ -121,10 +145,16 @@ function removeFromCart(evtTarget) {
       console.log(json);
     })
     .catch(e => {
-      console.error(e);
-      e.text().then(json => {
-        console.error(json.message)
-      })
+      console.error(e.status);
+      if(e.headers.get("content-type") == "application/json"){
+        e.json().then(json => {
+          console.error(json.message)
+        })
+      } else {
+        e.text().then(text => {
+          console.error(text)
+        })
+      }
     });
 }
 
@@ -161,10 +191,16 @@ function updateCartItemQuantity(evtTarget) {
       console.log(jsonCart);
     })
     .catch(e => {
-      console.error(e);
-      e.json().then(body => {
-        console.error(body)
-      })
+      console.error(e.status);
+      if(e.headers.get("content-type") == "application/json"){
+        e.json().then(json => {
+          console.error(json.message)
+        })
+      } else {
+        e.text().then(text => {
+          console.error(text)
+        })
+      }
     });
 }
 

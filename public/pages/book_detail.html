@@ -49,6 +49,10 @@
       .then(response => {
         if (response.status === 200) {
           return response.json();
+        } else if(response.status == 401) {
+          showModalLoginRequired();
+          setCookie(logged, 'false');
+          throw response;
         } else {
           throw response;
         }
@@ -81,21 +85,22 @@
       });
         // if not logged then popup
       } else {
-        $('#confirmModal').modal('show');
+        // $('#confirmModal').modal('show');
+        showModalLoginRequired();
       }
     }
 
-    function hideModal() {
-        $('#confirmModal').modal('hide')
-    }
-    function modalLogin() {
-        $('#confirmModal').modal('hide')
-        window.location.href = "/pages/login.html";
-    }
-    function modalRegister() {
-        $('#confirmModal').modal('hide')
-        window.location.href = "/pages/signup.html";
-    }
+    // function hideModal() {
+    //     $('#confirmModal').modal('hide')
+    // }
+    // function modalLogin() {
+    //     $('#confirmModal').modal('hide')
+    //     window.location.href = "/pages/login.html";
+    // }
+    // function modalRegister() {
+    //     $('#confirmModal').modal('hide')
+    //     window.location.href = "/pages/signup.html";
+    // }
 
 
 
@@ -194,7 +199,7 @@
             </form>
 
             <!-- Modal -->
-            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -215,7 +220,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="reviews_product p-3 mb-2 ">
               <a class="pull-right" href="#reviews">View all reviews</a>

@@ -7,6 +7,7 @@ var fs = require('fs'),
 var express = require('express');
 var app = express();
 var cookieSession = require('cookie-session');
+var cookieParser = require('cookie-parser'); 
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = process.env.PORT || 3000;
@@ -29,14 +30,15 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 //Setup cookie-session
 let secretSession1 = process.env.SECRET_SESSION1 || 'key1';
 let secretSession2 = process.env.SECRET_SESSION2 || 'key2';
-app.use(cookieSession({
-  name: 'user_session',
-  maxAge: 900000,
-  // expires: new Date(Date.now() + 3600000),
-  path: '/test',
-  signed: true,
-  keys: [secretSession1, secretSession2]
-}));
+// app.use(cookieSession({
+//   name: 'user_session',
+//   maxAge: 900000,
+//   // expires: new Date(Date.now() + 3600000),
+//   path: '/test',
+//   signed: true,
+//   keys: [secretSession1, secretSession2]
+// }));
+app.use(cookieParser());
 // app.use(function (req, res, next) {
 //   console.log(req.session.views);
 //   var n = req.session.views || 0
@@ -45,18 +47,18 @@ app.use(cookieSession({
 //   // res.end(n + ' views')
 //   next();
 // });
-app.use(function (req, res, next) {
+// app.use(function (req, res, next) {
   
-    // req.sessionOptions.expires = req.sessionOptions.expires + 900000;
-  if(!req.session.isNew) {
-    req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
-    if(req.session.loggedin) {
-      res.cookie('logged', req.session.loggedin, { maxAge: req.sessionOptions.maxAge });
-    }
-    let loggedin = req.session.loggedin
-  }
-  next();
-})
+//     // req.sessionOptions.expires = req.sessionOptions.expires + 900000;
+//   if(!req.session.isNew) {
+//     req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
+//     if(req.session.loggedin) {
+//       res.cookie('logged', req.session.loggedin, { maxAge: req.sessionOptions.maxAge });
+//     }
+//     let loggedin = req.session.loggedin
+//   }
+//   next();
+// })
 
 app.use('/', router);
 app.use(express.static(path.join(__dirname,'public')));

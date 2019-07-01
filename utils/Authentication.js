@@ -1,4 +1,5 @@
 let shortid = require('shortid');
+let jwt = require('jsonwebtoken');
 
 // exports.ensureToken = function(req) {
 //   var header = req.header.["authorization"];
@@ -21,4 +22,50 @@ exports.getUserId = function(req){
       req.session.userid = id;
   }
   return req.session.userid;
+}
+
+exports.createToken = function(userId) {
+  return new Promise((resolve, reject) => {
+    try{
+      let token = jwt.sign({userId: userId}, process.env.SECRET_SESSION1 || 'secret', {expiresIn: '3600000', jwtid: shortid.generate()});
+      resolve(token);
+    } catch (e) {
+       /*
+        e = {
+          name: 'NotBeforeError',
+          message: 'jwt not active',
+          date: 2018-10-04T16:10:44.000Z
+        }
+      */
+      console.log(e);
+      reject(e);
+    }
+  });
+}
+
+exports.authenticateRequest = function(req) {
+  return new Promise((resolve, reject) => {
+    console.log(req.cookies)
+    if(req.cookies.token) {
+      var token = req.cookies.token;
+      try {
+      var decoded = jwt.verify(token, process.env.SECRET_SESSION1 || 'secret');
+      console.log(decoded)
+      resolve(decoded);
+      } catch (e) {
+        /*
+          e = {
+            name: 'NotBeforeError',
+            message: 'jwt not active',
+            date: 2018-10-04T16:10:44.000Z
+          }
+        */
+        console.log(e);
+        reject(e);
+      }
+      
+    } else {
+      reject('{"message":"Token not found"}');
+    }
+  });
 }
