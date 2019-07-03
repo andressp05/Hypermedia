@@ -65,10 +65,10 @@ function fillCartPage(json) {
       listItem.classList.add('align-items-center');
 
       listItem.innerHTML = `
-        <div class="col-12 text-center col-md-2 text-center">
+        <div class="col-12 text-center col-md-2 text-center cursor-pointer" onclick="window.location='/pages/book_detail.html?isbn=${book.ISBN}';">
                 <img src="${img_path}" alt="thumbnail" class="card-cart">
         </div>
-        <div class="col-12 text-center col-md-3 text-md-center">
+        <div class="col-12 text-center col-md-3 text-md-center cursor-pointer" onclick="window.location='/pages/book_detail.html?isbn=${book.ISBN}';">
             <h4 class="product-name"><strong>${book_name}</strong></h4>
         </div>
         <div class="col-12 col-sm-12 text-sm-center col-md-7 text-md-center row">
