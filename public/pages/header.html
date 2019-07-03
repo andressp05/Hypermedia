@@ -12,7 +12,8 @@
           fetch('/api/user/logout', options)
           .then(response => {
             if (response.status === 200) {
-              window.location.reload(true); //Reload from the server; false to reload from cache
+              // window.location.reload(true); //Reload from the server; false to reload from cache
+              window.location = '/';
             } else {
               throw response;
             }
