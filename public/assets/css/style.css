@@ -223,9 +223,9 @@ hr #hrspecial {
   padding: 12px;
 }
 
-.list-group-item {}
+/* .list-group-item {}
 
-.list-group-item .active {}
+.list-group-item .active {} */
 
 .card-book-body p {
   margin-top: 1rem;
@@ -405,6 +405,7 @@ hr #hrspecial {
   border-radius: 0;
   -webkit-background-size: 6px 30px;
   -moz-background-size: 6px 30px;
+  background-size: 6px 30px;
   color: #bbb;
   font-size: 20px;
   position: absolute;
