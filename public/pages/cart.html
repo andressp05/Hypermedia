@@ -18,7 +18,7 @@
   <script src="https://use.fontawesome.com/c560c025cf.js"></script>
 </head>
 
-<body onload="setHeaderFooter()">
+<body>
   <!-- HEADER -->
   <div id='header'></div>
 
@@ -59,6 +59,9 @@
   <div id="footer"></div>
 
   <script>
+    setHeaderFooter();
+
+
     let options = {
       method: "GET",
       credentials: 'same-origin',
@@ -71,6 +74,10 @@
       .then(function (response) {
         if (response.status === 200) {
           return response.json();
+        } else if(response.status == 401) {
+          showModalLoginRequired();
+          setCookie('logged', 'false');
+          throw response;
         } else {
           throw response;
         }
@@ -80,15 +87,14 @@
         console.log(json);
       })
       .catch(e => {
-        console.error(e);
-        if(e.status){
-          // if(e.status === 404){
-          //   e.json().then(json => {
-          //   console.error(json);
-          // })
-          // }
-          e.text().then(json => {
-            console.error(json);
+        console.error(e.status);
+        if(e.headers.get("content-type") == "application/json") {
+          e.json().then(json => {
+            console.error(json.message)
+          })
+        } else {
+          e.text().then(text => {
+            console.error(text)
           })
         }
       });
