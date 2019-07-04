@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   description: >-
     Hypermedia Applications project year 2018-2019. A bookstore with book lists
-    and user functions. You can use email `test@test.com` and password `123` to test the login features
+    and user functions. You can use email `test@test.com` and password `123` to test the login features.
   version: 1.0.0
   title: Hypermedia Bookshop
   termsOfService: ''
@@ -21,7 +21,7 @@ tags:
   - name: event
     description: All the events related commands
   - name: cart
-    description: All the cart related commands
+    description: All the cart related commands. Users must authenticate with the login first.
   - name: reviews
     description: All the reviews related commands
 schemes:
@@ -735,4 +735,4 @@ definitions:
       name: John Doe
 externalDocs:
   description: Go to our Swagger yaml file
-  url: 'https://hypermedia-bookshop.herokuapp.com/openapi.swagger.yaml'
+  url: 'https://hypermedia-bookshop.herokuapp.com/openapi/swagger.yaml'
