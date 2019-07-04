@@ -53,9 +53,7 @@ module.exports.loginUser = function loginUser (req, res, next) {
         // utils.writeJson(res, response);
       })
       .catch(function (response) {
-        console.log('loginUser error! ' + response)
-        req.session.loggedin = false;
-        req.session.userid = null;
+        console.log('loginUser error! ' + response);
         utils.writeJson(res, response);
       });
   
