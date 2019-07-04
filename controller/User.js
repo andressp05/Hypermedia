@@ -12,10 +12,8 @@ module.exports.createUser = function createUser (req, res, next) {
   var email = req.swagger.params['email'].value;
   var password = req.swagger.params['password'].value;
   var address = req.swagger.params['address'].value;
-  if(req.session.loggedin && req.session.loggedin == true){
-    utils.writeJson(res, utils.respondWithCode(403, '{"message": "user already logged in"}'));
-  } else {
-    User.createUser(name,surname,email,password,address, req.session.userid)
+
+    User.createUser(name,surname,email,password,address, null)
       .then(async function (response) {
         console.log(`User ${response} registered`);
         var token = await auth.createToken(response);
@@ -23,12 +21,11 @@ module.exports.createUser = function createUser (req, res, next) {
         res.cookie("token", token, {maxAge: 3500000, httpOnly: true});
         res.cookie('logged', 'true' , {maxAge: 3500000});
         utils.writeJson(res, {token: token});
-        utils.writeJson(res, response);
       })
       .catch(function (response) {
         utils.writeJson(res, response);
       });
-  }
+  
 };
 
 module.exports.loginUser = function loginUser (req, res, next) {
@@ -48,8 +45,8 @@ module.exports.loginUser = function loginUser (req, res, next) {
 
         auth.createToken(response).then(token => {
           console.log(`Generated token ${token}`);
-          res.cookie("token", token, {maxAge: 86400000, httpOnly: true});
-          res.cookie('logged', 'true' , {maxAge: 86400000});
+          res.cookie("token", token, {maxAge: 3500000, httpOnly: true});
+          res.cookie('logged', 'true' , {maxAge: 3500000});
           utils.writeJson(res, {token: token});
         });
         
