@@ -27,7 +27,7 @@ exports.getUserId = function(req){
 exports.createToken = function(userId) {
   return new Promise((resolve, reject) => {
     try{
-      let token = jwt.sign({userId: userId}, process.env.SECRET_SESSION1 || 'secret', {expiresIn: '3600000', jwtid: shortid.generate()});
+      let token = jwt.sign({userId: userId}, process.env.SECRET_SESSION1 || 'secret', {expiresIn: '86405000', jwtid: shortid.generate()});
       resolve(token);
     } catch (e) {
        /*

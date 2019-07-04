@@ -48,8 +48,8 @@ module.exports.loginUser = function loginUser (req, res, next) {
 
         auth.createToken(response).then(token => {
           console.log(`Generated token ${token}`);
-          res.cookie("token", token, {maxAge: 3500000, httpOnly: true});
-          res.cookie('logged', 'true' , {maxAge: 3500000});
+          res.cookie("token", token, {maxAge: 86400000, httpOnly: true});
+          res.cookie('logged', 'true' , {maxAge: 86400000});
           utils.writeJson(res, {token: token});
         });
         
