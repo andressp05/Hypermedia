@@ -1,4 +1,5 @@
-# Hypermedia
+# Hypermedia Project
 
-To push all our work and link with Heroku we have to do instead of a normal git push this one:
-`git push heroku master`
+Project of the subject Hypermedia Applications of POLIMI (Politecnico di Milano)
+
+We simulate an online bookshop using technologies as HTML, CSS, JavaScript, JSON, Swagger, SQL
